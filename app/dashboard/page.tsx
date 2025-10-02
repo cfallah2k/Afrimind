@@ -123,8 +123,10 @@ export default function Dashboard() {
         <Header user={user} onLogout={handleLogout} />
         
         <div className="mobile-container">
-          <main className="pb-20">
-            {renderTabContent()}
+          <main className="pb-20 md:pb-8">
+            <div className="p-4 md:p-6 space-y-6">
+              {renderTabContent()}
+            </div>
           </main>
           
           <BottomNavigation 
@@ -141,35 +143,35 @@ function HomeTab({ dashboardData }: { dashboardData: any }) {
   const { user } = useAuth()
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="space-y-6">
       {/* Welcome Section */}
-      <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 rounded-3xl p-8 text-white shadow-2xl">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h1 className="text-3xl font-bold mb-2">Welcome back, {user?.name || 'User'}!</h1>
-            <p className="text-blue-100">Ready to unlock Africa's potential with AI intelligence</p>
+      <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 rounded-3xl p-6 md:p-8 text-white shadow-2xl">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 space-y-4 md:space-y-0">
+          <div className="flex-1">
+            <h1 className="text-2xl md:text-3xl font-bold mb-2">Welcome back, {user?.name || 'User'}!</h1>
+            <p className="text-blue-100 text-sm md:text-base">Ready to unlock Africa's potential with AI intelligence</p>
           </div>
-          <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
-            <Brain className="w-8 h-8 text-white" />
+          <div className="w-12 h-12 md:w-16 md:h-16 bg-white/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+            <Brain className="w-6 h-6 md:w-8 md:h-8 text-white" />
           </div>
         </div>
         
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4">
             <div className="flex items-center space-x-3">
-              <Activity className="w-6 h-6 text-green-400" />
+              <Activity className="w-5 h-5 md:w-6 md:h-6 text-green-400" />
               <div>
-                <p className="text-sm text-blue-100">System Health</p>
-                <p className="text-2xl font-bold">{dashboardData.systemHealth}%</p>
+                <p className="text-xs md:text-sm text-blue-100">System Health</p>
+                <p className="text-xl md:text-2xl font-bold">{dashboardData.systemHealth}%</p>
               </div>
             </div>
           </div>
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4">
             <div className="flex items-center space-x-3">
-              <Users className="w-6 h-6 text-blue-400" />
+              <Users className="w-5 h-5 md:w-6 md:h-6 text-blue-400" />
               <div>
-                <p className="text-sm text-blue-100">Active Users</p>
-                <p className="text-2xl font-bold">{dashboardData.activeSessions.toLocaleString()}</p>
+                <p className="text-xs md:text-sm text-blue-100">Active Users</p>
+                <p className="text-xl md:text-2xl font-bold">{dashboardData.activeSessions.toLocaleString()}</p>
               </div>
             </div>
           </div>
@@ -177,115 +179,115 @@ function HomeTab({ dashboardData }: { dashboardData: any }) {
       </div>
 
       {/* Real-time Stats */}
-      <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-xl">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 md:p-6 border border-white/20 shadow-xl">
           <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center">
-              <TrendingUp className="w-6 h-6 text-white" />
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center">
+              <TrendingUp className="w-5 h-5 md:w-6 md:h-6 text-white" />
             </div>
             <div className="text-right">
-              <p className="text-2xl font-bold text-gray-800">{dashboardData.totalUsers.toLocaleString()}</p>
-              <p className="text-sm text-gray-600">Total Users</p>
+              <p className="text-xl md:text-2xl font-bold text-gray-800">{dashboardData.totalUsers.toLocaleString()}</p>
+              <p className="text-xs md:text-sm text-gray-600">Total Users</p>
             </div>
           </div>
           <div className="flex items-center space-x-2">
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-            <span className="text-sm text-green-600 font-semibold">+12% this month</span>
+            <span className="text-xs md:text-sm text-green-600 font-semibold">+12% this month</span>
           </div>
         </div>
 
-        <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-xl">
+        <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 md:p-6 border border-white/20 shadow-xl">
           <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center">
-              <Zap className="w-6 h-6 text-white" />
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center">
+              <Zap className="w-5 h-5 md:w-6 md:h-6 text-white" />
             </div>
             <div className="text-right">
-              <p className="text-2xl font-bold text-gray-800">{dashboardData.aiQueries.toLocaleString()}</p>
-              <p className="text-sm text-gray-600">AI Queries</p>
+              <p className="text-xl md:text-2xl font-bold text-gray-800">{dashboardData.aiQueries.toLocaleString()}</p>
+              <p className="text-xs md:text-sm text-gray-600">AI Queries</p>
             </div>
           </div>
           <div className="flex items-center space-x-2">
             <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
-            <span className="text-sm text-purple-600 font-semibold">+8% this week</span>
+            <span className="text-xs md:text-sm text-purple-600 font-semibold">+8% this week</span>
           </div>
         </div>
       </div>
 
       {/* Weather & Market Data */}
-      <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-xl">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 md:p-6 border border-white/20 shadow-xl">
           <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center">
-              <Cloud className="w-6 h-6 text-white" />
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center">
+              <Cloud className="w-5 h-5 md:w-6 md:h-6 text-white" />
             </div>
             <div className="text-right">
-              <p className="text-2xl font-bold text-gray-800">{dashboardData.weatherData.temperature}°C</p>
-              <p className="text-sm text-gray-600">Temperature</p>
+              <p className="text-xl md:text-2xl font-bold text-gray-800">{dashboardData.weatherData.temperature}°C</p>
+              <p className="text-xs md:text-sm text-gray-600">Temperature</p>
             </div>
           </div>
           <div className="flex items-center space-x-2">
             <Droplets className="w-4 h-4 text-blue-500" />
-            <span className="text-sm text-blue-600 font-semibold">{dashboardData.weatherData.humidity}% humidity</span>
+            <span className="text-xs md:text-sm text-blue-600 font-semibold">{dashboardData.weatherData.humidity}% humidity</span>
           </div>
         </div>
 
-        <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-xl">
+        <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 md:p-6 border border-white/20 shadow-xl">
           <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-xl flex items-center justify-center">
-              <DollarSign className="w-6 h-6 text-white" />
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-xl flex items-center justify-center">
+              <DollarSign className="w-5 h-5 md:w-6 md:h-6 text-white" />
             </div>
             <div className="text-right">
-              <p className="text-2xl font-bold text-gray-800">₦{dashboardData.marketData.maize}</p>
-              <p className="text-sm text-gray-600">Maize Price</p>
+              <p className="text-xl md:text-2xl font-bold text-gray-800">₦{dashboardData.marketData.maize}</p>
+              <p className="text-xs md:text-sm text-gray-600">Maize Price</p>
             </div>
           </div>
           <div className="flex items-center space-x-2">
             <TrendingUp className="w-4 h-4 text-green-500" />
-            <span className="text-sm text-green-600 font-semibold">+5% today</span>
+            <span className="text-xs md:text-sm text-green-600 font-semibold">+5% today</span>
           </div>
         </div>
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-xl">
-        <h3 className="text-lg font-bold text-gray-800 mb-4">Quick Actions</h3>
-        <div className="grid grid-cols-2 gap-4">
-          <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105">
+      <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 md:p-6 border border-white/20 shadow-xl">
+        <h3 className="text-base md:text-lg font-bold text-gray-800 mb-4">Quick Actions</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-3 md:p-4 rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105">
             <div className="flex items-center space-x-3">
-              <Smartphone className="w-5 h-5" />
-              <span className="font-semibold">Voice Chat</span>
+              <Smartphone className="w-4 h-4 md:w-5 md:h-5" />
+              <span className="text-sm md:text-base font-semibold">Voice Chat</span>
             </div>
           </button>
-          <button className="bg-gradient-to-r from-green-500 to-emerald-600 text-white p-4 rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-300 transform hover:scale-105">
+          <button className="bg-gradient-to-r from-green-500 to-emerald-600 text-white p-3 md:p-4 rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-300 transform hover:scale-105">
             <div className="flex items-center space-x-3">
-              <Wifi className="w-5 h-5" />
-              <span className="font-semibold">Offline Mode</span>
+              <Wifi className="w-4 h-4 md:w-5 md:h-5" />
+              <span className="text-sm md:text-base font-semibold">Offline Mode</span>
             </div>
           </button>
         </div>
       </div>
 
       {/* Performance Charts */}
-      <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-xl">
-        <h3 className="text-lg font-bold text-gray-800 mb-4">Performance Overview</h3>
-        <div className="grid grid-cols-3 gap-4">
+      <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 md:p-6 border border-white/20 shadow-xl">
+        <h3 className="text-base md:text-lg font-bold text-gray-800 mb-4">Performance Overview</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="text-center">
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl mx-auto mb-3 flex items-center justify-center">
-              <BarChart3 className="w-8 h-8 text-white" />
+            <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl mx-auto mb-3 flex items-center justify-center">
+              <BarChart3 className="w-6 h-6 md:w-8 md:h-8 text-white" />
             </div>
-            <p className="text-sm text-gray-600">Analytics</p>
+            <p className="text-xs md:text-sm text-gray-600">Analytics</p>
           </div>
           <div className="text-center">
-            <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl mx-auto mb-3 flex items-center justify-center">
-              <PieChart className="w-8 h-8 text-white" />
+            <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl mx-auto mb-3 flex items-center justify-center">
+              <PieChart className="w-6 h-6 md:w-8 md:h-8 text-white" />
             </div>
-            <p className="text-sm text-gray-600">Reports</p>
+            <p className="text-xs md:text-sm text-gray-600">Reports</p>
           </div>
           <div className="text-center">
-            <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl mx-auto mb-3 flex items-center justify-center">
-              <LineChart className="w-8 h-8 text-white" />
+            <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl mx-auto mb-3 flex items-center justify-center">
+              <LineChart className="w-6 h-6 md:w-8 md:h-8 text-white" />
             </div>
-            <p className="text-sm text-gray-600">Trends</p>
+            <p className="text-xs md:text-sm text-gray-600">Trends</p>
           </div>
         </div>
       </div>

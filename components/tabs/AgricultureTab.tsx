@@ -91,42 +91,42 @@ export default function AgricultureTab() {
   ]
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 md:p-6 space-y-4 md:space-y-6">
       {/* Header */}
-      <div className="bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 rounded-3xl p-8 text-white shadow-2xl">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h1 className="text-3xl font-bold mb-2">Agricultural Intelligence</h1>
-            <p className="text-green-100">Smart farming powered by AI</p>
+      <div className="bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 rounded-3xl p-6 md:p-8 text-white shadow-2xl">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 space-y-4 md:space-y-0">
+          <div className="flex-1">
+            <h1 className="text-2xl md:text-3xl font-bold mb-2">Agricultural Intelligence</h1>
+            <p className="text-green-100 text-sm md:text-base">Smart farming powered by AI</p>
           </div>
-          <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
-            <Leaf className="w-8 h-8 text-white" />
+          <div className="w-12 h-12 md:w-16 md:h-16 bg-white/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+            <Leaf className="w-6 h-6 md:w-8 md:h-8 text-white" />
           </div>
         </div>
         
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 text-center">
-            <Thermometer className="w-6 h-6 text-yellow-400 mx-auto mb-2" />
-            <p className="text-2xl font-bold">{Math.round(realTimeData.weather.current.temp)}°C</p>
-            <p className="text-sm text-green-100">Temperature</p>
+            <Thermometer className="w-5 h-5 md:w-6 md:h-6 text-yellow-400 mx-auto mb-2" />
+            <p className="text-xl md:text-2xl font-bold">{Math.round(realTimeData.weather.current.temp)}°C</p>
+            <p className="text-xs md:text-sm text-green-100">Temperature</p>
           </div>
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 text-center">
-            <Droplets className="w-6 h-6 text-blue-400 mx-auto mb-2" />
-            <p className="text-2xl font-bold">{realTimeData.weather.current.humidity}%</p>
-            <p className="text-sm text-green-100">Humidity</p>
+            <Droplets className="w-5 h-5 md:w-6 md:h-6 text-blue-400 mx-auto mb-2" />
+            <p className="text-xl md:text-2xl font-bold">{realTimeData.weather.current.humidity}%</p>
+            <p className="text-xs md:text-sm text-green-100">Humidity</p>
           </div>
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 text-center">
-            <Wind className="w-6 h-6 text-cyan-400 mx-auto mb-2" />
-            <p className="text-2xl font-bold">{realTimeData.weather.current.wind} km/h</p>
-            <p className="text-sm text-green-100">Wind Speed</p>
+            <Wind className="w-5 h-5 md:w-6 md:h-6 text-cyan-400 mx-auto mb-2" />
+            <p className="text-xl md:text-2xl font-bold">{realTimeData.weather.current.wind} km/h</p>
+            <p className="text-xs md:text-sm text-green-100">Wind Speed</p>
           </div>
         </div>
       </div>
 
       {/* Crop Selection */}
-      <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-xl">
-        <h3 className="text-lg font-bold text-gray-800 mb-4">Select Crop</h3>
-        <div className="grid grid-cols-2 gap-4">
+      <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 md:p-6 border border-white/20 shadow-xl">
+        <h3 className="text-base md:text-lg font-bold text-gray-800 mb-4">Select Crop</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {crops.map((crop) => {
             const IconComponent = crop.icon
             const isSelected = selectedCrop === crop.id
@@ -134,14 +134,14 @@ export default function AgricultureTab() {
               <button
                 key={crop.id}
                 onClick={() => setSelectedCrop(crop.id)}
-                className={`p-4 rounded-2xl transition-all duration-300 transform ${
+                className={`p-3 md:p-4 rounded-2xl transition-all duration-300 transform ${
                   isSelected 
                     ? `bg-gradient-to-r from-${crop.color}-500 to-${crop.color}-600 text-white shadow-lg scale-105` 
                     : 'bg-gray-50 hover:bg-gray-100 text-gray-700 hover:scale-105'
                 }`}
               >
-                <IconComponent className="w-8 h-8 mx-auto mb-2" />
-                <p className="font-semibold">{crop.name}</p>
+                <IconComponent className="w-6 h-6 md:w-8 md:h-8 mx-auto mb-2" />
+                <p className="text-sm md:text-base font-semibold">{crop.name}</p>
               </button>
             )
           })}
