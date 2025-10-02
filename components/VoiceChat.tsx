@@ -15,7 +15,7 @@ export default function VoiceChat({ onMessage, isListening, onListeningChange }:
   const [transcript, setTranscript] = useState('')
   const [audioLevel, setAudioLevel] = useState(0)
   
-  const recognitionRef = useRef<SpeechRecognition | null>(null)
+  const recognitionRef = useRef<any>(null)
   const synthesisRef = useRef<SpeechSynthesisUtterance | null>(null)
   const audioContextRef = useRef<AudioContext | null>(null)
   const analyserRef = useRef<AnalyserNode | null>(null)
