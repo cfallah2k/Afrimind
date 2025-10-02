@@ -36,7 +36,7 @@ export default function VoiceChat({ onMessage, isListening, onListeningChange }:
         onListeningChange(true)
       }
 
-      recognitionRef.current.onresult = (event) => {
+      recognitionRef.current.onresult = (event: any) => {
         let finalTranscript = ''
         let interimTranscript = ''
 
@@ -57,7 +57,7 @@ export default function VoiceChat({ onMessage, isListening, onListeningChange }:
         }
       }
 
-      recognitionRef.current.onerror = (event) => {
+      recognitionRef.current.onerror = (event: any) => {
         console.error('Speech recognition error:', event.error)
         onListeningChange(false)
       }
