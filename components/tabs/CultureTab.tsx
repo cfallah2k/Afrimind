@@ -118,34 +118,34 @@ export default function CultureTab() {
   ]
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 md:p-6 space-y-4 md:space-y-6">
       {/* Header */}
-      <div className="bg-gradient-to-r from-orange-600 via-red-600 to-orange-700 rounded-3xl p-8 text-white shadow-2xl">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h1 className="text-3xl font-bold mb-2">Cultural Intelligence</h1>
-            <p className="text-orange-100">Context-aware AI for African business</p>
+      <div className="bg-gradient-to-r from-orange-600 via-red-600 to-orange-700 rounded-3xl p-6 md:p-8 text-white shadow-2xl">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 space-y-4 md:space-y-0">
+          <div className="flex-1">
+            <h1 className="text-2xl md:text-3xl font-bold mb-2">Cultural Intelligence</h1>
+            <p className="text-orange-100 text-sm md:text-base">Context-aware AI for African business</p>
           </div>
-          <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
-            <Users className="w-8 h-8 text-white" />
+          <div className="w-12 h-12 md:w-16 md:h-16 bg-white/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+            <Users className="w-6 h-6 md:w-8 md:h-8 text-white" />
           </div>
         </div>
         
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 text-center">
-            <Languages className="w-6 h-6 text-cyan-400 mx-auto mb-2" />
-            <p className="text-2xl font-bold">20+</p>
-            <p className="text-sm text-orange-100">Languages</p>
+            <Languages className="w-5 h-5 md:w-6 md:h-6 text-cyan-400 mx-auto mb-2" />
+            <p className="text-xl md:text-2xl font-bold">20+</p>
+            <p className="text-xs md:text-sm text-orange-100">Languages</p>
           </div>
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 text-center">
-            <Globe className="w-6 h-6 text-green-400 mx-auto mb-2" />
-            <p className="text-2xl font-bold">54</p>
-            <p className="text-sm text-orange-100">Countries</p>
+            <Globe className="w-5 h-5 md:w-6 md:h-6 text-green-400 mx-auto mb-2" />
+            <p className="text-xl md:text-2xl font-bold">54</p>
+            <p className="text-xs md:text-sm text-orange-100">Countries</p>
           </div>
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 text-center">
-            <Heart className="w-6 h-6 text-pink-400 mx-auto mb-2" />
-            <p className="text-2xl font-bold">1.4B</p>
-            <p className="text-sm text-orange-100">People</p>
+            <Heart className="w-5 h-5 md:w-6 md:h-6 text-pink-400 mx-auto mb-2" />
+            <p className="text-xl md:text-2xl font-bold">1.4B</p>
+            <p className="text-xs md:text-sm text-orange-100">People</p>
           </div>
         </div>
       </div>

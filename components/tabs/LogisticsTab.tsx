@@ -118,34 +118,34 @@ export default function LogisticsTab() {
   ]
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 md:p-6 space-y-4 md:space-y-6">
       {/* Header */}
-      <div className="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 rounded-3xl p-8 text-white shadow-2xl">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h1 className="text-3xl font-bold mb-2">Trade & Logistics Intelligence</h1>
-            <p className="text-purple-100">Cross-border excellence powered by AI</p>
+      <div className="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 rounded-3xl p-6 md:p-8 text-white shadow-2xl">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 space-y-4 md:space-y-0">
+          <div className="flex-1">
+            <h1 className="text-2xl md:text-3xl font-bold mb-2">Trade & Logistics Intelligence</h1>
+            <p className="text-purple-100 text-sm md:text-base">Cross-border excellence powered by AI</p>
           </div>
-          <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
-            <Truck className="w-8 h-8 text-white" />
+          <div className="w-12 h-12 md:w-16 md:h-16 bg-white/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+            <Truck className="w-6 h-6 md:w-8 md:h-8 text-white" />
           </div>
         </div>
         
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 text-center">
-            <Route className="w-6 h-6 text-cyan-400 mx-auto mb-2" />
-            <p className="text-2xl font-bold">3</p>
-            <p className="text-sm text-purple-100">Active Routes</p>
+            <Route className="w-5 h-5 md:w-6 md:h-6 text-cyan-400 mx-auto mb-2" />
+            <p className="text-xl md:text-2xl font-bold">3</p>
+            <p className="text-xs md:text-sm text-purple-100">Active Routes</p>
           </div>
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 text-center">
-            <Package className="w-6 h-6 text-green-400 mx-auto mb-2" />
-            <p className="text-2xl font-bold">12</p>
-            <p className="text-sm text-purple-100">Shipments</p>
+            <Package className="w-5 h-5 md:w-6 md:h-6 text-green-400 mx-auto mb-2" />
+            <p className="text-xl md:text-2xl font-bold">12</p>
+            <p className="text-xs md:text-sm text-purple-100">Shipments</p>
           </div>
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 text-center">
-            <Shield className="w-6 h-6 text-yellow-400 mx-auto mb-2" />
-            <p className="text-2xl font-bold">98%</p>
-            <p className="text-sm text-purple-100">Success Rate</p>
+            <Shield className="w-5 h-5 md:w-6 md:h-6 text-yellow-400 mx-auto mb-2" />
+            <p className="text-xl md:text-2xl font-bold">98%</p>
+            <p className="text-xs md:text-sm text-purple-100">Success Rate</p>
           </div>
         </div>
       </div>
