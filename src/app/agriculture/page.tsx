@@ -1,0 +1,179 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { 
+  SunIcon,
+  CloudIcon,
+  ChartBarIcon,
+  MapIcon,
+  ClockIcon,
+  TrendingUpIcon,
+  ExclamationTriangleIcon,
+  CheckCircleIcon
+} from '@heroicons/react/24/outline'
+import { WeatherWidget } from '@/components/agriculture/weather-widget'
+import { CropRecommendations } from '@/components/agriculture/crop-recommendations'
+import { MarketPrices } from '@/components/agriculture/market-prices'
+import { PestDiseaseInfo } from '@/components/agriculture/pest-disease-info'
+import { FarmingTips } from '@/components/agriculture/farming-tips'
+
+export default function AgriculturePage() {
+  const [selectedLocation, setSelectedLocation] = useState('Lagos, Nigeria')
+  const [selectedSeason, setSelectedSeason] = useState('wet')
+
+  const fadeInUp = {
+    initial: { opacity: 0, y: 60 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6 }
+  }
+
+  const staggerChildren = {
+    animate: {
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-success-50 via-white to-primary-50">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-success-600 to-primary-600 text-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial="initial"
+            animate="animate"
+            variants={staggerChildren}
+            className="text-center"
+          >
+            <motion.div
+              variants={fadeInUp}
+              className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-8"
+            >
+              <SunIcon className="w-4 h-4 mr-2" />
+              Agricultural Intelligence
+            </motion.div>
+
+            <motion.h1
+              variants={fadeInUp}
+              className="text-4xl md:text-6xl font-bold mb-6"
+            >
+              AI-Powered Farming Solutions
+            </motion.h1>
+
+            <motion.p
+              variants={fadeInUp}
+              className="text-xl md:text-2xl text-success-100 max-w-4xl mx-auto mb-8"
+            >
+              Get real-time weather forecasts, crop recommendations, market prices, 
+              and farming insights tailored for African agriculture.
+            </motion.p>
+
+            {/* Location Selector */}
+            <motion.div
+              variants={fadeInUp}
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            >
+              <div className="flex items-center space-x-2 bg-white/20 rounded-lg px-4 py-2">
+                <MapIcon className="w-5 h-5" />
+                <select
+                  value={selectedLocation}
+                  onChange={(e) => setSelectedLocation(e.target.value)}
+                  className="bg-transparent text-white border-none outline-none"
+                >
+                  <option value="Lagos, Nigeria">Lagos, Nigeria</option>
+                  <option value="Nairobi, Kenya">Nairobi, Kenya</option>
+                  <option value="Accra, Ghana">Accra, Ghana</option>
+                  <option value="Cairo, Egypt">Cairo, Egypt</option>
+                  <option value="Johannesburg, South Africa">Johannesburg, South Africa</option>
+                </select>
+              </div>
+              <div className="flex items-center space-x-2 bg-white/20 rounded-lg px-4 py-2">
+                <ClockIcon className="w-5 h-5" />
+                <select
+                  value={selectedSeason}
+                  onChange={(e) => setSelectedSeason(e.target.value)}
+                  className="bg-transparent text-white border-none outline-none"
+                >
+                  <option value="wet">Wet Season</option>
+                  <option value="dry">Dry Season</option>
+                  <option value="transition">Transition</option>
+                </select>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <motion.div
+          initial="initial"
+          animate="animate"
+          variants={staggerChildren}
+          className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+        >
+          {/* Weather Widget */}
+          <motion.div variants={fadeInUp} className="lg:col-span-2">
+            <WeatherWidget location={selectedLocation} />
+          </motion.div>
+
+          {/* Quick Stats */}
+          <motion.div variants={fadeInUp} className="space-y-6">
+            <div className="bg-white rounded-2xl p-6 shadow-soft">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Stats</h3>
+              <div className="space-y-4">
+                {[
+                  { label: 'Temperature', value: '28°C', icon: SunIcon, color: 'text-warning-600' },
+                  { label: 'Humidity', value: '75%', icon: CloudIcon, color: 'text-primary-600' },
+                  { label: 'Rainfall', value: '15mm', icon: ChartBarIcon, color: 'text-success-600' },
+                ].map((stat, index) => (
+                  <div key={index} className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <stat.icon className={`w-5 h-5 ${stat.color}`} />
+                      <span className="text-gray-700">{stat.label}</span>
+                    </div>
+                    <span className="font-semibold text-gray-900">{stat.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl p-6 shadow-soft">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Market Trends</h3>
+              <div className="space-y-3">
+                {[
+                  { crop: 'Maize', price: '₦450/kg', trend: 'up', change: '+5%' },
+                  { crop: 'Rice', price: '₦380/kg', trend: 'down', change: '-2%' },
+                  { crop: 'Cassava', price: '₦120/kg', trend: 'up', change: '+8%' },
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center justify-between">
+                    <span className="text-gray-700">{item.crop}</span>
+                    <div className="flex items-center space-x-2">
+                      <span className="font-semibold text-gray-900">{item.price}</span>
+                      <span className={`text-sm ${item.trend === 'up' ? 'text-success-600' : 'text-danger-600'}`}>
+                        {item.change}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+
+        {/* Feature Grid */}
+        <motion.div
+          variants={fadeInUp}
+          className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
+          <CropRecommendations location={selectedLocation} season={selectedSeason} />
+          <MarketPrices location={selectedLocation} />
+          <PestDiseaseInfo location={selectedLocation} />
+          <FarmingTips location={selectedLocation} />
+        </motion.div>
+      </div>
+    </div>
+  )
+}
