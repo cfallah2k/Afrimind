@@ -111,7 +111,7 @@ export function CustomsRegulations({ origin, destination, commodity }: CustomsRe
       <div className="mb-6">
         <h4 className="font-semibold text-gray-900 mb-3">Import Requirements</h4>
         <div className="space-y-2">
-          {regulationsData?.regulations.importRequirements.map((requirement, index) => (
+          {regulationsData?.regulations.importRequirements.map((requirement: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <CheckCircleIcon className="w-4 h-4 text-success-600" />
               <span className="text-gray-700">{requirement}</span>
@@ -124,7 +124,7 @@ export function CustomsRegulations({ origin, destination, commodity }: CustomsRe
       <div className="mb-6">
         <h4 className="font-semibold text-gray-900 mb-3">Export Requirements</h4>
         <div className="space-y-2">
-          {regulationsData?.regulations.exportRequirements.map((requirement, index) => (
+          {regulationsData?.regulations.exportRequirements.map((requirement: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <CheckCircleIcon className="w-4 h-4 text-success-600" />
               <span className="text-gray-700">{requirement}</span>
@@ -137,7 +137,7 @@ export function CustomsRegulations({ origin, destination, commodity }: CustomsRe
       <div className="mb-6 p-4 bg-danger-50 rounded-lg">
         <h4 className="font-semibold text-danger-800 mb-3">Prohibited Items</h4>
         <div className="space-y-2">
-          {regulationsData?.regulations.prohibitedItems.map((item, index) => (
+          {regulationsData?.regulations.prohibitedItems.map((item: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <ExclamationTriangleIcon className="w-4 h-4 text-danger-600" />
               <span className="text-danger-700">{item}</span>
