@@ -207,7 +207,7 @@ export function TradeRoutes({ origin, destination, commodity }: TradeRoutesProps
       <div className="mt-6 p-4 bg-primary-50 rounded-lg">
         <h4 className="font-semibold text-primary-800 mb-3">Recommended Logistics Providers</h4>
         <div className="space-y-3">
-          {routesData?.logisticsProviders.map((provider, index) => (
+          {routesData?.logisticsProviders.map((provider: any, index: number) => (
             <div key={index} className="flex items-center justify-between p-3 bg-white rounded-lg">
               <div>
                 <div className="font-medium text-gray-900">{provider.name}</div>
