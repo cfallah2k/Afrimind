@@ -173,7 +173,7 @@ export function TariffCalculator({ commodityCode, origin, destination, value }: 
           <div className="mt-3">
             <div className="font-medium text-warning-800 mb-2">Accepted Methods:</div>
             <div className="space-y-1">
-              {tariffData?.paymentMethods.map((method, index) => (
+              {tariffData?.paymentMethods.map((method: any, index: number) => (
                 <div key={index} className="flex items-center space-x-2">
                   <CheckCircleIcon className="w-3 h-3 text-warning-600" />
                   <span className="text-warning-700">{method}</span>
@@ -188,7 +188,7 @@ export function TariffCalculator({ commodityCode, origin, destination, value }: 
       <div className="p-4 bg-gray-50 rounded-lg">
         <h4 className="font-semibold text-gray-800 mb-3">Possible Exemptions</h4>
         <div className="space-y-2">
-          {tariffData?.exemptions.map((exemption, index) => (
+          {tariffData?.exemptions.map((exemption: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <InformationCircleIcon className="w-4 h-4 text-gray-600" />
               <span className="text-gray-700">{exemption}</span>
