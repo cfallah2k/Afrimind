@@ -148,7 +148,7 @@ export function DocumentationRequirements({ commodity, value }: DocumentationReq
       <div className="mt-6 p-4 bg-gray-50 rounded-lg">
         <h4 className="font-semibold text-gray-800 mb-3">Optional Documents</h4>
         <div className="space-y-2">
-          {docsData?.optionalDocuments.map((doc, index) => (
+          {docsData?.optionalDocuments.map((doc: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <InformationCircleIcon className="w-4 h-4 text-gray-600" />
               <span className="text-gray-700">{doc}</span>
@@ -161,7 +161,7 @@ export function DocumentationRequirements({ commodity, value }: DocumentationReq
       <div className="mt-4 p-4 bg-primary-50 rounded-lg">
         <h4 className="font-semibold text-primary-800 mb-3">Preparation Tips</h4>
         <div className="space-y-2">
-          {docsData?.documentPreparationTips.map((tip, index) => (
+          {docsData?.documentPreparationTips.map((tip: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <CheckCircleIcon className="w-4 h-4 text-primary-600" />
               <span className="text-primary-700">{tip}</span>
@@ -174,7 +174,7 @@ export function DocumentationRequirements({ commodity, value }: DocumentationReq
       <div className="mt-4 p-4 bg-warning-50 rounded-lg">
         <h4 className="font-semibold text-warning-800 mb-3">Common Mistakes to Avoid</h4>
         <div className="space-y-2">
-          {docsData?.commonMistakes.map((mistake, index) => (
+          {docsData?.commonMistakes.map((mistake: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <ExclamationTriangleIcon className="w-4 h-4 text-warning-600" />
               <span className="text-warning-700">{mistake}</span>
