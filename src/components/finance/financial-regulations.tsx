@@ -151,7 +151,7 @@ export function FinancialRegulations({ country, regulationType }: FinancialRegul
       <div className="mb-6">
         <h4 className="font-semibold text-gray-900 mb-4">Regulatory Bodies</h4>
         <div className="space-y-3">
-          {regulationsData?.regulatoryBodies.map((body, index) => (
+          {regulationsData?.regulatoryBodies.map((body: any, index: number) => (
             <div key={index} className="border border-gray-200 rounded-lg p-4">
               <div className="flex items-center justify-between mb-2">
                 <h5 className="font-medium text-gray-900">{body.name}</h5>
@@ -168,12 +168,12 @@ export function FinancialRegulations({ country, regulationType }: FinancialRegul
       <div className="mb-6">
         <h4 className="font-semibold text-gray-900 mb-4">Key Regulations</h4>
         <div className="space-y-4">
-          {regulationsData?.keyRegulations.map((regulation, index) => (
+          {regulationsData?.keyRegulations.map((regulation: any, index: number) => (
             <div key={index} className="border border-gray-200 rounded-lg p-4">
               <h5 className="font-medium text-gray-900 mb-2">{regulation.regulation}</h5>
               <p className="text-sm text-gray-600 mb-3">{regulation.description}</p>
               <div className="space-y-2">
-                {regulation.complianceRequirements.map((requirement, reqIndex) => (
+                {regulation.complianceRequirements.map((requirement: any, reqIndex: number) => (
                   <div key={reqIndex} className="flex items-center space-x-2 text-sm">
                     <CheckCircleIcon className="w-4 h-4 text-success-600" />
                     <span className="text-gray-700">{requirement}</span>
@@ -189,11 +189,11 @@ export function FinancialRegulations({ country, regulationType }: FinancialRegul
       <div className="mb-6 p-4 bg-primary-50 rounded-lg">
         <h4 className="font-semibold text-primary-800 mb-3">Licensing Requirements</h4>
         <div className="space-y-3">
-          {regulationsData?.licensingRequirements.map((license, index) => (
+          {regulationsData?.licensingRequirements.map((license: any, index: number) => (
             <div key={index} className="p-3 bg-white rounded-lg">
               <div className="font-medium text-gray-900 mb-2">{license.service}</div>
               <div className="space-y-1">
-                {license.requirements.map((requirement, reqIndex) => (
+                {license.requirements.map((requirement: any, reqIndex: number) => (
                   <div key={reqIndex} className="flex items-center space-x-2 text-sm">
                     <DocumentTextIcon className="w-4 h-4 text-primary-600" />
                     <span className="text-primary-700">{requirement}</span>
@@ -209,7 +209,7 @@ export function FinancialRegulations({ country, regulationType }: FinancialRegul
       <div className="mb-6 p-4 bg-warning-50 rounded-lg">
         <h4 className="font-semibold text-warning-800 mb-3">Compliance Timeline</h4>
         <div className="space-y-2">
-          {regulationsData?.complianceTimeline.map((timeline, index) => (
+          {regulationsData?.complianceTimeline.map((timeline: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <ClockIcon className="w-4 h-4 text-warning-600" />
               <span className="text-warning-700">{timeline}</span>
@@ -222,7 +222,7 @@ export function FinancialRegulations({ country, regulationType }: FinancialRegul
       <div className="p-4 bg-danger-50 rounded-lg">
         <h4 className="font-semibold text-danger-800 mb-3">Penalties and Sanctions</h4>
         <div className="space-y-2">
-          {regulationsData?.penaltiesAndSanctions.map((penalty, index) => (
+          {regulationsData?.penaltiesAndSanctions.map((penalty: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <ExclamationTriangleIcon className="w-4 h-4 text-danger-600" />
               <span className="text-danger-700">{penalty}</span>
