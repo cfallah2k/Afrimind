@@ -117,7 +117,7 @@ export function PestDiseaseInfo({ location }: PestDiseaseInfoProps) {
       </div>
 
       <div className="space-y-4">
-        {pestData?.commonPests.map((pest, index) => (
+        {pestData?.commonPests.map((pest: any, index: number) => (
           <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-3">
               <h4 className="font-semibold text-gray-900">{pest.name}</h4>
@@ -132,7 +132,7 @@ export function PestDiseaseInfo({ location }: PestDiseaseInfoProps) {
               <div>
                 <div className="font-medium text-gray-700 mb-1">Symptoms:</div>
                 <ul className="space-y-1">
-                  {pest.symptoms.map((symptom, symptomIndex) => (
+                  {pest.symptoms.map((symptom: any, symptomIndex: number) => (
                     <li key={symptomIndex} className="flex items-center space-x-2">
                       <div className="w-1 h-1 bg-danger-500 rounded-full"></div>
                       <span>{symptom}</span>
@@ -143,7 +143,7 @@ export function PestDiseaseInfo({ location }: PestDiseaseInfoProps) {
               <div>
                 <div className="font-medium text-gray-700 mb-1">Prevention:</div>
                 <ul className="space-y-1">
-                  {pest.prevention.map((prevention, preventionIndex) => (
+                  {pest.prevention.map((prevention: any, preventionIndex: number) => (
                     <li key={preventionIndex} className="flex items-center space-x-2">
                       <CheckCircleIcon className="w-3 h-3 text-success-600" />
                       <span>{prevention}</span>
@@ -167,7 +167,7 @@ export function PestDiseaseInfo({ location }: PestDiseaseInfoProps) {
       <div className="mt-6 p-4 bg-success-50 rounded-lg">
         <h4 className="font-semibold text-success-800 mb-2">Prevention Strategies</h4>
         <div className="grid grid-cols-2 gap-2">
-          {pestData?.preventionStrategies.map((strategy, index) => (
+          {pestData?.preventionStrategies.map((strategy: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm text-success-700">
               <ShieldCheckIcon className="w-4 h-4" />
               <span>{strategy}</span>
@@ -180,7 +180,7 @@ export function PestDiseaseInfo({ location }: PestDiseaseInfoProps) {
       <div className="mt-4 p-4 bg-primary-50 rounded-lg">
         <h4 className="font-semibold text-primary-800 mb-2">Emergency Contacts</h4>
         <div className="space-y-2">
-          {pestData?.emergencyContacts.map((contact, index) => (
+          {pestData?.emergencyContacts.map((contact: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm text-primary-700">
               <PhoneIcon className="w-4 h-4" />
               <span>{contact}</span>
