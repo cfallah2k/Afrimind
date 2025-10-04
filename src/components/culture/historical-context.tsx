@@ -112,7 +112,7 @@ export function HistoricalContext({ topic, region }: HistoricalContextProps) {
       <div className="mb-6">
         <h4 className="font-semibold text-gray-900 mb-4">Key Events</h4>
         <div className="space-y-4">
-          {historicalData?.historicalBackground.keyEvents.map((event, index) => (
+          {historicalData?.historicalBackground.keyEvents.map((event: any, index: number) => (
             <div key={index} className="border border-gray-200 rounded-lg p-4">
               <div className="flex items-center justify-between mb-2">
                 <h5 className="font-medium text-gray-900">{event.event}</h5>
@@ -129,7 +129,7 @@ export function HistoricalContext({ topic, region }: HistoricalContextProps) {
       <div className="mb-6 p-4 bg-primary-50 rounded-lg">
         <h4 className="font-semibold text-primary-800 mb-3">Cultural Evolution</h4>
         <div className="space-y-2">
-          {historicalData?.historicalBackground.culturalEvolution.map((evolution, index) => (
+          {historicalData?.historicalBackground.culturalEvolution.map((evolution: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <CheckCircleIcon className="w-4 h-4 text-primary-600" />
               <span className="text-primary-700">{evolution}</span>
@@ -142,7 +142,7 @@ export function HistoricalContext({ topic, region }: HistoricalContextProps) {
       <div className="mb-6 p-4 bg-success-50 rounded-lg">
         <h4 className="font-semibold text-success-800 mb-3">Economic Development</h4>
         <div className="space-y-2">
-          {historicalData?.historicalBackground.economicDevelopment.map((development, index) => (
+          {historicalData?.historicalBackground.economicDevelopment.map((development: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <StarIcon className="w-4 h-4 text-success-600" />
               <span className="text-success-700">{development}</span>
@@ -155,7 +155,7 @@ export function HistoricalContext({ topic, region }: HistoricalContextProps) {
       <div className="mb-6 p-4 bg-warning-50 rounded-lg">
         <h4 className="font-semibold text-warning-800 mb-3">Contemporary Relevance</h4>
         <div className="space-y-2">
-          {historicalData?.contemporaryRelevance.map((relevance, index) => (
+          {historicalData?.contemporaryRelevance.map((relevance: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <InformationCircleIcon className="w-4 h-4 text-warning-600" />
               <span className="text-warning-700">{relevance}</span>
@@ -168,7 +168,7 @@ export function HistoricalContext({ topic, region }: HistoricalContextProps) {
       <div className="mb-6 p-4 bg-gray-50 rounded-lg">
         <h4 className="font-semibold text-gray-800 mb-3">Sources and References</h4>
         <div className="space-y-2">
-          {historicalData?.sourcesAndReferences.map((source, index) => (
+          {historicalData?.sourcesAndReferences.map((source: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <BookOpenIcon className="w-4 h-4 text-gray-600" />
               <span className="text-gray-700">{source}</span>
@@ -181,7 +181,7 @@ export function HistoricalContext({ topic, region }: HistoricalContextProps) {
       <div className="p-4 bg-accent-50 rounded-lg">
         <h4 className="font-semibold text-accent-800 mb-3">Further Reading</h4>
         <div className="space-y-2">
-          {historicalData?.furtherReading.map((reading, index) => (
+          {historicalData?.furtherReading.map((reading: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <div className="w-1.5 h-1.5 bg-accent-500 rounded-full"></div>
               <span className="text-accent-700">{reading}</span>
