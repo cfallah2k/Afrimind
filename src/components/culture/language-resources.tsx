@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { 
   BookOpenIcon,
-  VolumeUpIcon,
+  SpeakerWaveIcon as VolumeUpIcon,
   StarIcon,
   CheckCircleIcon,
   InformationCircleIcon

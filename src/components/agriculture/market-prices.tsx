@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { 
   CurrencyDollarIcon,
-  TrendingUpIcon,
-  TrendingDownIcon,
+  ArrowTrendingUpIcon,
+  ArrowTrendingDownIcon,
   ChartBarIcon,
   MapPinIcon
 } from '@heroicons/react/24/outline'
@@ -93,7 +93,7 @@ export function MarketPrices({ location }: MarketPricesProps) {
   }
 
   const getTrendIcon = (trend: string) => {
-    return trend === 'up' ? TrendingUpIcon : TrendingDownIcon
+    return trend === 'up' ? ArrowTrendingUpIcon : ArrowTrendingDownIcon
   }
 
   const getTrendColor = (trend: string, change: number) => {

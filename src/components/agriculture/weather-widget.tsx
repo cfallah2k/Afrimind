@@ -5,10 +5,10 @@ import { motion } from 'framer-motion'
 import { 
   SunIcon,
   CloudIcon,
-  CloudRainIcon,
-  WindIcon,
+  CloudIcon as CloudRainIcon,
+  WifiIcon as WindIcon,
   EyeIcon,
-  ThermometerIcon
+  FireIcon as ThermometerIcon
 } from '@heroicons/react/24/outline'
 
 interface WeatherWidgetProps {

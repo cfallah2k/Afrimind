@@ -6,7 +6,7 @@ import {
   CurrencyDollarIcon,
   PhoneIcon,
   ShieldCheckIcon,
-  TrendingUpIcon,
+  ArrowTrendingUpIcon,
   CheckCircleIcon,
   StarIcon
 } from '@heroicons/react/24/outline'
@@ -232,7 +232,7 @@ export function MobileMoneyServices({ country, serviceType }: MobileMoneyService
         <div className="grid grid-cols-2 gap-2">
           {servicesData?.benefits.map((benefit, index) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
-              <TrendingUpIcon className="w-4 h-4 text-success-600" />
+              <ArrowTrendingUpIcon className="w-4 h-4 text-success-600" />
               <span className="text-success-700">{benefit}</span>
             </div>
           ))}

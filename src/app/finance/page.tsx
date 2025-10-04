@@ -8,7 +8,7 @@ import {
   CreditCardIcon,
   ChartBarIcon,
   ShieldCheckIcon,
-  TrendingUpIcon
+  ArrowTrendingUpIcon
 } from '@heroicons/react/24/outline'
 import { MobileMoneyServices } from '@/components/finance/mobile-money-services'
 import { BankingServices } from '@/components/finance/banking-services'
@@ -130,7 +130,7 @@ export default function FinancePage() {
                   { label: 'Mobile Money Users', value: '500M+', icon: CreditCardIcon, color: 'text-secondary-600' },
                   { label: 'Banking Penetration', value: '85%', icon: BuildingOfficeIcon, color: 'text-primary-600' },
                   { label: 'Financial Inclusion', value: '75%', icon: ShieldCheckIcon, color: 'text-success-600' },
-                  { label: 'Digital Payments', value: '60%', icon: TrendingUpIcon, color: 'text-warning-600' },
+                  { label: 'Digital Payments', value: '60%', icon: ArrowTrendingUpIcon, color: 'text-warning-600' },
                 ].map((stat, index) => (
                   <div key={index} className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">

@@ -6,7 +6,7 @@ import {
   LightBulbIcon,
   CheckCircleIcon,
   ClockIcon,
-  TrendingUpIcon,
+  ArrowTrendingUpIcon,
   StarIcon
 } from '@heroicons/react/24/outline'
 
@@ -179,7 +179,7 @@ export function FarmingTips({ location }: FarmingTipsProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {tipsData?.successMetrics.map((metric, index) => (
             <div key={index} className="flex items-center space-x-2 text-sm text-success-700">
-              <TrendingUpIcon className="w-4 h-4" />
+              <ArrowTrendingUpIcon className="w-4 h-4" />
               <span>{metric}</span>
             </div>
           ))}

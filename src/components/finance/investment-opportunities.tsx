@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { 
-  TrendingUpIcon,
+  ArrowTrendingUpIcon,
   BuildingOfficeIcon,
   ChartBarIcon,
   StarIcon,
@@ -148,7 +148,7 @@ export function InvestmentOpportunities({ country, investmentType, riskTolerance
       className="bg-white rounded-2xl p-6 shadow-soft"
     >
       <div className="flex items-center space-x-2 mb-6">
-        <TrendingUpIcon className="w-6 h-6 text-primary-600" />
+        <ArrowTrendingUpIcon className="w-6 h-6 text-primary-600" />
         <h3 className="text-lg font-semibold text-gray-900">Investment Opportunities</h3>
       </div>
 

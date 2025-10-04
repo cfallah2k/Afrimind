@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { 
   ChartBarIcon,
-  TrendingUpIcon,
+  ArrowTrendingUpIcon,
   ShieldCheckIcon,
   StarIcon,
   CheckCircleIcon,
@@ -214,7 +214,7 @@ export function CreditScoring({ country, borrowerType }: CreditScoringProps) {
         <div className="space-y-2">
           {creditData?.improvingCreditScore.map((tip, index) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
-              <TrendingUpIcon className="w-4 h-4 text-success-600" />
+              <ArrowTrendingUpIcon className="w-4 h-4 text-success-600" />
               <span className="text-success-700">{tip}</span>
             </div>
           ))}

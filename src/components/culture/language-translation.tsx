@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { 
   LanguageIcon,
   ArrowRightIcon,
-  VolumeUpIcon,
+  SpeakerWaveIcon as VolumeUpIcon,
   CheckCircleIcon,
   InformationCircleIcon
 } from '@heroicons/react/24/outline'
