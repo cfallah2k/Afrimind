@@ -127,7 +127,7 @@ export function LanguageTranslation({ language, country }: LanguageTranslationPr
       <div className="mb-6">
         <h4 className="font-semibold text-gray-900 mb-4">Basic Words</h4>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {translationData?.basicWords.map((word, index) => (
+          {translationData?.basicWords.map((word: any, index: number) => (
             <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
               <div>
                 <div className="font-medium text-gray-900">{word.word}</div>
@@ -148,7 +148,7 @@ export function LanguageTranslation({ language, country }: LanguageTranslationPr
       <div className="mb-6">
         <h4 className="font-semibold text-gray-900 mb-4">Common Phrases</h4>
         <div className="space-y-3">
-          {translationData?.commonPhrases.map((phrase, index) => (
+          {translationData?.commonPhrases.map((phrase: any, index: number) => (
             <div key={index} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
               <div>
                 <div className="font-medium text-gray-900">{phrase.phrase}</div>
@@ -167,7 +167,7 @@ export function LanguageTranslation({ language, country }: LanguageTranslationPr
       <div className="p-4 bg-accent-50 rounded-lg">
         <h4 className="font-semibold text-accent-800 mb-3">Cultural Notes</h4>
         <div className="space-y-2">
-          {translationData?.culturalNotes.map((note, index) => (
+          {translationData?.culturalNotes.map((note: any, index: number) => (
             <div key={index} className="flex items-start space-x-2 text-sm">
               <InformationCircleIcon className="w-4 h-4 text-accent-600 mt-0.5 flex-shrink-0" />
               <span className="text-accent-700">{note}</span>
