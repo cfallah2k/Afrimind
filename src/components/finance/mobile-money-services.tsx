@@ -154,7 +154,7 @@ export function MobileMoneyServices({ country, serviceType }: MobileMoneyService
       </div>
 
       <div className="space-y-4">
-        {servicesData?.providers.map((provider, index) => (
+        {servicesData?.providers.map((provider: any, index: number) => (
           <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-3">
               <h4 className="font-semibold text-gray-900">{provider.name}</h4>
@@ -173,7 +173,7 @@ export function MobileMoneyServices({ country, serviceType }: MobileMoneyService
               <div>
                 <div className="font-medium text-gray-700 mb-2">Services:</div>
                 <div className="flex flex-wrap gap-1">
-                  {provider.services.map((service, serviceIndex) => (
+                  {provider.services.map((service: any, serviceIndex: number) => (
                     <span
                       key={serviceIndex}
                       className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-secondary-100 text-secondary-800"
@@ -217,7 +217,7 @@ export function MobileMoneyServices({ country, serviceType }: MobileMoneyService
       <div className="mt-6 p-4 bg-primary-50 rounded-lg">
         <h4 className="font-semibold text-primary-800 mb-3">Common Use Cases</h4>
         <div className="grid grid-cols-2 gap-2">
-          {servicesData?.commonUseCases.map((useCase, index) => (
+          {servicesData?.commonUseCases.map((useCase: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <CheckCircleIcon className="w-4 h-4 text-primary-600" />
               <span className="text-primary-700">{useCase}</span>
@@ -230,7 +230,7 @@ export function MobileMoneyServices({ country, serviceType }: MobileMoneyService
       <div className="mt-4 p-4 bg-success-50 rounded-lg">
         <h4 className="font-semibold text-success-800 mb-3">Benefits</h4>
         <div className="grid grid-cols-2 gap-2">
-          {servicesData?.benefits.map((benefit, index) => (
+          {servicesData?.benefits.map((benefit: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <ArrowTrendingUpIcon className="w-4 h-4 text-success-600" />
               <span className="text-success-700">{benefit}</span>
@@ -243,7 +243,7 @@ export function MobileMoneyServices({ country, serviceType }: MobileMoneyService
       <div className="mt-4 p-4 bg-warning-50 rounded-lg">
         <h4 className="font-semibold text-warning-800 mb-3">Future Trends</h4>
         <div className="space-y-2">
-          {servicesData?.futureTrends.map((trend, index) => (
+          {servicesData?.futureTrends.map((trend: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <ShieldCheckIcon className="w-4 h-4 text-warning-600" />
               <span className="text-warning-700">{trend}</span>
