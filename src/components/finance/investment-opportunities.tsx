@@ -175,7 +175,7 @@ export function InvestmentOpportunities({ country, investmentType, riskTolerance
             </div>
           </div>
           <div className="flex flex-wrap gap-1">
-            {investmentData?.stockMarket.sectors.map((sector, index) => (
+            {investmentData?.stockMarket.sectors.map((sector: any, index: number) => (
               <span
                 key={index}
                 className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-primary-100 text-primary-800"
@@ -192,7 +192,7 @@ export function InvestmentOpportunities({ country, investmentType, riskTolerance
       <div className="mb-6">
         <h4 className="font-semibold text-gray-900 mb-4">Government Bonds</h4>
         <div className="space-y-3">
-          {investmentData?.governmentBonds.map((bond, index) => (
+          {investmentData?.governmentBonds.map((bond: any, index: number) => (
             <div key={index} className="border border-gray-200 rounded-lg p-4">
               <div className="flex items-center justify-between mb-2">
                 <h5 className="font-medium text-gray-900">{bond.name}</h5>
@@ -221,7 +221,7 @@ export function InvestmentOpportunities({ country, investmentType, riskTolerance
       <div className="mb-6 p-4 bg-primary-50 rounded-lg">
         <h4 className="font-semibold text-primary-800 mb-3">Real Estate</h4>
         <div className="space-y-3">
-          {investmentData?.realEstate.map((property, index) => (
+          {investmentData?.realEstate.map((property: any, index: number) => (
             <div key={index} className="p-3 bg-white rounded-lg">
               <div className="font-medium text-gray-900 mb-2">{property.type}</div>
               <div className="grid grid-cols-2 gap-4 text-sm">
@@ -251,7 +251,7 @@ export function InvestmentOpportunities({ country, investmentType, riskTolerance
       <div className="mb-6 p-4 bg-success-50 rounded-lg">
         <h4 className="font-semibold text-success-800 mb-3">Investment Platforms</h4>
         <div className="space-y-3">
-          {investmentData?.investmentPlatforms.map((platform, index) => (
+          {investmentData?.investmentPlatforms.map((platform: any, index: number) => (
             <div key={index} className="p-3 bg-white rounded-lg">
               <div className="flex items-center justify-between mb-2">
                 <h5 className="font-medium text-gray-900">{platform.name}</h5>
@@ -280,7 +280,7 @@ export function InvestmentOpportunities({ country, investmentType, riskTolerance
       <div className="p-4 bg-warning-50 rounded-lg">
         <h4 className="font-semibold text-warning-800 mb-3">Risk Management</h4>
         <div className="space-y-2">
-          {investmentData?.riskManagement.map((strategy, index) => (
+          {investmentData?.riskManagement.map((strategy: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <ShieldCheckIcon className="w-4 h-4 text-warning-600" />
               <span className="text-warning-700">{strategy}</span>
