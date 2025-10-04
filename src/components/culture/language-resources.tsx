@@ -124,7 +124,7 @@ export function LanguageResources({ language, resourceType }: LanguageResourcesP
       <div className="mb-6">
         <h4 className="font-semibold text-gray-900 mb-4">Basic Words</h4>
         <div className="space-y-3">
-          {resourcesData?.dictionary.basicWords.map((word, index) => (
+          {resourcesData?.dictionary.basicWords.map((word: any, index: number) => (
             <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
               <div>
                 <div className="font-medium text-gray-900">{word.word}</div>
@@ -149,7 +149,7 @@ export function LanguageResources({ language, resourceType }: LanguageResourcesP
             <div>
               <div className="font-medium text-gray-700 mb-2">Basic Grammar:</div>
               <div className="space-y-1">
-                {resourcesData?.grammarGuide.basicGrammar.map((grammar, index) => (
+                {resourcesData?.grammarGuide.basicGrammar.map((grammar: any, index: number) => (
                   <div key={index} className="flex items-center space-x-2">
                     <CheckCircleIcon className="w-3 h-3 text-primary-600" />
                     <span className="text-primary-700">{grammar}</span>
@@ -160,7 +160,7 @@ export function LanguageResources({ language, resourceType }: LanguageResourcesP
             <div>
               <div className="font-medium text-gray-700 mb-2">Common Patterns:</div>
               <div className="space-y-1">
-                {resourcesData?.grammarGuide.commonPatterns.map((pattern, index) => (
+                {resourcesData?.grammarGuide.commonPatterns.map((pattern: any, index: number) => (
                   <div key={index} className="flex items-center space-x-2">
                     <CheckCircleIcon className="w-3 h-3 text-primary-600" />
                     <span className="text-primary-700">{pattern}</span>
@@ -186,7 +186,7 @@ export function LanguageResources({ language, resourceType }: LanguageResourcesP
       <div className="mb-6">
         <h4 className="font-semibold text-gray-900 mb-4">Audio Resources</h4>
         <div className="space-y-3">
-          {resourcesData?.audioResources.map((resource, index) => (
+          {resourcesData?.audioResources.map((resource: any, index: number) => (
             <div key={index} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
               <div>
                 <div className="font-medium text-gray-900">{resource.type}</div>
@@ -204,7 +204,7 @@ export function LanguageResources({ language, resourceType }: LanguageResourcesP
       <div className="mb-6 p-4 bg-success-50 rounded-lg">
         <h4 className="font-semibold text-success-800 mb-3">Learning Tips</h4>
         <div className="space-y-2">
-          {resourcesData?.learningTips.map((tip, index) => (
+          {resourcesData?.learningTips.map((tip: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <StarIcon className="w-4 h-4 text-success-600" />
               <span className="text-success-700">{tip}</span>
@@ -217,7 +217,7 @@ export function LanguageResources({ language, resourceType }: LanguageResourcesP
       <div className="p-4 bg-accent-50 rounded-lg">
         <h4 className="font-semibold text-accent-800 mb-3">Cultural Notes</h4>
         <div className="space-y-2">
-          {resourcesData?.culturalNotes.map((note, index) => (
+          {resourcesData?.culturalNotes.map((note: any, index: number) => (
             <div key={index} className="flex items-start space-x-2 text-sm">
               <InformationCircleIcon className="w-4 h-4 text-accent-600 mt-0.5 flex-shrink-0" />
               <span className="text-accent-700">{note}</span>
