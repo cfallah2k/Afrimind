@@ -8,7 +8,8 @@ import {
   ChartBarIcon,
   StarIcon,
   CheckCircleIcon,
-  InformationCircleIcon
+  InformationCircleIcon,
+  ShieldCheckIcon
 } from '@heroicons/react/24/outline'
 
 interface InvestmentOpportunitiesProps {
