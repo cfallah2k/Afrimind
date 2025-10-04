@@ -147,7 +147,7 @@ export function WeatherWidget({ location }: WeatherWidgetProps) {
       <div>
         <h3 className="text-lg font-semibold text-gray-900 mb-4">5-Day Forecast</h3>
         <div className="grid grid-cols-5 gap-4">
-          {weatherData?.forecast.map((day, index) => (
+          {weatherData?.forecast.map((day: any, index: number) => (
             <div key={index} className="text-center">
               <div className="text-sm text-gray-600 mb-2">{day.day}</div>
               <div className="mb-2">

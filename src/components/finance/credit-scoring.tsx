@@ -149,7 +149,7 @@ export function CreditScoring({ country, borrowerType }: CreditScoringProps) {
       <div className="mb-6">
         <h4 className="font-semibold text-gray-900 mb-4">Credit Bureaus</h4>
         <div className="space-y-3">
-          {creditData?.creditBureaus.map((bureau, index) => (
+          {creditData?.creditBureaus.map((bureau: any, index: number) => (
             <div key={index} className="border border-gray-200 rounded-lg p-4">
               <div className="flex items-center justify-between mb-2">
                 <h5 className="font-medium text-gray-900">{bureau.name}</h5>
@@ -157,7 +157,7 @@ export function CreditScoring({ country, borrowerType }: CreditScoringProps) {
               </div>
               <div className="text-sm text-gray-600 mb-2">{bureau.website}</div>
               <div className="flex flex-wrap gap-1">
-                {bureau.services.map((service, serviceIndex) => (
+                {bureau.services.map((service: any, serviceIndex: number) => (
                   <span
                     key={serviceIndex}
                     className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-primary-100 text-primary-800"
@@ -176,7 +176,7 @@ export function CreditScoring({ country, borrowerType }: CreditScoringProps) {
       <div className="mb-6">
         <h4 className="font-semibold text-gray-900 mb-4">Credit Score Factors</h4>
         <div className="space-y-3">
-          {creditData?.creditScoreFactors.map((factor, index) => (
+          {creditData?.creditScoreFactors.map((factor: any, index: number) => (
             <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
               <div>
                 <div className="font-medium text-gray-900">{factor.factor}</div>

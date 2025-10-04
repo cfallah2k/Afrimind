@@ -128,7 +128,7 @@ export function MarketPrices({ location }: MarketPricesProps) {
       </div>
 
       <div className="space-y-4">
-        {marketData?.commodities.map((commodity, index) => {
+        {marketData?.commodities.map((commodity: any, index: number) => {
           const TrendIcon = getTrendIcon(commodity.trend)
           return (
             <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
@@ -163,7 +163,7 @@ export function MarketPrices({ location }: MarketPricesProps) {
       <div className="mt-6 p-4 bg-primary-50 rounded-lg">
         <h4 className="font-semibold text-primary-800 mb-2">Market Analysis</h4>
         <ul className="text-sm text-primary-700 space-y-1">
-          {marketData?.marketAnalysis.map((analysis, index) => (
+          {marketData?.marketAnalysis.map((analysis: any, index: number) => (
             <li key={index} className="flex items-start space-x-2">
               <div className="w-1.5 h-1.5 bg-primary-500 rounded-full mt-2 flex-shrink-0"></div>
               <span>{analysis}</span>
@@ -176,7 +176,7 @@ export function MarketPrices({ location }: MarketPricesProps) {
       <div className="mt-4 p-4 bg-success-50 rounded-lg">
         <h4 className="font-semibold text-success-800 mb-2">Best Selling Locations</h4>
         <div className="flex flex-wrap gap-2">
-          {marketData?.bestSellingLocations.map((location, index) => (
+          {marketData?.bestSellingLocations.map((location: any, index: number) => (
             <span
               key={index}
               className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-success-100 text-success-800"

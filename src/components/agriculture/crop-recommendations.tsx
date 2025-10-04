@@ -115,7 +115,7 @@ export function CropRecommendations({ location, season }: CropRecommendationsPro
       </div>
 
       <div className="space-y-4">
-        {recommendations?.recommendedCrops.map((crop, index) => (
+        {recommendations?.recommendedCrops.map((crop: any, index: number) => (
           <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-3">
               <h4 className="font-semibold text-gray-900">{crop.name}</h4>
@@ -144,7 +144,7 @@ export function CropRecommendations({ location, season }: CropRecommendationsPro
             </div>
 
             <div className="mt-3 flex flex-wrap gap-1">
-              {crop.benefits.map((benefit, benefitIndex) => (
+              {crop.benefits.map((benefit: any, benefitIndex: number) => (
                 <span
                   key={benefitIndex}
                   className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-success-100 text-success-800"
@@ -162,7 +162,7 @@ export function CropRecommendations({ location, season }: CropRecommendationsPro
       <div className="mt-6 p-4 bg-warning-50 rounded-lg">
         <h4 className="font-semibold text-warning-800 mb-2">Soil Improvement Tips</h4>
         <ul className="text-sm text-warning-700 space-y-1">
-          {recommendations?.soilImprovementTips.map((tip, index) => (
+          {recommendations?.soilImprovementTips.map((tip: any, index: number) => (
             <li key={index} className="flex items-start space-x-2">
               <div className="w-1.5 h-1.5 bg-warning-500 rounded-full mt-2 flex-shrink-0"></div>
               <span>{tip}</span>
