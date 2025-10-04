@@ -24,8 +24,7 @@ import { LoadingSpinner } from '@/components/ui/loading-spinner'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6 }
+  animate: { opacity: 1, y: 0 }
 }
 
 const staggerChildren = {
@@ -62,13 +61,14 @@ export default function HomePage() {
         className="relative"
       >
         {/* Hero Section */}
-        <motion.section variants={fadeInUp}>
+        <motion.section variants={fadeInUp} transition={{ duration: 0.6 }}>
           <HeroSection />
         </motion.section>
 
         {/* Features Overview */}
         <motion.section 
           variants={fadeInUp}
+          transition={{ duration: 0.6 }}
           className="py-20 bg-white/50 backdrop-blur-sm"
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -152,27 +152,27 @@ export default function HomePage() {
         </motion.section>
 
         {/* Services Section */}
-        <motion.section variants={fadeInUp}>
+        <motion.section variants={fadeInUp} transition={{ duration: 0.6 }}>
           <ServicesSection />
         </motion.section>
 
         {/* Stats Section */}
-        <motion.section variants={fadeInUp}>
+        <motion.section variants={fadeInUp} transition={{ duration: 0.6 }}>
           <StatsSection />
         </motion.section>
 
         {/* Features Section */}
-        <motion.section variants={fadeInUp}>
+        <motion.section variants={fadeInUp} transition={{ duration: 0.6 }}>
           <FeaturesSection />
         </motion.section>
 
         {/* Testimonials */}
-        <motion.section variants={fadeInUp}>
+        <motion.section variants={fadeInUp} transition={{ duration: 0.6 }}>
           <TestimonialsSection />
         </motion.section>
 
         {/* CTA Section */}
-        <motion.section variants={fadeInUp}>
+        <motion.section variants={fadeInUp} transition={{ duration: 0.6 }}>
           <CtaSection />
         </motion.section>
       </motion.main>

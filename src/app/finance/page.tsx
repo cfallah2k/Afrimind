@@ -22,8 +22,7 @@ export default function FinancePage() {
 
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 }
+    animate: { opacity: 1, y: 0 }
   }
 
   const staggerChildren = {
@@ -47,6 +46,7 @@ export default function FinancePage() {
           >
             <motion.div
               variants={fadeInUp}
+              transition={{ duration: 0.6 }}
               className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-8"
             >
               <CurrencyDollarIcon className="w-4 h-4 mr-2" />
@@ -55,6 +55,7 @@ export default function FinancePage() {
 
             <motion.h1
               variants={fadeInUp}
+              transition={{ duration: 0.6 }}
               className="text-4xl md:text-6xl font-bold mb-6"
             >
               Empowering Financial Access
@@ -62,6 +63,7 @@ export default function FinancePage() {
 
             <motion.p
               variants={fadeInUp}
+              transition={{ duration: 0.6 }}
               className="text-xl md:text-2xl text-secondary-100 max-w-4xl mx-auto mb-8"
             >
               Access mobile money services, banking solutions, and financial tools 
@@ -71,6 +73,7 @@ export default function FinancePage() {
             {/* Finance Selector */}
             <motion.div
               variants={fadeInUp}
+              transition={{ duration: 0.6 }}
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
               <div className="flex items-center space-x-2 bg-white/20 rounded-lg px-4 py-2">
@@ -114,7 +117,7 @@ export default function FinancePage() {
           className="grid grid-cols-1 lg:grid-cols-3 gap-8"
         >
           {/* Mobile Money Services */}
-          <motion.div variants={fadeInUp} className="lg:col-span-2">
+          <motion.div variants={fadeInUp} transition={{ duration: 0.6 }} className="lg:col-span-2">
             <MobileMoneyServices 
               country={selectedCountry}
               serviceType={selectedService}
@@ -122,7 +125,7 @@ export default function FinancePage() {
           </motion.div>
 
           {/* Quick Stats */}
-          <motion.div variants={fadeInUp} className="space-y-6">
+          <motion.div variants={fadeInUp} transition={{ duration: 0.6 }} className="space-y-6">
             <div className="bg-white rounded-2xl p-6 shadow-soft">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Financial Overview</h3>
               <div className="space-y-4">
@@ -168,6 +171,7 @@ export default function FinancePage() {
         {/* Feature Grid */}
         <motion.div
           variants={fadeInUp}
+          transition={{ duration: 0.6 }}
           className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           <BankingServices 
