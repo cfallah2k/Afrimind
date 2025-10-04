@@ -5,8 +5,7 @@ import { motion } from 'framer-motion'
 import { 
   SunIcon,
   CheckCircleIcon,
-  StarIcon,
-  TrendingUpIcon
+  StarIcon
 } from '@heroicons/react/24/outline'
 
 interface CropRecommendationsProps {

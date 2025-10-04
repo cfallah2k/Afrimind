@@ -8,7 +8,6 @@ import {
   ChartBarIcon,
   MapIcon,
   ClockIcon,
-  TrendingUpIcon,
   ExclamationTriangleIcon,
   CheckCircleIcon
 } from '@heroicons/react/24/outline'

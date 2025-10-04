@@ -5,7 +5,6 @@ import { motion } from 'framer-motion'
 import { 
   CalculatorIcon,
   CurrencyDollarIcon,
-  TrendingUpIcon,
   InformationCircleIcon,
   CheckCircleIcon
 } from '@heroicons/react/24/outline'
