@@ -135,7 +135,7 @@ export function LocalContext({ location, contextType }: LocalContextProps) {
             <div>
               <div className="font-medium text-gray-700 mb-2">Greeting Customs:</div>
               <div className="space-y-1">
-                {contextData?.socialContext.greetingCustoms.map((custom, index) => (
+                {contextData?.socialContext.greetingCustoms.map((custom: any, index: number) => (
                   <div key={index} className="flex items-center space-x-2">
                     <div className="w-1 h-1 bg-success-500 rounded-full"></div>
                     <span className="text-success-700">{custom}</span>
@@ -201,7 +201,7 @@ export function LocalContext({ location, contextType }: LocalContextProps) {
       <div className="p-4 bg-gray-50 rounded-lg">
         <h4 className="font-semibold text-gray-800 mb-3">AI Considerations</h4>
         <div className="space-y-2">
-          {contextData?.aiConsiderations.map((consideration, index) => (
+          {contextData?.aiConsiderations.map((consideration: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <InformationCircleIcon className="w-4 h-4 text-gray-600" />
               <span className="text-gray-700">{consideration}</span>
