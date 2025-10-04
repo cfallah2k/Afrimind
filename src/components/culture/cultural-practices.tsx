@@ -141,7 +141,7 @@ export function CulturalPractices({ country, region }: CulturalPracticesProps) {
       </div>
 
       <div className="space-y-4">
-        {practicesData?.practices.map((practice, index) => (
+        {practicesData?.practices.map((practice: any, index: number) => (
           <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
             <h4 className="font-semibold text-gray-900 mb-2">{practice.name}</h4>
             <p className="text-sm text-gray-600 mb-3">{practice.description}</p>
@@ -161,7 +161,7 @@ export function CulturalPractices({ country, region }: CulturalPracticesProps) {
               <div className="mt-3">
                 <div className="font-medium text-gray-700 mb-2">Traditional Elements:</div>
                 <div className="flex flex-wrap gap-1">
-                  {practice.traditionalElements.map((element, elementIndex) => (
+                  {practice.traditionalElements.map((element: any, elementIndex: number) => (
                     <span
                       key={elementIndex}
                       className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-accent-100 text-accent-800"
@@ -178,7 +178,7 @@ export function CulturalPractices({ country, region }: CulturalPracticesProps) {
               <div className="mt-3">
                 <div className="font-medium text-gray-700 mb-2">Activities:</div>
                 <div className="space-y-1">
-                  {practice.activities.map((activity, activityIndex) => (
+                  {practice.activities.map((activity: any, activityIndex: number) => (
                     <div key={activityIndex} className="flex items-center space-x-2 text-sm">
                       <CheckCircleIcon className="w-3 h-3 text-success-600" />
                       <span className="text-gray-700">{activity}</span>
@@ -195,7 +195,7 @@ export function CulturalPractices({ country, region }: CulturalPracticesProps) {
       <div className="mt-6 p-4 bg-primary-50 rounded-lg">
         <h4 className="font-semibold text-primary-800 mb-3">Cultural Etiquette</h4>
         <div className="space-y-2">
-          {practicesData?.culturalEtiquette.map((etiquette, index) => (
+          {practicesData?.culturalEtiquette.map((etiquette: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <CheckCircleIcon className="w-4 h-4 text-primary-600" />
               <span className="text-primary-700">{etiquette}</span>
@@ -208,7 +208,7 @@ export function CulturalPractices({ country, region }: CulturalPracticesProps) {
       <div className="mt-4 p-4 bg-success-50 rounded-lg">
         <h4 className="font-semibold text-success-800 mb-3">Traditional Foods</h4>
         <div className="space-y-3">
-          {practicesData?.traditionalFoods.map((food, index) => (
+          {practicesData?.traditionalFoods.map((food: any, index: number) => (
             <div key={index} className="flex items-start space-x-3">
               <div className="w-2 h-2 bg-success-500 rounded-full mt-2 flex-shrink-0"></div>
               <div>
