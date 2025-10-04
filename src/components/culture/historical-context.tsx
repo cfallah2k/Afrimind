@@ -16,7 +16,7 @@ interface HistoricalContextProps {
 }
 
 export function HistoricalContext({ topic, region }: HistoricalContextProps) {
-  const [historicalData, setHistoricalData] = useState(null)
+  const [historicalData, setHistoricalData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

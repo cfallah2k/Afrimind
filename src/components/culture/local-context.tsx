@@ -16,7 +16,7 @@ interface LocalContextProps {
 }
 
 export function LocalContext({ location, contextType }: LocalContextProps) {
-  const [contextData, setContextData] = useState(null)
+  const [contextData, setContextData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

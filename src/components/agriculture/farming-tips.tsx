@@ -15,7 +15,7 @@ interface FarmingTipsProps {
 }
 
 export function FarmingTips({ location }: FarmingTipsProps) {
-  const [tipsData, setTipsData] = useState(null)
+  const [tipsData, setTipsData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

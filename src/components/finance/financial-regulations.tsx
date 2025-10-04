@@ -17,7 +17,7 @@ interface FinancialRegulationsProps {
 }
 
 export function FinancialRegulations({ country, regulationType }: FinancialRegulationsProps) {
-  const [regulationsData, setRegulationsData] = useState(null)
+  const [regulationsData, setRegulationsData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

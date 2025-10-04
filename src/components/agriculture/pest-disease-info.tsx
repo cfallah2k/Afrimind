@@ -15,7 +15,7 @@ interface PestDiseaseInfoProps {
 }
 
 export function PestDiseaseInfo({ location }: PestDiseaseInfoProps) {
-  const [pestData, setPestData] = useState(null)
+  const [pestData, setPestData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

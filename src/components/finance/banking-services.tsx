@@ -17,7 +17,7 @@ interface BankingServicesProps {
 }
 
 export function BankingServices({ country, serviceType }: BankingServicesProps) {
-  const [bankingData, setBankingData] = useState(null)
+  const [bankingData, setBankingData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

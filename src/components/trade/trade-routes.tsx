@@ -18,7 +18,7 @@ interface TradeRoutesProps {
 }
 
 export function TradeRoutes({ origin, destination, commodity }: TradeRoutesProps) {
-  const [routesData, setRoutesData] = useState(null)
+  const [routesData, setRoutesData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

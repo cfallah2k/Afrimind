@@ -16,7 +16,7 @@ interface WeatherWidgetProps {
 }
 
 export function WeatherWidget({ location }: WeatherWidgetProps) {
-  const [weatherData, setWeatherData] = useState(null)
+  const [weatherData, setWeatherData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

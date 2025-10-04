@@ -14,7 +14,7 @@ interface CropRecommendationsProps {
 }
 
 export function CropRecommendations({ location, season }: CropRecommendationsProps) {
-  const [recommendations, setRecommendations] = useState(null)
+  const [recommendations, setRecommendations] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

@@ -17,7 +17,7 @@ interface BorderConditionsProps {
 }
 
 export function BorderConditions({ borderCrossing, countryPair }: BorderConditionsProps) {
-  const [borderData, setBorderData] = useState(null)
+  const [borderData, setBorderData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

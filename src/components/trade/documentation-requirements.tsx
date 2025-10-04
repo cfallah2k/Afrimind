@@ -16,7 +16,7 @@ interface DocumentationRequirementsProps {
 }
 
 export function DocumentationRequirements({ commodity, value }: DocumentationRequirementsProps) {
-  const [docsData, setDocsData] = useState(null)
+  const [docsData, setDocsData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

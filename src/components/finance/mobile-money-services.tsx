@@ -17,7 +17,7 @@ interface MobileMoneyServicesProps {
 }
 
 export function MobileMoneyServices({ country, serviceType }: MobileMoneyServicesProps) {
-  const [servicesData, setServicesData] = useState(null)
+  const [servicesData, setServicesData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

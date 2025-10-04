@@ -15,7 +15,7 @@ interface MarketPricesProps {
 }
 
 export function MarketPrices({ location }: MarketPricesProps) {
-  const [marketData, setMarketData] = useState(null)
+  const [marketData, setMarketData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

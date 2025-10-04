@@ -17,7 +17,7 @@ interface CreditScoringProps {
 }
 
 export function CreditScoring({ country, borrowerType }: CreditScoringProps) {
-  const [creditData, setCreditData] = useState(null)
+  const [creditData, setCreditData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

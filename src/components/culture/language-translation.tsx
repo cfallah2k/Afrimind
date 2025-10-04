@@ -16,7 +16,7 @@ interface LanguageTranslationProps {
 }
 
 export function LanguageTranslation({ language, country }: LanguageTranslationProps) {
-  const [translationData, setTranslationData] = useState(null)
+  const [translationData, setTranslationData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [inputText, setInputText] = useState('')
   const [translatedText, setTranslatedText] = useState('')

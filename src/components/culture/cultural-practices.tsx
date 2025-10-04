@@ -16,7 +16,7 @@ interface CulturalPracticesProps {
 }
 
 export function CulturalPractices({ country, region }: CulturalPracticesProps) {
-  const [practicesData, setPracticesData] = useState(null)
+  const [practicesData, setPracticesData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

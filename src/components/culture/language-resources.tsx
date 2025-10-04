@@ -16,7 +16,7 @@ interface LanguageResourcesProps {
 }
 
 export function LanguageResources({ language, resourceType }: LanguageResourcesProps) {
-  const [resourcesData, setResourcesData] = useState(null)
+  const [resourcesData, setResourcesData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

@@ -17,7 +17,7 @@ interface TariffCalculatorProps {
 }
 
 export function TariffCalculator({ commodityCode, origin, destination, value }: TariffCalculatorProps) {
-  const [tariffData, setTariffData] = useState(null)
+  const [tariffData, setTariffData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

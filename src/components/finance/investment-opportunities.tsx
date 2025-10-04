@@ -18,7 +18,7 @@ interface InvestmentOpportunitiesProps {
 }
 
 export function InvestmentOpportunities({ country, investmentType, riskTolerance }: InvestmentOpportunitiesProps) {
-  const [investmentData, setInvestmentData] = useState(null)
+  const [investmentData, setInvestmentData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

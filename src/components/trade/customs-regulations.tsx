@@ -18,7 +18,7 @@ interface CustomsRegulationsProps {
 }
 
 export function CustomsRegulations({ origin, destination, commodity }: CustomsRegulationsProps) {
-  const [regulationsData, setRegulationsData] = useState(null)
+  const [regulationsData, setRegulationsData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
