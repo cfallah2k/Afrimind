@@ -24,11 +24,6 @@ export class AfriMindMCPServer {
       {
         name: 'afrimind-platform',
         version: '1.0.0',
-      },
-      {
-        capabilities: {
-          tools: {},
-        },
       }
     )
 
@@ -95,8 +90,8 @@ export class AfriMindMCPServer {
   }
 }
 
-// Start server if run directly
-if (import.meta.url === `file://${process.argv[1]}`) {
+// Start server if run directly (only in Node.js environment)
+if (typeof window === 'undefined' && typeof process !== 'undefined' && import.meta.url === `file://${process.argv[1]}`) {
   const server = new AfriMindMCPServer()
   server.start().catch(console.error)
 }
