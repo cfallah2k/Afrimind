@@ -197,7 +197,7 @@ export function BorderConditions({ borderCrossing, countryPair }: BorderConditio
       <div className="mb-6 p-4 bg-warning-50 rounded-lg">
         <h4 className="font-semibold text-warning-800 mb-3">Best Times to Cross</h4>
         <div className="space-y-2">
-          {borderData?.bestTimesToCross.map((time, index) => (
+          {borderData?.bestTimesToCross.map((time: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <ClockIcon className="w-4 h-4 text-warning-600" />
               <span className="text-warning-700">{time}</span>
@@ -210,7 +210,7 @@ export function BorderConditions({ borderCrossing, countryPair }: BorderConditio
       <div className="mb-6 p-4 bg-primary-50 rounded-lg">
         <h4 className="font-semibold text-primary-800 mb-3">Required Procedures</h4>
         <div className="space-y-2">
-          {borderData?.requiredProcedures.map((procedure, index) => (
+          {borderData?.requiredProcedures.map((procedure: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <CheckCircleIcon className="w-4 h-4 text-primary-600" />
               <span className="text-primary-700">{procedure}</span>
@@ -223,7 +223,7 @@ export function BorderConditions({ borderCrossing, countryPair }: BorderConditio
       <div className="mb-6 p-4 bg-success-50 rounded-lg">
         <h4 className="font-semibold text-success-800 mb-3">Tips for Smooth Crossing</h4>
         <div className="space-y-2">
-          {borderData?.tipsForSmoothCrossing.map((tip, index) => (
+          {borderData?.tipsForSmoothCrossing.map((tip: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <ShieldCheckIcon className="w-4 h-4 text-success-600" />
               <span className="text-success-700">{tip}</span>
