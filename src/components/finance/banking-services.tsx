@@ -159,7 +159,7 @@ export function BankingServices({ country, serviceType }: BankingServicesProps) 
 
       {/* Major Banks */}
       <div className="space-y-4 mb-6">
-        {bankingData?.majorBanks.map((bank, index) => (
+        {bankingData?.majorBanks.map((bank: any, index: number) => (
           <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-3">
               <h4 className="font-semibold text-gray-900">{bank.name}</h4>
@@ -176,7 +176,7 @@ export function BankingServices({ country, serviceType }: BankingServicesProps) 
               <div>
                 <div className="font-medium text-gray-700 mb-2">Services:</div>
                 <div className="flex flex-wrap gap-1">
-                  {bank.services.map((service, serviceIndex) => (
+                  {bank.services.map((service: any, serviceIndex: number) => (
                     <span
                       key={serviceIndex}
                       className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-primary-100 text-primary-800"
@@ -215,7 +215,7 @@ export function BankingServices({ country, serviceType }: BankingServicesProps) 
       <div className="mb-6 p-4 bg-primary-50 rounded-lg">
         <h4 className="font-semibold text-primary-800 mb-3">Account Types</h4>
         <div className="space-y-3">
-          {bankingData?.accountTypes.map((account, index) => (
+          {bankingData?.accountTypes.map((account: any, index: number) => (
             <div key={index} className="flex items-center justify-between p-3 bg-white rounded-lg">
               <div>
                 <div className="font-medium text-gray-900">{account.type}</div>
@@ -233,7 +233,7 @@ export function BankingServices({ country, serviceType }: BankingServicesProps) 
       <div className="mb-6 p-4 bg-success-50 rounded-lg">
         <h4 className="font-semibold text-success-800 mb-3">Digital Banking Features</h4>
         <div className="grid grid-cols-2 gap-2">
-          {bankingData?.digitalBanking.map((feature, index) => (
+          {bankingData?.digitalBanking.map((feature: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <ShieldCheckIcon className="w-4 h-4 text-success-600" />
               <span className="text-success-700">{feature}</span>
@@ -246,7 +246,7 @@ export function BankingServices({ country, serviceType }: BankingServicesProps) 
       <div className="p-4 bg-warning-50 rounded-lg">
         <h4 className="font-semibold text-warning-800 mb-3">Fees and Charges</h4>
         <div className="space-y-2">
-          {bankingData?.feesAndCharges.map((fee, index) => (
+          {bankingData?.feesAndCharges.map((fee: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <CreditCardIcon className="w-4 h-4 text-warning-600" />
               <span className="text-warning-700">{fee}</span>
