@@ -194,7 +194,7 @@ export function CreditScoring({ country, borrowerType }: CreditScoringProps) {
       <div className="mb-6 p-4 bg-primary-50 rounded-lg">
         <h4 className="font-semibold text-primary-800 mb-3">Score Ranges</h4>
         <div className="space-y-2">
-          {creditData?.scoreRanges.map((range, index) => (
+          {creditData?.scoreRanges.map((range: any, index: number) => (
             <div key={index} className="flex items-center justify-between p-2 bg-white rounded">
               <div>
                 <div className="font-medium text-gray-900">{range.range}</div>
@@ -212,7 +212,7 @@ export function CreditScoring({ country, borrowerType }: CreditScoringProps) {
       <div className="mb-6 p-4 bg-success-50 rounded-lg">
         <h4 className="font-semibold text-success-800 mb-3">Improving Credit Score</h4>
         <div className="space-y-2">
-          {creditData?.improvingCreditScore.map((tip, index) => (
+          {creditData?.improvingCreditScore.map((tip: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <ArrowTrendingUpIcon className="w-4 h-4 text-success-600" />
               <span className="text-success-700">{tip}</span>
@@ -225,7 +225,7 @@ export function CreditScoring({ country, borrowerType }: CreditScoringProps) {
       <div className="p-4 bg-warning-50 rounded-lg">
         <h4 className="font-semibold text-warning-800 mb-3">Alternative Credit Assessment</h4>
         <div className="space-y-2">
-          {creditData?.alternativeCreditAssessment.map((assessment, index) => (
+          {creditData?.alternativeCreditAssessment.map((assessment: any, index: number) => (
             <div key={index} className="flex items-center space-x-2 text-sm">
               <InformationCircleIcon className="w-4 h-4 text-warning-600" />
               <span className="text-warning-700">{assessment}</span>
