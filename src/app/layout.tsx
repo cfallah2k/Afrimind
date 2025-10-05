@@ -6,6 +6,7 @@ import { Toaster } from 'react-hot-toast'
 import { MobileAppWrapper } from '@/components/mobile-app-wrapper'
 import { ResponsiveNavigation } from '@/components/responsive-navigation'
 import { EnvChecker } from '@/components/env-checker'
+import { ConditionalAuthGuard } from '@/components/conditional-auth-guard'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -46,10 +47,12 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <Providers>
           <EnvChecker />
-          <ResponsiveNavigation />
-          <MobileAppWrapper>
-            {children}
-          </MobileAppWrapper>
+          <ConditionalAuthGuard>
+            <ResponsiveNavigation />
+            <MobileAppWrapper>
+              {children}
+            </MobileAppWrapper>
+          </ConditionalAuthGuard>
           <Toaster 
             position="top-center"
             toastOptions={{

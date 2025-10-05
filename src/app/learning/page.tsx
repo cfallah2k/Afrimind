@@ -16,7 +16,8 @@ import {
   LanguageIcon,
   TruckIcon,
   CheckCircleIcon,
-  LockClosedIcon
+  LockClosedIcon,
+  ChevronDownIcon
 } from '@heroicons/react/24/outline'
 import { useLanguage } from '@/components/providers/language-provider'
 
@@ -26,9 +27,11 @@ const fadeInUp = {
 }
 
 export default function LearningPage() {
-  const { t } = useLanguage()
+  const { t, currentLanguage, setLanguage, currentCountry, setCountry, availableLanguages, availableCountries } = useLanguage()
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [selectedLevel, setSelectedLevel] = useState('all')
+  const [showLanguageSelector, setShowLanguageSelector] = useState(false)
+  const [showCountrySelector, setShowCountrySelector] = useState(false)
 
   const categories = [
     { id: 'agriculture', name: 'Agriculture', icon: GlobeAltIcon, color: 'green' },
@@ -218,6 +221,88 @@ export default function LearningPage() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Language & Country Selection */}
+      <section className="py-8 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <motion.div 
+            className="bg-white rounded-xl shadow-sm p-4 lg:p-6"
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-lg lg:text-xl font-semibold text-gray-900 mb-4">Select Learning Language & Region</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {/* Language Selection */}
+              <div className="relative">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Learning Language</label>
+                <button
+                  onClick={() => setShowLanguageSelector(!showLanguageSelector)}
+                  className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-md bg-white text-left focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                >
+                  <div className="flex items-center space-x-2">
+                    <LanguageIcon className="w-4 h-4 text-gray-500" />
+                    <span className="text-sm font-medium">English</span>
+                  </div>
+                  <ChevronDownIcon className="w-4 h-4 text-gray-400" />
+                </button>
+                
+                {showLanguageSelector && (
+                  <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                    {availableLanguages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => {
+                          setLanguage(lang.code)
+                          setShowLanguageSelector(false)
+                        }}
+                        className="w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-gray-50"
+                      >
+                        <span className="text-lg">{lang.flag}</span>
+                        <span className="text-sm">{lang.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Country Selection */}
+              <div className="relative">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Country/Region</label>
+                <button
+                  onClick={() => setShowCountrySelector(!showCountrySelector)}
+                  className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-md bg-white text-left focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                >
+                  <div className="flex items-center space-x-2">
+                    <GlobeAltIcon className="w-4 h-4 text-gray-500" />
+                    <span className="text-sm font-medium">Liberia</span>
+                  </div>
+                  <ChevronDownIcon className="w-4 h-4 text-gray-400" />
+                </button>
+                
+                {showCountrySelector && (
+                  <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                    {availableCountries.map((country) => (
+                      <button
+                        key={country.code}
+                        onClick={() => {
+                          setCountry(country.code)
+                          setShowCountrySelector(false)
+                        }}
+                        className="w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-gray-50"
+                      >
+                        <span className="text-lg">{country.flag}</span>
+                        <span className="text-sm">{country.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 

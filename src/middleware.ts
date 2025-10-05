@@ -1,8 +1,30 @@
 import { NextResponse } from 'next/server'
 
 export function middleware(req: any) {
-  // Simple middleware without authentication requirements
-  // All routes are public for the demo version
+  const { pathname } = req.nextUrl
+  
+  // Public routes that don't require authentication
+  const publicRoutes = [
+    '/auth/signin',
+    '/auth/signup', 
+    '/auth/forgot-password',
+    '/auth/reset-password',
+    '/auth/verify-otp',
+    '/api/auth',
+    '/_next',
+    '/favicon.ico'
+  ]
+  
+  // Check if the current path is a public route
+  const isPublicRoute = publicRoutes.some(route => pathname.startsWith(route))
+  
+  // If it's a public route, allow access
+  if (isPublicRoute) {
+    return NextResponse.next()
+  }
+  
+  // For all other routes, we'll let the client-side AuthGuard handle the authentication check
+  // This allows for better user experience with loading states
   return NextResponse.next()
 }
 

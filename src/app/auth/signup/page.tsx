@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 import { useLocalAuth } from '@/hooks/use-local-auth'
+import { AuthNavigation } from '@/components/auth-navigation'
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -299,6 +300,8 @@ export default function SignUpPage() {
             </span>
           </div>
         </form>
+
+        <AuthNavigation currentPage="signup" />
       </div>
     </div>
   )

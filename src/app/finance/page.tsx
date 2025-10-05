@@ -8,17 +8,24 @@ import {
   CreditCardIcon,
   ChartBarIcon,
   ShieldCheckIcon,
-  ArrowTrendingUpIcon
+  ArrowTrendingUpIcon,
+  ChevronDownIcon,
+  GlobeAltIcon,
+  LanguageIcon
 } from '@heroicons/react/24/outline'
 import { MobileMoneyServices } from '@/components/finance/mobile-money-services'
 import { BankingServices } from '@/components/finance/banking-services'
 import { FinancialRegulations } from '@/components/finance/financial-regulations'
 import { CreditScoring } from '@/components/finance/credit-scoring'
 import { InvestmentOpportunities } from '@/components/finance/investment-opportunities'
+import { useLanguage } from '@/components/providers/language-provider'
 
 export default function FinancePage() {
+  const { currentLanguage, setLanguage, currentCountry, setCountry, availableLanguages, availableCountries } = useLanguage()
   const [selectedCountry, setSelectedCountry] = useState('Nigeria')
   const [selectedService, setSelectedService] = useState('mobile_money')
+  const [showCountrySelector, setShowCountrySelector] = useState(false)
+  const [showLanguageSelector, setShowLanguageSelector] = useState(false)
 
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
@@ -50,6 +57,84 @@ export default function FinancePage() {
         </div>
       </div>
       <div className="max-w-md lg:max-w-4xl xl:max-w-6xl mx-auto px-4 py-6">
+
+      {/* Country & Language Selection */}
+      <motion.div 
+        className="bg-white rounded-xl shadow-sm p-4 lg:p-6 mb-6"
+        variants={fadeInUp}
+        initial="initial"
+        animate="animate"
+        transition={{ duration: 0.6 }}
+      >
+        <h2 className="text-lg lg:text-xl font-semibold text-gray-900 mb-4">Select Country & Language</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {/* Country Selection */}
+          <div className="relative">
+            <label className="block text-sm font-medium text-gray-700 mb-2">Country/Region</label>
+            <button
+              onClick={() => setShowCountrySelector(!showCountrySelector)}
+              className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-md bg-white text-left focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+            >
+              <div className="flex items-center space-x-2">
+                <GlobeAltIcon className="w-4 h-4 text-gray-500" />
+                <span className="text-sm font-medium">Liberia</span>
+              </div>
+              <ChevronDownIcon className="w-4 h-4 text-gray-400" />
+            </button>
+            
+            {showCountrySelector && (
+              <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                {availableCountries.map((country) => (
+                  <button
+                    key={country.code}
+                    onClick={() => {
+                      setCountry(country.code)
+                      setShowCountrySelector(false)
+                    }}
+                    className="w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-gray-50"
+                  >
+                    <span className="text-lg">{country.flag}</span>
+                    <span className="text-sm">{country.name}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Language Selection */}
+          <div className="relative">
+            <label className="block text-sm font-medium text-gray-700 mb-2">Language</label>
+            <button
+              onClick={() => setShowLanguageSelector(!showLanguageSelector)}
+              className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-md bg-white text-left focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+            >
+              <div className="flex items-center space-x-2">
+                <LanguageIcon className="w-4 h-4 text-gray-500" />
+                <span className="text-sm font-medium">English</span>
+              </div>
+              <ChevronDownIcon className="w-4 h-4 text-gray-400" />
+            </button>
+            
+            {showLanguageSelector && (
+              <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                {availableLanguages.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => {
+                      setLanguage(lang.code)
+                      setShowLanguageSelector(false)
+                    }}
+                    className="w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-gray-50"
+                  >
+                    <span className="text-lg">{lang.flag}</span>
+                    <span className="text-sm">{lang.name}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </motion.div>
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

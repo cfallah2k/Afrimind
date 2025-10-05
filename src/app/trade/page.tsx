@@ -8,18 +8,26 @@ import {
   DocumentTextIcon,
   ClockIcon,
   CurrencyDollarIcon,
-  ExclamationTriangleIcon
+  ExclamationTriangleIcon,
+  ChevronDownIcon,
+  GlobeAltIcon,
+  LanguageIcon
 } from '@heroicons/react/24/outline'
 import { TradeRoutes } from '@/components/trade/trade-routes'
 import { CustomsRegulations } from '@/components/trade/customs-regulations'
 import { DocumentationRequirements } from '@/components/trade/documentation-requirements'
 import { BorderConditions } from '@/components/trade/border-conditions'
 import { TariffCalculator } from '@/components/trade/tariff-calculator'
+import { useLanguage } from '@/components/providers/language-provider'
 
 export default function TradePage() {
+  const { currentLanguage, setLanguage, currentCountry, setCountry, availableLanguages, availableCountries } = useLanguage()
   const [selectedOrigin, setSelectedOrigin] = useState('Lagos, Nigeria')
   const [selectedDestination, setSelectedDestination] = useState('Accra, Ghana')
   const [selectedCommodity, setSelectedCommodity] = useState('Agricultural Products')
+  const [showOriginSelector, setShowOriginSelector] = useState(false)
+  const [showDestinationSelector, setShowDestinationSelector] = useState(false)
+  const [showLanguageSelector, setShowLanguageSelector] = useState(false)
 
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
@@ -51,6 +59,139 @@ export default function TradePage() {
         </div>
       </div>
       <div className="max-w-md lg:max-w-4xl xl:max-w-6xl mx-auto px-4 py-6">
+
+      {/* Route & Language Selection */}
+      <motion.div 
+        className="bg-white rounded-xl shadow-sm p-4 lg:p-6 mb-6"
+        variants={fadeInUp}
+        initial="initial"
+        animate="animate"
+        transition={{ duration: 0.6 }}
+      >
+        <h2 className="text-lg lg:text-xl font-semibold text-gray-900 mb-4">Select Trade Route & Language</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          {/* Origin Selection */}
+          <div className="relative">
+            <label className="block text-sm font-medium text-gray-700 mb-2">From (Origin)</label>
+            <button
+              onClick={() => setShowOriginSelector(!showOriginSelector)}
+              className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-md bg-white text-left focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+            >
+              <div className="flex items-center space-x-2">
+                <GlobeAltIcon className="w-4 h-4 text-gray-500" />
+                <span className="text-sm font-medium">{selectedOrigin}</span>
+              </div>
+              <ChevronDownIcon className="w-4 h-4 text-gray-400" />
+            </button>
+            
+            {showOriginSelector && (
+              <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                {[
+                  { name: 'Lagos, Nigeria', flag: '🇳🇬' },
+                  { name: 'Accra, Ghana', flag: '🇬🇭' },
+                  { name: 'Monrovia, Liberia', flag: '🇱🇷' },
+                  { name: 'Dakar, Senegal', flag: '🇸🇳' },
+                  { name: 'Abidjan, Côte d\'Ivoire', flag: '🇨🇮' },
+                  { name: 'Bamako, Mali', flag: '🇲🇱' },
+                  { name: 'Ouagadougou, Burkina Faso', flag: '🇧🇫' },
+                  { name: 'Niamey, Niger', flag: '🇳🇪' },
+                  { name: 'Conakry, Guinea', flag: '🇬🇳' },
+                  { name: 'Freetown, Sierra Leone', flag: '🇸🇱' }
+                ].map((location) => (
+                  <button
+                    key={location.name}
+                    onClick={() => {
+                      setSelectedOrigin(location.name)
+                      setShowOriginSelector(false)
+                    }}
+                    className="w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-gray-50"
+                  >
+                    <span className="text-lg">{location.flag}</span>
+                    <span className="text-sm">{location.name}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Destination Selection */}
+          <div className="relative">
+            <label className="block text-sm font-medium text-gray-700 mb-2">To (Destination)</label>
+            <button
+              onClick={() => setShowDestinationSelector(!showDestinationSelector)}
+              className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-md bg-white text-left focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+            >
+              <div className="flex items-center space-x-2">
+                <GlobeAltIcon className="w-4 h-4 text-gray-500" />
+                <span className="text-sm font-medium">{selectedDestination}</span>
+              </div>
+              <ChevronDownIcon className="w-4 h-4 text-gray-400" />
+            </button>
+            
+            {showDestinationSelector && (
+              <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                {[
+                  { name: 'Lagos, Nigeria', flag: '🇳🇬' },
+                  { name: 'Accra, Ghana', flag: '🇬🇭' },
+                  { name: 'Monrovia, Liberia', flag: '🇱🇷' },
+                  { name: 'Dakar, Senegal', flag: '🇸🇳' },
+                  { name: 'Abidjan, Côte d\'Ivoire', flag: '🇨🇮' },
+                  { name: 'Bamako, Mali', flag: '🇲🇱' },
+                  { name: 'Ouagadougou, Burkina Faso', flag: '🇧🇫' },
+                  { name: 'Niamey, Niger', flag: '🇳🇪' },
+                  { name: 'Conakry, Guinea', flag: '🇬🇳' },
+                  { name: 'Freetown, Sierra Leone', flag: '🇸🇱' }
+                ].map((location) => (
+                  <button
+                    key={location.name}
+                    onClick={() => {
+                      setSelectedDestination(location.name)
+                      setShowDestinationSelector(false)
+                    }}
+                    className="w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-gray-50"
+                  >
+                    <span className="text-lg">{location.flag}</span>
+                    <span className="text-sm">{location.name}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Language Selection */}
+          <div className="relative">
+            <label className="block text-sm font-medium text-gray-700 mb-2">Language</label>
+            <button
+              onClick={() => setShowLanguageSelector(!showLanguageSelector)}
+              className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-md bg-white text-left focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+            >
+              <div className="flex items-center space-x-2">
+                <LanguageIcon className="w-4 h-4 text-gray-500" />
+                <span className="text-sm font-medium">English</span>
+              </div>
+              <ChevronDownIcon className="w-4 h-4 text-gray-400" />
+            </button>
+            
+            {showLanguageSelector && (
+              <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                {availableLanguages.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => {
+                      setLanguage(lang.code)
+                      setShowLanguageSelector(false)
+                    }}
+                    className="w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-gray-50"
+                  >
+                    <span className="text-lg">{lang.flag}</span>
+                    <span className="text-sm">{lang.name}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </motion.div>
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

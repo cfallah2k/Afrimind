@@ -5,6 +5,7 @@ import { useLocalAuth } from '@/hooks/use-local-auth'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
+import { AuthNavigation } from '@/components/auth-navigation'
 
 export default function SignInPage() {
   const [email, setEmail] = useState('')
@@ -119,9 +120,9 @@ export default function SignInPage() {
             </div>
 
             <div className="text-sm">
-              <a href="#" className="font-medium text-green-600 hover:text-green-500">
+              <Link href="/auth/forgot-password" className="font-medium text-green-600 hover:text-green-500">
                 Forgot your password?
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -144,6 +145,8 @@ export default function SignInPage() {
             </span>
           </div>
         </form>
+
+        <AuthNavigation currentPage="signin" />
       </div>
     </div>
   )
