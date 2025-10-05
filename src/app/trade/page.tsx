@@ -138,6 +138,7 @@ export default function TradePage() {
           />
         </motion.div>
       </div>
+      </div>
     </div>
   )
 }

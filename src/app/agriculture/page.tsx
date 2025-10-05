@@ -51,38 +51,6 @@ export default function AgriculturePage() {
         </div>
       </div>
       <div className="max-w-md lg:max-w-4xl xl:max-w-6xl mx-auto px-4 py-6">
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
-            >
-              <div className="flex items-center space-x-2 bg-white/20 rounded-lg px-4 py-2">
-                <MapIcon className="w-5 h-5" />
-                <select
-                  value={selectedLocation}
-                  onChange={(e) => setSelectedLocation(e.target.value)}
-                  className="bg-transparent text-white border-none outline-none"
-                >
-                  <option value="Lagos, Nigeria">Lagos, Nigeria</option>
-                  <option value="Nairobi, Kenya">Nairobi, Kenya</option>
-                  <option value="Accra, Ghana">Accra, Ghana</option>
-                  <option value="Cairo, Egypt">Cairo, Egypt</option>
-                  <option value="Johannesburg, South Africa">Johannesburg, South Africa</option>
-                </select>
-              </div>
-              <div className="flex items-center space-x-2 bg-white/20 rounded-lg px-4 py-2">
-                <ClockIcon className="w-5 h-5" />
-                <select
-                  value={selectedSeason}
-                  onChange={(e) => setSelectedSeason(e.target.value)}
-                  className="bg-transparent text-white border-none outline-none"
-                >
-                  <option value="wet">Wet Season</option>
-                  <option value="dry">Dry Season</option>
-                  <option value="transition">Transition</option>
-                </select>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </div>
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
