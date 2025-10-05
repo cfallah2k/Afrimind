@@ -5,8 +5,8 @@ import { motion } from 'framer-motion'
 import { 
   CurrencyDollarIcon,
   ChartBarIcon,
-  TrendingUpIcon,
-  TrendingDownIcon,
+  ArrowTrendingUpIcon as TrendingUpIcon,
+  ArrowTrendingDownIcon as TrendingDownIcon,
   ArrowPathIcon,
   MapPinIcon,
   CalculatorIcon,

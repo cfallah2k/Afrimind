@@ -21,7 +21,9 @@ import {
   PlusIcon,
   VideoCameraIcon,
   MicrophoneIcon,
-  PaperAirplaneIcon
+  PaperAirplaneIcon,
+  ArrowTrendingUpIcon as TrendingUpIcon,
+  ArrowTrendingDownIcon as TrendingDownIcon
 } from '@heroicons/react/24/outline'
 
 const fadeInUp = {
