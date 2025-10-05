@@ -121,6 +121,7 @@ export default function AgriculturePage() {
           <FarmingTips location={selectedLocation} />
         </motion.div>
       </div>
+      </div>
     </div>
   )
 }
