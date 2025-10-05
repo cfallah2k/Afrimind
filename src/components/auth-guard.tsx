@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLocalAuth } from '@/hooks/use-local-auth'
-import { LoadingSpinner } from '@/components/ui/loading-spinner'
 
 interface AuthGuardProps {
   children: React.ReactNode
@@ -27,7 +26,7 @@ export function AuthGuard({ children, fallback }: AuthGuardProps) {
     return fallback || (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50">
         <div className="text-center">
-          <LoadingSpinner size="lg" />
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto"></div>
           <p className="mt-4 text-gray-600">Checking authentication...</p>
         </div>
       </div>
@@ -38,7 +37,7 @@ export function AuthGuard({ children, fallback }: AuthGuardProps) {
     return fallback || (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50">
         <div className="text-center">
-          <LoadingSpinner size="lg" />
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto"></div>
           <p className="mt-4 text-gray-600">Redirecting to sign in...</p>
         </div>
       </div>
