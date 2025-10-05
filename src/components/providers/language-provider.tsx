@@ -30,15 +30,15 @@ interface LanguageProviderProps {
 }
 
 export function LanguageProvider({ children }: LanguageProviderProps) {
-  const { data: session } = useSession()
+  const session = useSession()
   const [currentLanguage, setCurrentLanguage] = useState('en')
   const [currentCountry, setCurrentCountry] = useState('NG')
 
   // Initialize language and country from session or localStorage
   useEffect(() => {
-    if (session?.user) {
-      setCurrentLanguage(session.user.language || 'en')
-      setCurrentCountry(session.user.country || 'NG')
+    if (session?.data?.user) {
+      setCurrentLanguage(session.data.user.language || 'en')
+      setCurrentCountry(session.data.user.country || 'NG')
     } else {
       const savedLanguage = localStorage.getItem('afrimind-language')
       const savedCountry = localStorage.getItem('afrimind-country')

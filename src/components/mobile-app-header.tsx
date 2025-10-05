@@ -31,7 +31,7 @@ export function MobileAppHeader({
   showNotifications = true,
   notificationCount = 0
 }: MobileAppHeaderProps) {
-  const { data: session } = useSession()
+  const session = useSession()
   const { t } = useLanguage()
 
   return (
@@ -78,7 +78,7 @@ export function MobileAppHeader({
               <ShareIcon className="w-5 h-5 text-gray-600" />
             </button>
             
-            {session ? (
+            {session?.data ? (
               <div className="flex items-center space-x-2">
                 <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
                   <CpuChipIcon className="w-5 h-5 text-blue-600" />

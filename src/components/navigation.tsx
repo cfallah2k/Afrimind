@@ -21,7 +21,7 @@ import LanguageSelector from './ui/language-selector'
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const { data: session } = useSession()
+  const session = useSession()
   const { t } = useLanguage()
 
   useEffect(() => {
@@ -110,7 +110,7 @@ export function Navigation() {
           {/* Mobile App Style Header */}
           <div className="flex items-center space-x-4">
             <LanguageSelector />
-            {session ? (
+            {session?.data ? (
               <div className="flex items-center space-x-3">
                 <Link
                   href="/ai/chat"
