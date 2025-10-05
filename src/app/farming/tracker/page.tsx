@@ -866,15 +866,8 @@ export default function FarmingTrackerPage() {
                 // Start recording
                 mediaRecorder.start()
                 
-                // Stop recording function
-                const stopRecording = () => {
-                  mediaRecorder.stop()
-                  stream.getTracks().forEach(track => track.stop())
-                  recordingModal.remove()
-                }
-                
                 // Show recording interface
-                const recordingModal = document.createElement('div')
+                const recordingModal: HTMLDivElement = document.createElement('div')
                 recordingModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'
                 recordingModal.innerHTML = `
                   <div class="bg-white rounded-lg p-6 max-w-md mx-4 text-center">
@@ -884,6 +877,14 @@ export default function FarmingTrackerPage() {
                     <button onclick="stopRecording()" class="px-6 py-2 bg-red-600 text-white rounded-lg">Stop Recording</button>
                   </div>
                 `
+                
+                // Stop recording function
+                const stopRecording = () => {
+                  mediaRecorder.stop()
+                  stream.getTracks().forEach(track => track.stop())
+                  recordingModal.remove()
+                }
+                
                 document.body.appendChild(recordingModal)
                 
                 // Add stop function to window for button
