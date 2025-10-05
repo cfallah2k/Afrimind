@@ -154,7 +154,8 @@ export const translations = {
 
 export function getTranslation(key: string, language: string = 'en'): string {
   const lang = language in translations ? language : 'en'
-  return translations[lang as keyof typeof translations][key as keyof typeof translations[typeof lang]] || key
+  const langTranslations = translations[lang as keyof typeof translations] as Record<string, string>
+  return langTranslations[key] || key
 }
 
 export function getSupportedLanguages(countryCode: string): string[] {
