@@ -3,6 +3,7 @@
 import { ThemeProvider } from 'next-themes'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { useState } from 'react'
+import { LanguageProvider } from './providers/language-provider'
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient({
@@ -22,7 +23,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
         enableSystem
         disableTransitionOnChange
       >
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </ThemeProvider>
     </QueryClientProvider>
   )

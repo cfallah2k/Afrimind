@@ -3,6 +3,8 @@ import { Inter, Poppins } from 'next/font/google'
 import './globals.css'
 import { Providers } from '@/components/providers'
 import { Toaster } from 'react-hot-toast'
+import { MobileAppWrapper } from '@/components/mobile-app-wrapper'
+import { ResponsiveNavigation } from '@/components/responsive-navigation'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -42,24 +44,29 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body className="font-sans antialiased">
         <Providers>
-          {children}
+          <ResponsiveNavigation />
+          <MobileAppWrapper>
+            {children}
+          </MobileAppWrapper>
           <Toaster 
-            position="top-right"
+            position="top-center"
             toastOptions={{
-              duration: 4000,
+              duration: 3000,
               style: {
-                background: '#363636',
+                background: '#1f2937',
                 color: '#fff',
+                borderRadius: '12px',
+                fontSize: '14px',
               },
               success: {
-                duration: 3000,
+                duration: 2000,
                 iconTheme: {
                   primary: '#22c55e',
                   secondary: '#fff',
                 },
               },
               error: {
-                duration: 5000,
+                duration: 4000,
                 iconTheme: {
                   primary: '#ef4444',
                   secondary: '#fff',
