@@ -39,8 +39,8 @@ export default function ProfilePage() {
     farmName: '',
     farmSize: '',
     farmingExperience: '',
-    primaryCrops: [],
-    farmingMethods: [],
+    primaryCrops: [] as string[],
+    farmingMethods: [] as string[],
     
     // Location
     country: '',
