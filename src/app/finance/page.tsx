@@ -50,37 +50,6 @@ export default function FinancePage() {
         </div>
       </div>
       <div className="max-w-md lg:max-w-4xl xl:max-w-6xl mx-auto px-4 py-6">
-              <div className="flex items-center space-x-2 bg-white/20 rounded-lg px-4 py-2">
-                <BuildingOfficeIcon className="w-5 h-5" />
-                <select
-                  value={selectedCountry}
-                  onChange={(e) => setSelectedCountry(e.target.value)}
-                  className="bg-transparent text-white border-none outline-none"
-                >
-                  <option value="Nigeria">Nigeria</option>
-                  <option value="Kenya">Kenya</option>
-                  <option value="Ghana">Ghana</option>
-                  <option value="South Africa">South Africa</option>
-                  <option value="Ghana">Ghana</option>
-                </select>
-              </div>
-              <div className="flex items-center space-x-2 bg-white/20 rounded-lg px-4 py-2">
-                <CreditCardIcon className="w-5 h-5" />
-                <select
-                  value={selectedService}
-                  onChange={(e) => setSelectedService(e.target.value)}
-                  className="bg-transparent text-white border-none outline-none"
-                >
-                  <option value="mobile_money">Mobile Money</option>
-                  <option value="banking">Banking</option>
-                  <option value="investment">Investment</option>
-                  <option value="credit">Credit</option>
-                </select>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </div>
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

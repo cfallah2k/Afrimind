@@ -137,6 +137,7 @@ export default function CulturePage() {
           />
         </motion.div>
       </div>
+      </div>
     </div>
   )
 }
