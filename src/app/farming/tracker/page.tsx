@@ -866,18 +866,20 @@ export default function FarmingTrackerPage() {
                 // Start recording
                 mediaRecorder.start()
                 
-                // Show recording interface
-                const recordingModal = document.createElement('div') as HTMLDivElement
-                recordingModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'
-                recordingModal.innerHTML = `
-                  <div class="bg-white rounded-lg p-6 max-w-md mx-4 text-center">
-                    <div class="w-16 h-16 bg-red-500 rounded-full mx-auto mb-4 animate-pulse"></div>
-                    <h3 class="text-lg font-semibold mb-2">Recording Voice Note</h3>
-                    <p class="text-gray-600 mb-4">Speak about your farming activities...</p>
-                    <button onclick="stopRecording()" class="px-6 py-2 bg-red-600 text-white rounded-lg">Stop Recording</button>
+                // Show recording interface (string-based to avoid TS DOM type quirks)
+                const recordingHtml = `
+                  <div class="afm-recording-modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div class="bg-white rounded-lg p-6 max-w-md mx-4 text-center">
+                      <div class="w-16 h-16 bg-red-500 rounded-full mx-auto mb-4 animate-pulse"></div>
+                      <h3 class="text-lg font-semibold mb-2">Recording Voice Note</h3>
+                      <p class="text-gray-600 mb-4">Speak about your farming activities...</p>
+                      <button onclick="stopRecording()" class="px-6 py-2 bg-red-600 text-white rounded-lg">Stop Recording</button>
+                    </div>
                   </div>
                 `
-                
+                document.body.insertAdjacentHTML('beforeend', recordingHtml)
+                const recordingModal = document.querySelector('.afm-recording-modal') as HTMLDivElement | null
+
                 // Stop recording function
                 const stopRecording = () => {
                   mediaRecorder.stop()
@@ -886,8 +888,6 @@ export default function FarmingTrackerPage() {
                     recordingModal.parentNode.removeChild(recordingModal)
                   }
                 }
-                
-                document.body.appendChild(recordingModal)
                 
                 // Add stop function to window for button
                 (window as any).stopRecording = stopRecording
