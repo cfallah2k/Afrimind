@@ -16,7 +16,7 @@ import {
   ClockIcon,
   UsersIcon,
   MapPinIcon,
-  TrendingUpIcon
+  ArrowTrendingUpIcon as TrendingUpIcon
 } from '@heroicons/react/24/outline'
 
 const fadeInUp = {

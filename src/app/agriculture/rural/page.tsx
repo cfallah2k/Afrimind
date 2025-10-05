@@ -5,11 +5,8 @@ import { motion } from 'framer-motion'
 import { 
   SunIcon,
   CloudIcon,
-  DropletIcon,
   MapPinIcon,
-  DownloadIcon,
   WifiIcon,
-  WifiSlashIcon,
   UsersIcon,
   BookOpenIcon,
   LightBulbIcon,
@@ -17,7 +14,10 @@ import {
   HeartIcon,
   StarIcon,
   ClockIcon,
-  CheckCircleIcon
+  CheckCircleIcon,
+  ArrowDownTrayIcon as DownloadIcon,
+  WifiIcon as WifiSlashIcon,
+  BeakerIcon as DropletIcon
 } from '@heroicons/react/24/outline'
 
 const fadeInUp = {

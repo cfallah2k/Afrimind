@@ -15,7 +15,7 @@ import {
   BookOpenIcon,
   MapPinIcon,
   BellIcon,
-  TrendingUpIcon,
+  ArrowTrendingUpIcon as TrendingUpIcon,
   UsersIcon,
   StarIcon
 } from '@heroicons/react/24/outline'

@@ -4,13 +4,13 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { 
   ChartBarIcon,
-  TrendingUpIcon,
-  TrendingDownIcon,
+  ArrowTrendingUpIcon as TrendingUpIcon,
+  ArrowTrendingDownIcon as TrendingDownIcon,
   CalendarIcon,
   MapPinIcon,
   SunIcon,
-  CloudRainIcon,
-  SeedlingIcon,
+  CloudIcon as CloudRainIcon,
+  SparklesIcon as SeedlingIcon,
   ScissorsIcon,
   CurrencyDollarIcon,
   ClockIcon,

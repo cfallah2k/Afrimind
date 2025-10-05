@@ -9,9 +9,9 @@ import {
   PlayIcon,
   CheckCircleIcon,
   StarIcon,
-  TrendingUpIcon,
+  ArrowTrendingUpIcon as TrendingUpIcon,
   CalendarIcon,
-  AwardIcon,
+  StarIcon as AwardIcon,
   FireIcon
 } from '@heroicons/react/24/outline'
 

@@ -5,10 +5,10 @@ import { motion } from 'framer-motion'
 import { 
   CalendarIcon,
   SunIcon,
-  CloudRainIcon,
-  SeedlingIcon,
+  CloudIcon as CloudRainIcon,
+  SparklesIcon as SeedlingIcon,
   ScissorsIcon,
-  TrendingUpIcon,
+  ArrowTrendingUpIcon as TrendingUpIcon,
   BellIcon,
   ChartBarIcon,
   MapPinIcon,
