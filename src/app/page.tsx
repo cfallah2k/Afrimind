@@ -47,6 +47,15 @@ export default function HomePage() {
     return 'Good evening'
   }
 
+  const getFirstName = () => {
+    if (!session?.user?.name) return ''
+    
+    // Extract first name from name or email
+    const fullName = session.user.name
+    const firstName = fullName.split(' ')[0].split('@')[0] // Get first word, remove @ if it's an email
+    return firstName
+  }
+
   if (isLoading) {
     return <LoadingSpinner />
   }
@@ -150,7 +159,7 @@ export default function HomePage() {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-2xl font-bold text-gray-900 mb-2">
-            {getGreeting()}{session?.user?.name ? `, ${session.user.name}` : ''}! 👋
+            {getGreeting()}{getFirstName() ? `, ${getFirstName()}` : ''}! 👋
           </h1>
           <p className="text-gray-600">
             Ready to grow with AfriMind today?

@@ -230,13 +230,9 @@ export default function FarmerNetworkPage() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-bold text-gray-900">Farmer Network</h1>
-              <p className="text-gray-600">Connect, learn, and grow together</p>
+              <p className="text-gray-600">Connect with fellow farmers</p>
             </div>
             <div className="flex items-center space-x-4">
-              <button className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                <PlusIcon className="w-4 h-4" />
-                <span>Add Farmer</span>
-              </button>
             </div>
           </div>
         </div>
@@ -497,7 +493,13 @@ export default function FarmerNetworkPage() {
             animate="animate"
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <h2 className="text-lg lg:text-xl font-semibold text-gray-900 mb-4">Market Insights</h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg lg:text-xl font-semibold text-gray-900">Market Insights</h2>
+              <button className="flex items-center space-x-2 px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm">
+                <PlusIcon className="w-4 h-4" />
+                <span>Add Farmer</span>
+              </button>
+            </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <div className="bg-white rounded-xl shadow-sm p-4 lg:p-6">
                 <h3 className="font-semibold text-gray-900 mb-3">Price Alerts</h3>

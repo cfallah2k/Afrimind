@@ -173,8 +173,36 @@ export default function FarmingNotificationsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 pb-24 lg:pb-0">
-      {/* Header */}
-      <div className="bg-white shadow-sm">
+      {/* Mobile Header */}
+      <div className="lg:hidden bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
+        <div className="max-w-md mx-auto px-4 py-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                <BellIcon className="w-5 h-5 text-blue-600" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h1 className="text-base font-bold text-gray-900 truncate">Notifications 🔔</h1>
+                <p className="text-xs text-gray-600 truncate">Farming updates</p>
+              </div>
+            </div>
+            {unreadCount > 0 && (
+              <div className="flex items-center space-x-2">
+                <span className="text-xs text-gray-600">{unreadCount}</span>
+                <button
+                  onClick={markAllAsRead}
+                  className="text-xs text-blue-600 hover:text-blue-700 font-medium"
+                >
+                  Mark all read
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop Header */}
+      <div className="hidden lg:block bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -203,27 +231,32 @@ export default function FarmingNotificationsPage() {
         </div>
       </div>
 
-      <div className="max-w-md lg:max-w-4xl xl:max-w-6xl mx-auto px-4 py-6">
+      <motion.main
+        initial="initial"
+        animate="animate"
+        variants={fadeInUp}
+        className="max-w-md lg:max-w-4xl xl:max-w-6xl mx-auto px-3 sm:px-4 py-4 sm:py-6"
+      >
         {/* Filters */}
         <motion.div 
-          className="mb-8"
+          className="mb-6 sm:mb-8"
           variants={fadeInUp}
           initial="initial"
           animate="animate"
           transition={{ duration: 0.6 }}
         >
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-2 sm:gap-4">
             {filters.map((filter) => (
               <button
                 key={filter.id}
                 onClick={() => setSelectedFilter(filter.id)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg border-2 transition-colors ${
+                className={`flex items-center space-x-1 sm:space-x-2 px-3 sm:px-4 py-2 rounded-lg border-2 transition-colors text-sm sm:text-base ${
                   selectedFilter === filter.id
                     ? 'border-blue-500 bg-blue-50 text-blue-700'
                     : 'border-gray-200 hover:border-gray-300 text-gray-700'
                 }`}
               >
-                <span className="font-medium">{filter.name}</span>
+                <span className="font-medium text-xs sm:text-sm">{filter.name}</span>
                 <span className={`px-2 py-1 rounded-full text-xs ${
                   selectedFilter === filter.id
                     ? 'bg-blue-200 text-blue-800'
@@ -236,18 +269,18 @@ export default function FarmingNotificationsPage() {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
           {/* Notifications List */}
           <div className="lg:col-span-2">
             <motion.div 
-              className="bg-white rounded-xl shadow-lg overflow-hidden"
+              className="bg-white rounded-xl shadow-sm overflow-hidden"
               variants={fadeInUp}
               initial="initial"
               animate="animate"
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="p-6 border-b border-gray-200">
-                <h2 className="text-xl font-semibold text-gray-900">
+              <div className="p-4 sm:p-6 border-b border-gray-200">
+                <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
                   {selectedFilter === 'all' ? 'All Notifications' : filters.find(f => f.id === selectedFilter)?.name}
                 </h2>
               </div>
@@ -257,13 +290,13 @@ export default function FarmingNotificationsPage() {
                   return (
                     <div
                       key={notification.id}
-                      className={`p-6 hover:bg-gray-50 transition-colors cursor-pointer ${
+                      className={`p-4 sm:p-6 hover:bg-gray-50 transition-colors cursor-pointer ${
                         !notification.read ? 'bg-blue-50' : ''
                       }`}
                       onClick={() => markAsRead(notification.id)}
                     >
-                      <div className="flex items-start space-x-4">
-                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                      <div className="flex items-start space-x-3 sm:space-x-4">
+                        <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${
                           notification.type === 'urgent' ? 'bg-red-100' :
                           notification.type === 'milestone' ? 'bg-green-100' :
                           notification.type === 'tip' ? 'bg-blue-100' :
@@ -271,7 +304,7 @@ export default function FarmingNotificationsPage() {
                           notification.type === 'pest' ? 'bg-yellow-100' :
                           'bg-pink-100'
                         }`}>
-                          <Icon className={`w-5 h-5 ${
+                          <Icon className={`w-4 h-4 sm:w-5 sm:h-5 ${
                             notification.type === 'urgent' ? 'text-red-600' :
                             notification.type === 'milestone' ? 'text-green-600' :
                             notification.type === 'tip' ? 'text-blue-600' :
@@ -280,22 +313,22 @@ export default function FarmingNotificationsPage() {
                             'text-pink-600'
                           }`} />
                         </div>
-                        <div className="flex-1">
-                          <div className="flex items-center justify-between mb-2">
-                            <h3 className={`font-semibold ${
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-start justify-between mb-2">
+                            <h3 className={`text-sm sm:text-base font-semibold ${
                               !notification.read ? 'text-gray-900' : 'text-gray-700'
                             }`}>
                               {notification.title}
                             </h3>
-                            <div className="flex items-center space-x-2">
-                              <span className="text-sm text-gray-500">{notification.time}</span>
+                            <div className="flex items-center space-x-2 ml-2">
+                              <span className="text-xs sm:text-sm text-gray-500">{notification.time}</span>
                               {!notification.read && (
-                                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></div>
                               )}
                             </div>
                           </div>
-                          <p className="text-gray-600 mb-3">{notification.message}</p>
-                          <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+                          <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3 line-clamp-2">{notification.message}</p>
+                          <button className="text-xs sm:text-sm text-blue-600 hover:text-blue-700 font-medium">
                             {notification.action}
                           </button>
                         </div>
@@ -308,29 +341,29 @@ export default function FarmingNotificationsPage() {
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {/* Upcoming Events */}
             <motion.div 
-              className="bg-white rounded-xl shadow-lg p-6"
+              className="bg-white rounded-xl shadow-sm p-4 sm:p-6"
               variants={fadeInUp}
               initial="initial"
               animate="animate"
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Upcoming Events</h3>
-              <div className="space-y-4">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Upcoming Events</h3>
+              <div className="space-y-3 sm:space-y-4">
                 {upcomingEvents.map((event) => (
-                  <div key={event.id} className="border border-gray-200 rounded-lg p-4">
+                  <div key={event.id} className="border border-gray-200 rounded-lg p-3 sm:p-4">
                     <div className="flex items-start justify-between mb-2">
-                      <h4 className="font-medium text-gray-900">{event.title}</h4>
+                      <h4 className="text-sm sm:text-base font-medium text-gray-900">{event.title}</h4>
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${getPriorityColor(event.priority)}`}>
                         {event.priority}
                       </span>
                     </div>
-                    <p className="text-sm text-gray-600 mb-2">{event.description}</p>
+                    <p className="text-xs sm:text-sm text-gray-600 mb-2">{event.description}</p>
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500">{event.crop}</span>
-                      <span className="text-sm font-medium text-gray-900">
+                      <span className="text-xs sm:text-sm text-gray-500">{event.crop}</span>
+                      <span className="text-xs sm:text-sm font-medium text-gray-900">
                         {event.date.toLocaleDateString()}
                       </span>
                     </div>
@@ -341,71 +374,71 @@ export default function FarmingNotificationsPage() {
 
             {/* Quick Actions */}
             <motion.div 
-              className="bg-white rounded-xl shadow-lg p-6"
+              className="bg-white rounded-xl shadow-sm p-4 sm:p-6"
               variants={fadeInUp}
               initial="initial"
               animate="animate"
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
-              <div className="space-y-3">
-                <button className="w-full flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-                  <CalendarIcon className="w-5 h-5 text-blue-600" />
-                  <span className="text-sm font-medium text-gray-900">Set Reminder</span>
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Quick Actions</h3>
+              <div className="space-y-2 sm:space-y-3">
+                <button className="w-full flex items-center space-x-2 sm:space-x-3 p-2 sm:p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                  <CalendarIcon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+                  <span className="text-xs sm:text-sm font-medium text-gray-900">Set Reminder</span>
                 </button>
                 
-                <button className="w-full flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-                  <SunIcon className="w-5 h-5 text-yellow-600" />
-                  <span className="text-sm font-medium text-gray-900">Weather Alert</span>
+                <button className="w-full flex items-center space-x-2 sm:space-x-3 p-2 sm:p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                  <SunIcon className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-600" />
+                  <span className="text-xs sm:text-sm font-medium text-gray-900">Weather Alert</span>
                 </button>
                 
-                <button className="w-full flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-                  <ScissorsIcon className="w-5 h-5 text-green-600" />
-                  <span className="text-sm font-medium text-gray-900">Harvest Reminder</span>
+                <button className="w-full flex items-center space-x-2 sm:space-x-3 p-2 sm:p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                  <ScissorsIcon className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+                  <span className="text-xs sm:text-sm font-medium text-gray-900">Harvest Reminder</span>
                 </button>
                 
-                <button className="w-full flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-                  <TrendingUpIcon className="w-5 h-5 text-purple-600" />
-                  <span className="text-sm font-medium text-gray-900">Price Alert</span>
+                <button className="w-full flex items-center space-x-2 sm:space-x-3 p-2 sm:p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                  <TrendingUpIcon className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
+                  <span className="text-xs sm:text-sm font-medium text-gray-900">Price Alert</span>
                 </button>
               </div>
             </motion.div>
 
             {/* Notification Settings */}
             <motion.div 
-              className="bg-white rounded-xl shadow-lg p-6"
+              className="bg-white rounded-xl shadow-sm p-4 sm:p-6"
               variants={fadeInUp}
               initial="initial"
               animate="animate"
               transition={{ duration: 0.6, delay: 0.8 }}
             >
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Notification Settings</h3>
-              <div className="space-y-4">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Notification Settings</h3>
+              <div className="space-y-3 sm:space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-700">Weather Alerts</span>
-                  <input type="checkbox" defaultChecked className="w-4 h-4 text-blue-600" />
+                  <span className="text-xs sm:text-sm text-gray-700">Weather Alerts</span>
+                  <input type="checkbox" defaultChecked className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-700">Harvest Reminders</span>
-                  <input type="checkbox" defaultChecked className="w-4 h-4 text-blue-600" />
+                  <span className="text-xs sm:text-sm text-gray-700">Harvest Reminders</span>
+                  <input type="checkbox" defaultChecked className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-700">Market Updates</span>
-                  <input type="checkbox" defaultChecked className="w-4 h-4 text-blue-600" />
+                  <span className="text-xs sm:text-sm text-gray-700">Market Updates</span>
+                  <input type="checkbox" defaultChecked className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-700">Pest Alerts</span>
-                  <input type="checkbox" defaultChecked className="w-4 h-4 text-blue-600" />
+                  <span className="text-xs sm:text-sm text-gray-700">Pest Alerts</span>
+                  <input type="checkbox" defaultChecked className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-700">Farming Tips</span>
-                  <input type="checkbox" className="w-4 h-4 text-blue-600" />
+                  <span className="text-xs sm:text-sm text-gray-700">Farming Tips</span>
+                  <input type="checkbox" className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
                 </div>
               </div>
             </motion.div>
           </div>
         </div>
-      </div>
+      </motion.main>
     </div>
   )
 }

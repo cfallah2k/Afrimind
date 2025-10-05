@@ -181,48 +181,6 @@ export default function LearningPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 pb-24 lg:pb-0">
-      {/* Mobile App Header */}
-      <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
-        <div className="max-w-md lg:max-w-7xl mx-auto px-4 py-3 lg:py-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 lg:w-12 lg:h-12 bg-pink-100 rounded-xl flex items-center justify-center">
-              <BookOpenIcon className="w-6 h-6 lg:w-7 lg:h-7 text-pink-600" />
-            </div>
-            <div>
-              <h1 className="text-lg lg:text-2xl xl:text-3xl font-bold text-gray-900">Learning 📚</h1>
-              <p className="text-sm lg:text-base xl:text-lg text-gray-600">Master new skills</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Stats Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { number: '6,500+', label: 'Students Enrolled' },
-              { number: '50+', label: 'Courses Available' },
-              { number: '12', label: 'Languages Supported' },
-              { number: '95%', label: 'Completion Rate' }
-            ].map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                className="text-center"
-                variants={fadeInUp}
-                initial="initial"
-                animate="animate"
-                transition={{ duration: 0.6, delay: 0.1 * index }}
-              >
-                <div className="text-3xl md:text-4xl font-bold text-green-600 mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-gray-600">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Language & Country Selection */}
       <section className="py-8 px-4 sm:px-6 lg:px-8 bg-gray-50">
@@ -485,32 +443,6 @@ export default function LearningPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            variants={fadeInUp}
-            initial="initial"
-            animate="animate"
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              Ready to Start Your Learning Journey?
-            </h2>
-            <p className="text-lg text-gray-600 mb-8">
-              Join thousands of learners across Africa who are already building their skills and advancing their careers
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-green-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-green-700 transition-colors text-lg">
-                Browse All Courses
-              </button>
-              <button className="border border-gray-300 text-gray-700 px-8 py-4 rounded-lg font-semibold hover:bg-gray-50 transition-colors text-lg">
-                View Learning Paths
-              </button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
     </div>
   )
 }

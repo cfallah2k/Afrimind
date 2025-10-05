@@ -10,8 +10,32 @@ import {
   GlobeAltIcon,
   LanguageIcon,
   DocumentTextIcon,
-  CurrencyDollarIcon
+  CurrencyDollarIcon,
+  MicrophoneIcon,
+  SpeakerWaveIcon,
+  PhotoIcon,
+  VideoCameraIcon,
+  ClockIcon,
+  TrashIcon,
+  ShareIcon,
+  BookmarkIcon,
+  MagnifyingGlassIcon,
+  PlusIcon,
+  XMarkIcon,
+  PlayIcon,
+  PauseIcon,
+  StopIcon,
+  ArrowPathIcon,
+  CheckCircleIcon,
+  ExclamationTriangleIcon,
+  InformationCircleIcon,
+  HeartIcon,
+  ThumbUpIcon,
+  ThumbDownIcon,
+  ChatBubbleLeftRightIcon,
+  ArrowLeftIcon
 } from '@heroicons/react/24/outline'
+import Link from 'next/link'
 
 interface Message {
   id: string
@@ -19,6 +43,15 @@ interface Message {
   sender: 'user' | 'ai'
   timestamp: Date
   type: 'agricultural' | 'trade' | 'cultural' | 'finance' | 'general'
+  isLiked?: boolean
+  isDisliked?: boolean
+  isBookmarked?: boolean
+  attachments?: {
+    type: 'image' | 'voice' | 'document'
+    url: string
+    name: string
+  }[]
+  isTyping?: boolean
 }
 
 const aiServices = [
@@ -32,7 +65,7 @@ export default function AIChatPage() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      content: 'Hello! I\'m your AI assistant for African digital sovereignty. How can I help you today?',
+      content: 'Hello! I\'m your advanced AI assistant for African digital sovereignty. I can help with agriculture, trade, culture, and finance. How can I assist you today?',
       sender: 'ai',
       timestamp: new Date(),
       type: 'general'
@@ -41,7 +74,19 @@ export default function AIChatPage() {
   const [inputMessage, setInputMessage] = useState('')
   const [selectedService, setSelectedService] = useState<string>('general')
   const [isTyping, setIsTyping] = useState(false)
+  const [isRecording, setIsRecording] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [showAttachments, setShowAttachments] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [showSearch, setShowSearch] = useState(false)
+  const [recordingDuration, setRecordingDuration] = useState(0)
+  const [currentVoiceNote, setCurrentVoiceNote] = useState<Message | null>(null)
+  
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+  const recordingIntervalRef = useRef<NodeJS.Timeout | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -79,6 +124,106 @@ export default function AIChatPage() {
       setIsTyping(false)
     }, 1500)
   }
+
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+      const mediaRecorder = new MediaRecorder(stream)
+      mediaRecorderRef.current = mediaRecorder
+      
+      mediaRecorder.start()
+      setIsRecording(true)
+      setRecordingDuration(0)
+      
+      recordingIntervalRef.current = setInterval(() => {
+        setRecordingDuration(prev => prev + 1)
+      }, 1000)
+      
+      mediaRecorder.onstop = () => {
+        stream.getTracks().forEach(track => track.stop())
+        setIsRecording(false)
+        if (recordingIntervalRef.current) {
+          clearInterval(recordingIntervalRef.current)
+        }
+      }
+    } catch (error) {
+      console.error('Error accessing microphone:', error)
+    }
+  }
+
+  const stopRecording = () => {
+    if (mediaRecorderRef.current && isRecording) {
+      mediaRecorderRef.current.stop()
+      
+      // Add voice message to chat
+      const voiceMessage: Message = {
+        id: Date.now().toString(),
+        content: `Voice message (${formatDuration(recordingDuration)})`,
+        sender: 'user',
+        timestamp: new Date(),
+        type: selectedService as any,
+        attachments: [{
+          type: 'voice',
+          url: '#',
+          name: `Voice_${Date.now()}.webm`
+        }]
+      }
+      setMessages(prev => [...prev, voiceMessage])
+    }
+  }
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      const fileMessage: Message = {
+        id: Date.now().toString(),
+        content: `Shared ${file.type.startsWith('image/') ? 'image' : 'file'}: ${file.name}`,
+        sender: 'user',
+        timestamp: new Date(),
+        type: selectedService as any,
+        attachments: [{
+          type: file.type.startsWith('image/') ? 'image' : 'document',
+          url: URL.createObjectURL(file),
+          name: file.name
+        }]
+      }
+      setMessages(prev => [...prev, fileMessage])
+    }
+  }
+
+  const toggleLike = (messageId: string) => {
+    setMessages(prev => prev.map(msg => 
+      msg.id === messageId 
+        ? { ...msg, isLiked: !msg.isLiked, isDisliked: false }
+        : msg
+    ))
+  }
+
+  const toggleDislike = (messageId: string) => {
+    setMessages(prev => prev.map(msg => 
+      msg.id === messageId 
+        ? { ...msg, isDisliked: !msg.isDisliked, isLiked: false }
+        : msg
+    ))
+  }
+
+  const toggleBookmark = (messageId: string) => {
+    setMessages(prev => prev.map(msg => 
+      msg.id === messageId 
+        ? { ...msg, isBookmarked: !msg.isBookmarked }
+        : msg
+    ))
+  }
+
+  const formatDuration = (seconds: number) => {
+    const mins = Math.floor(seconds / 60)
+    const secs = seconds % 60
+    return `${mins}:${secs.toString().padStart(2, '0')}`
+  }
+
+  const filteredMessages = messages.filter(message =>
+    message.content.toLowerCase().includes(searchQuery.toLowerCase())
+  )
 
   const generateAIResponse = (message: string, service: string): string => {
     const responses = {
@@ -130,39 +275,67 @@ export default function AIChatPage() {
         <div className="bg-white shadow-sm border-b border-gray-200 p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center">
+              <Link href="/ai" className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                <ArrowLeftIcon className="w-5 h-5 text-gray-600" />
+              </Link>
+              <div className="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center">
                 <CpuChipIcon className="w-6 h-6 text-white" />
               </div>
               <div>
                 <h1 className="text-xl font-semibold text-gray-900">AI Assistant</h1>
-                <p className="text-sm text-gray-500">African Digital Sovereignty</p>
+                <p className="text-sm text-gray-500">Advanced African Intelligence</p>
               </div>
             </div>
-            <div className="flex space-x-2">
-              {aiServices.map((service) => {
-                const Icon = service.icon
-                return (
-                  <button
-                    key={service.id}
-                    onClick={() => setSelectedService(service.id)}
-                    className={`p-2 rounded-lg transition-colors ${
-                      selectedService === service.id
-                        ? `bg-${service.color}-100 text-${service.color}-600`
-                        : 'text-gray-400 hover:text-gray-600'
-                    }`}
-                    title={service.name}
-                  >
-                    <Icon className="w-5 h-5" />
-                  </button>
-                )
-              })}
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={() => setShowSearch(!showSearch)}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                title="Search Messages"
+              >
+                <MagnifyingGlassIcon className="w-5 h-5 text-gray-600" />
+              </button>
+              <div className="flex space-x-1">
+                {aiServices.map((service) => {
+                  const Icon = service.icon
+                  return (
+                    <button
+                      key={service.id}
+                      onClick={() => setSelectedService(service.id)}
+                      className={`p-2 rounded-lg transition-colors ${
+                        selectedService === service.id
+                          ? `bg-${service.color}-100 text-${service.color}-600`
+                          : 'text-gray-400 hover:text-gray-600'
+                      }`}
+                      title={service.name}
+                    >
+                      <Icon className="w-5 h-5" />
+                    </button>
+                  )
+                })}
+              </div>
             </div>
           </div>
+          
+          {/* Search Bar */}
+          {showSearch && (
+            <div className="mt-4">
+              <div className="relative">
+                <MagnifyingGlassIcon className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Search messages..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                />
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          {messages.map((message) => {
+          {(searchQuery ? filteredMessages : messages).map((message) => {
             const Icon = getServiceIcon(message.type)
             const color = getServiceColor(message.type)
             
@@ -194,11 +367,79 @@ export default function AIChatPage() {
                       : 'bg-white text-gray-900 shadow-sm'
                   }`}>
                     <p className="text-sm">{message.content}</p>
-                    <p className={`text-xs mt-1 ${
-                      message.sender === 'user' ? 'text-blue-100' : 'text-gray-500'
-                    }`}>
-                      {message.timestamp.toLocaleTimeString()}
-                    </p>
+                    
+                    {/* Attachments */}
+                    {message.attachments && message.attachments.length > 0 && (
+                      <div className="mt-2 space-y-2">
+                        {message.attachments.map((attachment, idx) => (
+                          <div key={idx} className="flex items-center space-x-2">
+                            {attachment.type === 'image' && (
+                              <img 
+                                src={attachment.url} 
+                                alt={attachment.name}
+                                className="w-20 h-20 object-cover rounded-lg"
+                              />
+                            )}
+                            {attachment.type === 'voice' && (
+                              <div className="flex items-center space-x-2 bg-gray-100 rounded-lg p-2">
+                                <SpeakerWaveIcon className="w-4 h-4 text-gray-600" />
+                                <span className="text-xs text-gray-600">{attachment.name}</span>
+                                <button className="p-1 hover:bg-gray-200 rounded">
+                                  <PlayIcon className="w-3 h-3 text-gray-600" />
+                                </button>
+                              </div>
+                            )}
+                            {attachment.type === 'document' && (
+                              <div className="flex items-center space-x-2 bg-gray-100 rounded-lg p-2">
+                                <DocumentTextIcon className="w-4 h-4 text-gray-600" />
+                                <span className="text-xs text-gray-600">{attachment.name}</span>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    
+                    <div className="flex items-center justify-between mt-2">
+                      <p className={`text-xs ${
+                        message.sender === 'user' ? 'text-blue-100' : 'text-gray-500'
+                      }`}>
+                        {message.timestamp.toLocaleTimeString()}
+                      </p>
+                      
+                      {/* Message Actions */}
+                      {message.sender === 'ai' && (
+                        <div className="flex items-center space-x-1">
+                          <button
+                            onClick={() => toggleLike(message.id)}
+                            className={`p-1 rounded transition-colors ${
+                              message.isLiked ? 'text-green-600' : 'text-gray-400 hover:text-green-600'
+                            }`}
+                          >
+                            <ThumbUpIcon className="w-3 h-3" />
+                          </button>
+                          <button
+                            onClick={() => toggleDislike(message.id)}
+                            className={`p-1 rounded transition-colors ${
+                              message.isDisliked ? 'text-red-600' : 'text-gray-400 hover:text-red-600'
+                            }`}
+                          >
+                            <ThumbDownIcon className="w-3 h-3" />
+                          </button>
+                          <button
+                            onClick={() => toggleBookmark(message.id)}
+                            className={`p-1 rounded transition-colors ${
+                              message.isBookmarked ? 'text-yellow-600' : 'text-gray-400 hover:text-yellow-600'
+                            }`}
+                          >
+                            <BookmarkIcon className="w-3 h-3" />
+                          </button>
+                          <button className="p-1 text-gray-400 hover:text-gray-600 rounded transition-colors">
+                            <ShareIcon className="w-3 h-3" />
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -230,23 +471,95 @@ export default function AIChatPage() {
 
         {/* Input */}
         <div className="bg-white border-t border-gray-200 p-4">
-          <div className="flex space-x-4">
-            <input
-              type="text"
-              value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-              placeholder="Ask me anything about African digital sovereignty..."
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-            />
+          {/* Attachment Options */}
+          {showAttachments && (
+            <div className="mb-4 p-4 bg-gray-50 rounded-lg">
+              <div className="flex items-center space-x-4">
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  className="flex items-center space-x-2 px-3 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  <PhotoIcon className="w-4 h-4 text-gray-600" />
+                  <span className="text-sm text-gray-700">Image</span>
+                </button>
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  className="flex items-center space-x-2 px-3 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  <DocumentTextIcon className="w-4 h-4 text-gray-600" />
+                  <span className="text-sm text-gray-700">Document</span>
+                </button>
+                <button
+                  onClick={startRecording}
+                  disabled={isRecording}
+                  className="flex items-center space-x-2 px-3 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50"
+                >
+                  <MicrophoneIcon className="w-4 h-4 text-gray-600" />
+                  <span className="text-sm text-gray-700">Voice</span>
+                </button>
+              </div>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*,.pdf,.doc,.docx"
+                onChange={handleFileUpload}
+                className="hidden"
+              />
+            </div>
+          )}
+          
+          <div className="flex space-x-2">
+            <button
+              onClick={() => setShowAttachments(!showAttachments)}
+              className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+              title="Attachments"
+            >
+              <PlusIcon className="w-5 h-5" />
+            </button>
+            
+            <div className="flex-1 relative">
+              <input
+                type="text"
+                value={inputMessage}
+                onChange={(e) => setInputMessage(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                placeholder="Ask me anything about African digital sovereignty..."
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              />
+            </div>
+            
+            <button
+              onClick={isRecording ? stopRecording : startRecording}
+              className={`p-2 rounded-lg transition-colors ${
+                isRecording 
+                  ? 'bg-red-500 text-white hover:bg-red-600' 
+                  : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'
+              }`}
+              title={isRecording ? 'Stop Recording' : 'Voice Message'}
+            >
+              {isRecording ? (
+                <StopIcon className="w-5 h-5" />
+              ) : (
+                <MicrophoneIcon className="w-5 h-5" />
+              )}
+            </button>
+            
             <button
               onClick={handleSendMessage}
               disabled={!inputMessage.trim()}
-              className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               <PaperAirplaneIcon className="w-5 h-5" />
             </button>
           </div>
+          
+          {/* Recording Indicator */}
+          {isRecording && (
+            <div className="mt-2 flex items-center space-x-2 text-red-600">
+              <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+              <span className="text-sm">Recording... {formatDuration(recordingDuration)}</span>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -21,79 +21,397 @@ export function MobileMoneyServices({ country, serviceType }: MobileMoneyService
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Simulate API call
+    // Dynamic data based on country selection
     const fetchServicesData = async () => {
       setLoading(true)
-      // Mock data - in production, this would be a real API call
+      
+      // Country-specific data for all West African countries
+      const countryData = {
+        'Liberia': {
+          currency: 'LRD',
+          providers: [
+            {
+              name: 'Orange Money Liberia',
+              coverage: 'Liberia',
+              services: ['transfer', 'payment', 'savings', 'credit'],
+              fees: { transfer: '1-2% of amount', payment: '0.5-1.5% of amount', withdrawal: 'LRD 50-200' },
+              requirements: ['Valid ID', 'Phone number', 'Liberian address'],
+              limits: { daily: 'LRD 50,000', monthly: 'LRD 500,000' },
+              contact: '+231-77-XXX-XXXX', rating: 4.4,
+              description: 'Orange Money provides mobile money services in Liberia'
+            },
+            {
+              name: 'Lonestar MTN Mobile Money',
+              coverage: 'Liberia',
+              services: ['transfer', 'payment', 'savings'],
+              fees: { transfer: '1.5-3% of amount', payment: '1-2% of amount', withdrawal: 'LRD 75-250' },
+              requirements: ['Valid ID', 'Phone number', 'Liberian address'],
+              limits: { daily: 'LRD 40,000', monthly: 'LRD 400,000' },
+              contact: '+231-88-XXX-XXXX', rating: 4.2,
+              description: 'MTN Mobile Money services in Liberia'
+            }
+          ]
+        },
+        'Nigeria': {
+          currency: 'NGN',
+          providers: [
+            {
+              name: 'MTN Mobile Money Nigeria',
+              coverage: 'Nigeria',
+              services: ['transfer', 'payment', 'savings', 'credit'],
+              fees: { transfer: '1-3% of amount', payment: '0.5-2% of amount', withdrawal: 'NGN 50-200' },
+              requirements: ['Valid ID', 'Phone number', 'BVN'],
+              limits: { daily: 'NGN 50,000', monthly: 'NGN 500,000' },
+              contact: '+234-XXX-XXXX', rating: 4.5,
+              description: 'MTN Mobile Money provides services across Nigeria'
+            },
+            {
+              name: 'Airtel Money Nigeria',
+              coverage: 'Nigeria',
+              services: ['transfer', 'payment', 'savings'],
+              fees: { transfer: '1-2% of amount', payment: '0.5-1.5% of amount', withdrawal: 'NGN 30-150' },
+              requirements: ['Valid ID', 'Phone number', 'BVN'],
+              limits: { daily: 'NGN 30,000', monthly: 'NGN 300,000' },
+              contact: '+234-XXX-XXXX', rating: 4.3,
+              description: 'Airtel Money services in Nigeria'
+            }
+          ]
+        },
+        'Ghana': {
+          currency: 'GHS',
+          providers: [
+            {
+              name: 'MTN Mobile Money Ghana',
+              coverage: 'Ghana',
+              services: ['transfer', 'payment', 'savings', 'credit'],
+              fees: { transfer: '1-2.5% of amount', payment: '0.5-2% of amount', withdrawal: 'GHS 2-8' },
+              requirements: ['Valid ID', 'Phone number', 'Ghana Card'],
+              limits: { daily: 'GHS 2,000', monthly: 'GHS 20,000' },
+              contact: '+233-XXX-XXXX', rating: 4.6,
+              description: 'MTN Mobile Money services in Ghana'
+            },
+            {
+              name: 'Vodafone Cash Ghana',
+              coverage: 'Ghana',
+              services: ['transfer', 'payment', 'savings'],
+              fees: { transfer: '1-2% of amount', payment: '0.5-1.5% of amount', withdrawal: 'GHS 1.5-6' },
+              requirements: ['Valid ID', 'Phone number', 'Ghana Card'],
+              limits: { daily: 'GHS 1,500', monthly: 'GHS 15,000' },
+              contact: '+233-XXX-XXXX', rating: 4.4,
+              description: 'Vodafone Cash services in Ghana'
+            }
+          ]
+        },
+        'Senegal': {
+          currency: 'XOF',
+          providers: [
+            {
+              name: 'Orange Money Senegal',
+              coverage: 'Senegal',
+              services: ['transfer', 'payment', 'savings', 'credit'],
+              fees: { transfer: '1-2% of amount', payment: '0.5-1.5% of amount', withdrawal: 'XOF 100-500' },
+              requirements: ['Valid ID', 'Phone number', 'Senegalese address'],
+              limits: { daily: 'XOF 100,000', monthly: 'XOF 1,000,000' },
+              contact: '+221-77-XXX-XXXX', rating: 4.3,
+              description: 'Orange Money provides services in Senegal'
+            },
+            {
+              name: 'Free Money Senegal',
+              coverage: 'Senegal',
+              services: ['transfer', 'payment', 'savings'],
+              fees: { transfer: '1.5-2.5% of amount', payment: '1-2% of amount', withdrawal: 'XOF 150-600' },
+              requirements: ['Valid ID', 'Phone number', 'Senegalese address'],
+              limits: { daily: 'XOF 80,000', monthly: 'XOF 800,000' },
+              contact: '+221-78-XXX-XXXX', rating: 4.1,
+              description: 'Free Money services in Senegal'
+            }
+          ]
+        },
+        'Mali': {
+          currency: 'XOF',
+          providers: [
+            {
+              name: 'Orange Money Mali',
+              coverage: 'Mali',
+              services: ['transfer', 'payment', 'savings', 'credit'],
+              fees: { transfer: '1-2% of amount', payment: '0.5-1.5% of amount', withdrawal: 'XOF 100-500' },
+              requirements: ['Valid ID', 'Phone number', 'Malian address'],
+              limits: { daily: 'XOF 80,000', monthly: 'XOF 800,000' },
+              contact: '+223-70-XXX-XXXX', rating: 4.2,
+              description: 'Orange Money provides services in Mali'
+            },
+            {
+              name: 'Moov Money Mali',
+              coverage: 'Mali',
+              services: ['transfer', 'payment', 'savings'],
+              fees: { transfer: '1.5-2.5% of amount', payment: '1-2% of amount', withdrawal: 'XOF 150-600' },
+              requirements: ['Valid ID', 'Phone number', 'Malian address'],
+              limits: { daily: 'XOF 60,000', monthly: 'XOF 600,000' },
+              contact: '+223-76-XXX-XXXX', rating: 4.0,
+              description: 'Moov Money services in Mali'
+            }
+          ]
+        },
+        'Ivory Coast': {
+          currency: 'XOF',
+          providers: [
+            {
+              name: 'Orange Money Côte d\'Ivoire',
+              coverage: 'Ivory Coast',
+              services: ['transfer', 'payment', 'savings', 'credit'],
+              fees: { transfer: '1-2% of amount', payment: '0.5-1.5% of amount', withdrawal: 'XOF 100-500' },
+              requirements: ['Valid ID', 'Phone number', 'Ivorian address'],
+              limits: { daily: 'XOF 150,000', monthly: 'XOF 1,500,000' },
+              contact: '+225-07-XXX-XXXX', rating: 4.4,
+              description: 'Orange Money provides services in Ivory Coast'
+            },
+            {
+              name: 'MTN Mobile Money Côte d\'Ivoire',
+              coverage: 'Ivory Coast',
+              services: ['transfer', 'payment', 'savings'],
+              fees: { transfer: '1.5-2.5% of amount', payment: '1-2% of amount', withdrawal: 'XOF 150-600' },
+              requirements: ['Valid ID', 'Phone number', 'Ivorian address'],
+              limits: { daily: 'XOF 120,000', monthly: 'XOF 1,200,000' },
+              contact: '+225-05-XXX-XXXX', rating: 4.2,
+              description: 'MTN Mobile Money services in Ivory Coast'
+            }
+          ]
+        },
+        'Guinea': {
+          currency: 'GNF',
+          providers: [
+            {
+              name: 'Orange Money Guinea',
+              coverage: 'Guinea',
+              services: ['transfer', 'payment', 'savings', 'credit'],
+              fees: { transfer: '1-2% of amount', payment: '0.5-1.5% of amount', withdrawal: 'GNF 5,000-25,000' },
+              requirements: ['Valid ID', 'Phone number', 'Guinean address'],
+              limits: { daily: 'GNF 2,000,000', monthly: 'GNF 20,000,000' },
+              contact: '+224-60-XXX-XXXX', rating: 4.1,
+              description: 'Orange Money provides services in Guinea'
+            },
+            {
+              name: 'MTN Mobile Money Guinea',
+              coverage: 'Guinea',
+              services: ['transfer', 'payment', 'savings'],
+              fees: { transfer: '1.5-2.5% of amount', payment: '1-2% of amount', withdrawal: 'GNF 7,500-30,000' },
+              requirements: ['Valid ID', 'Phone number', 'Guinean address'],
+              limits: { daily: 'GNF 1,500,000', monthly: 'GNF 15,000,000' },
+              contact: '+224-61-XXX-XXXX', rating: 3.9,
+              description: 'MTN Mobile Money services in Guinea'
+            }
+          ]
+        },
+        'Sierra Leone': {
+          currency: 'SLL',
+          providers: [
+            {
+              name: 'Orange Money Sierra Leone',
+              coverage: 'Sierra Leone',
+              services: ['transfer', 'payment', 'savings', 'credit'],
+              fees: { transfer: '1-2% of amount', payment: '0.5-1.5% of amount', withdrawal: 'SLL 10,000-50,000' },
+              requirements: ['Valid ID', 'Phone number', 'Sierra Leone address'],
+              limits: { daily: 'SLL 5,000,000', monthly: 'SLL 50,000,000' },
+              contact: '+232-77-XXX-XXXX', rating: 4.0,
+              description: 'Orange Money provides services in Sierra Leone'
+            },
+            {
+              name: 'Africell Money Sierra Leone',
+              coverage: 'Sierra Leone',
+              services: ['transfer', 'payment', 'savings'],
+              fees: { transfer: '1.5-2.5% of amount', payment: '1-2% of amount', withdrawal: 'SLL 15,000-60,000' },
+              requirements: ['Valid ID', 'Phone number', 'Sierra Leone address'],
+              limits: { daily: 'SLL 4,000,000', monthly: 'SLL 40,000,000' },
+              contact: '+232-88-XXX-XXXX', rating: 3.8,
+              description: 'Africell Money services in Sierra Leone'
+            }
+          ]
+        },
+        'Gambia': {
+          currency: 'GMD',
+          providers: [
+            {
+              name: 'Orange Money Gambia',
+              coverage: 'Gambia',
+              services: ['transfer', 'payment', 'savings', 'credit'],
+              fees: { transfer: '1-2% of amount', payment: '0.5-1.5% of amount', withdrawal: 'GMD 20-100' },
+              requirements: ['Valid ID', 'Phone number', 'Gambian address'],
+              limits: { daily: 'GMD 10,000', monthly: 'GMD 100,000' },
+              contact: '+220-77-XXX-XXXX', rating: 4.2,
+              description: 'Orange Money provides services in Gambia'
+            },
+            {
+              name: 'Africell Money Gambia',
+              coverage: 'Gambia',
+              services: ['transfer', 'payment', 'savings'],
+              fees: { transfer: '1.5-2.5% of amount', payment: '1-2% of amount', withdrawal: 'GMD 30-120' },
+              requirements: ['Valid ID', 'Phone number', 'Gambian address'],
+              limits: { daily: 'GMD 8,000', monthly: 'GMD 80,000' },
+              contact: '+220-88-XXX-XXXX', rating: 4.0,
+              description: 'Africell Money services in Gambia'
+            }
+          ]
+        },
+        'Burkina Faso': {
+          currency: 'XOF',
+          providers: [
+            {
+              name: 'Orange Money Burkina Faso',
+              coverage: 'Burkina Faso',
+              services: ['transfer', 'payment', 'savings', 'credit'],
+              fees: { transfer: '1-2% of amount', payment: '0.5-1.5% of amount', withdrawal: 'XOF 100-500' },
+              requirements: ['Valid ID', 'Phone number', 'Burkinabé address'],
+              limits: { daily: 'XOF 80,000', monthly: 'XOF 800,000' },
+              contact: '+226-70-XXX-XXXX', rating: 4.1,
+              description: 'Orange Money provides services in Burkina Faso'
+            },
+            {
+              name: 'Moov Money Burkina Faso',
+              coverage: 'Burkina Faso',
+              services: ['transfer', 'payment', 'savings'],
+              fees: { transfer: '1.5-2.5% of amount', payment: '1-2% of amount', withdrawal: 'XOF 150-600' },
+              requirements: ['Valid ID', 'Phone number', 'Burkinabé address'],
+              limits: { daily: 'XOF 60,000', monthly: 'XOF 600,000' },
+              contact: '+226-76-XXX-XXXX', rating: 3.9,
+              description: 'Moov Money services in Burkina Faso'
+            }
+          ]
+        },
+        'Togo': {
+          currency: 'XOF',
+          providers: [
+            {
+              name: 'Orange Money Togo',
+              coverage: 'Togo',
+              services: ['transfer', 'payment', 'savings', 'credit'],
+              fees: { transfer: '1-2% of amount', payment: '0.5-1.5% of amount', withdrawal: 'XOF 100-500' },
+              requirements: ['Valid ID', 'Phone number', 'Togolese address'],
+              limits: { daily: 'XOF 80,000', monthly: 'XOF 800,000' },
+              contact: '+228-90-XXX-XXXX', rating: 4.0,
+              description: 'Orange Money provides services in Togo'
+            },
+            {
+              name: 'Moov Money Togo',
+              coverage: 'Togo',
+              services: ['transfer', 'payment', 'savings'],
+              fees: { transfer: '1.5-2.5% of amount', payment: '1-2% of amount', withdrawal: 'XOF 150-600' },
+              requirements: ['Valid ID', 'Phone number', 'Togolese address'],
+              limits: { daily: 'XOF 60,000', monthly: 'XOF 600,000' },
+              contact: '+228-91-XXX-XXXX', rating: 3.8,
+              description: 'Moov Money services in Togo'
+            }
+          ]
+        },
+        'Benin': {
+          currency: 'XOF',
+          providers: [
+            {
+              name: 'Orange Money Benin',
+              coverage: 'Benin',
+              services: ['transfer', 'payment', 'savings', 'credit'],
+              fees: { transfer: '1-2% of amount', payment: '0.5-1.5% of amount', withdrawal: 'XOF 100-500' },
+              requirements: ['Valid ID', 'Phone number', 'Beninese address'],
+              limits: { daily: 'XOF 100,000', monthly: 'XOF 1,000,000' },
+              contact: '+229-97-XXX-XXXX', rating: 4.2,
+              description: 'Orange Money provides services in Benin'
+            },
+            {
+              name: 'MTN Mobile Money Benin',
+              coverage: 'Benin',
+              services: ['transfer', 'payment', 'savings'],
+              fees: { transfer: '1.5-2.5% of amount', payment: '1-2% of amount', withdrawal: 'XOF 150-600' },
+              requirements: ['Valid ID', 'Phone number', 'Beninese address'],
+              limits: { daily: 'XOF 80,000', monthly: 'XOF 800,000' },
+              contact: '+229-96-XXX-XXXX', rating: 4.0,
+              description: 'MTN Mobile Money services in Benin'
+            }
+          ]
+        },
+        'Niger': {
+          currency: 'XOF',
+          providers: [
+            {
+              name: 'Orange Money Niger',
+              coverage: 'Niger',
+              services: ['transfer', 'payment', 'savings', 'credit'],
+              fees: { transfer: '1-2% of amount', payment: '0.5-1.5% of amount', withdrawal: 'XOF 100-500' },
+              requirements: ['Valid ID', 'Phone number', 'Nigerien address'],
+              limits: { daily: 'XOF 60,000', monthly: 'XOF 600,000' },
+              contact: '+227-90-XXX-XXXX', rating: 3.9,
+              description: 'Orange Money provides services in Niger'
+            },
+            {
+              name: 'Moov Money Niger',
+              coverage: 'Niger',
+              services: ['transfer', 'payment', 'savings'],
+              fees: { transfer: '1.5-2.5% of amount', payment: '1-2% of amount', withdrawal: 'XOF 150-600' },
+              requirements: ['Valid ID', 'Phone number', 'Nigerien address'],
+              limits: { daily: 'XOF 50,000', monthly: 'XOF 500,000' },
+              contact: '+227-91-XXX-XXXX', rating: 3.7,
+              description: 'Moov Money services in Niger'
+            }
+          ]
+        },
+        'Guinea-Bissau': {
+          currency: 'XOF',
+          providers: [
+            {
+              name: 'Orange Money Guinea-Bissau',
+              coverage: 'Guinea-Bissau',
+              services: ['transfer', 'payment', 'savings', 'credit'],
+              fees: { transfer: '1-2% of amount', payment: '0.5-1.5% of amount', withdrawal: 'XOF 100-500' },
+              requirements: ['Valid ID', 'Phone number', 'Guinea-Bissau address'],
+              limits: { daily: 'XOF 40,000', monthly: 'XOF 400,000' },
+              contact: '+245-95-XXX-XXXX', rating: 3.8,
+              description: 'Orange Money provides services in Guinea-Bissau'
+            },
+            {
+              name: 'MTN Mobile Money Guinea-Bissau',
+              coverage: 'Guinea-Bissau',
+              services: ['transfer', 'payment', 'savings'],
+              fees: { transfer: '1.5-2.5% of amount', payment: '1-2% of amount', withdrawal: 'XOF 150-600' },
+              requirements: ['Valid ID', 'Phone number', 'Guinea-Bissau address'],
+              limits: { daily: 'XOF 30,000', monthly: 'XOF 300,000' },
+              contact: '+245-96-XXX-XXXX', rating: 3.6,
+              description: 'MTN Mobile Money services in Guinea-Bissau'
+            }
+          ]
+        },
+        'Cape Verde': {
+          currency: 'CVE',
+          providers: [
+            {
+              name: 'Orange Money Cape Verde',
+              coverage: 'Cape Verde',
+              services: ['transfer', 'payment', 'savings', 'credit'],
+              fees: { transfer: '1-2% of amount', payment: '0.5-1.5% of amount', withdrawal: 'CVE 50-200' },
+              requirements: ['Valid ID', 'Phone number', 'Cape Verde address'],
+              limits: { daily: 'CVE 50,000', monthly: 'CVE 500,000' },
+              contact: '+238-99-XXX-XXXX', rating: 4.3,
+              description: 'Orange Money provides services in Cape Verde'
+            },
+            {
+              name: 'CV Movel Money',
+              coverage: 'Cape Verde',
+              services: ['transfer', 'payment', 'savings'],
+              fees: { transfer: '1.5-2.5% of amount', payment: '1-2% of amount', withdrawal: 'CVE 75-300' },
+              requirements: ['Valid ID', 'Phone number', 'Cape Verde address'],
+              limits: { daily: 'CVE 40,000', monthly: 'CVE 400,000' },
+              contact: '+238-98-XXX-XXXX', rating: 4.1,
+              description: 'CV Movel Money services in Cape Verde'
+            }
+          ]
+        }
+      }
+
+      const selectedCountryData = countryData[country as keyof typeof countryData] || countryData['Liberia']
+      
       setTimeout(() => {
         setServicesData({
           country,
           serviceType,
-          providers: [
-            {
-              name: 'MTN Mobile Money',
-              coverage: 'Pan-African',
-              services: ['transfer', 'payment', 'savings', 'credit'],
-              fees: {
-                transfer: '1-3% of amount',
-                payment: '0.5-2% of amount',
-                withdrawal: '$0.50-2.00'
-              },
-              requirements: [
-                'Valid ID',
-                'Phone number',
-                'Basic KYC'
-              ],
-              limits: {
-                daily: '$500',
-                monthly: '$5000'
-              },
-              rating: 4.5,
-              contact: '+234-XXX-XXXX'
-            },
-            {
-              name: 'Airtel Money',
-              coverage: 'East and Central Africa',
-              services: ['transfer', 'payment', 'savings'],
-              fees: {
-                transfer: '1-2% of amount',
-                payment: '0.5-1.5% of amount',
-                withdrawal: '$0.30-1.50'
-              },
-              requirements: [
-                'Valid ID',
-                'Phone number',
-                'Basic KYC'
-              ],
-              limits: {
-                daily: '$300',
-                monthly: '$3000'
-              },
-              rating: 4.3,
-              contact: '+234-XXX-XXXX'
-            },
-            {
-              name: 'Orange Money',
-              coverage: 'West and Central Africa',
-              services: ['transfer', 'payment', 'savings', 'credit'],
-              fees: {
-                transfer: '1-2.5% of amount',
-                payment: '0.5-2% of amount',
-                withdrawal: '$0.40-1.80'
-              },
-              requirements: [
-                'Valid ID',
-                'Phone number',
-                'Basic KYC'
-              ],
-              limits: {
-                daily: '$400',
-                monthly: '$4000'
-              },
-              rating: 4.2,
-              contact: '+234-XXX-XXXX'
-            }
-          ],
+          currency: selectedCountryData.currency,
+          providers: selectedCountryData.providers,
           commonUseCases: [
             'Sending money to family',
             'Paying for goods and services',
@@ -121,7 +439,7 @@ export function MobileMoneyServices({ country, serviceType }: MobileMoneyService
           ]
         })
         setLoading(false)
-      }, 1000)
+      }, 800)
     }
 
     fetchServicesData()

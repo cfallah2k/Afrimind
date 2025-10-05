@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { 
   TruckIcon,
@@ -11,7 +11,61 @@ import {
   ExclamationTriangleIcon,
   ChevronDownIcon,
   GlobeAltIcon,
-  LanguageIcon
+  LanguageIcon,
+  ArrowTrendingUpIcon as TrendingUpIcon,
+  ArrowTrendingDownIcon as TrendingDownIcon,
+  ChartBarIcon,
+  EyeIcon,
+  ShareIcon,
+  DownloadIcon,
+  FunnelIcon,
+  MagnifyingGlassIcon,
+  PlusIcon,
+  MinusIcon,
+  ArrowPathIcon,
+  CheckCircleIcon,
+  LightBulbIcon,
+  StarIcon,
+  BellIcon,
+  Cog6ToothIcon,
+  DocumentChartBarIcon,
+  PresentationChartLineIcon,
+  TableCellsIcon,
+  PrinterIcon,
+  ArrowDownTrayIcon,
+  ArrowUpTrayIcon,
+  XMarkIcon,
+  ChevronUpIcon,
+  InformationCircleIcon,
+  QuestionMarkCircleIcon,
+  AdjustmentsHorizontalIcon,
+  ViewColumnsIcon,
+  Bars3Icon,
+  Squares2X2Icon,
+  ListBulletIcon,
+  HeartIcon,
+  ThumbUpIcon,
+  ThumbDownIcon,
+  BookmarkIcon,
+  FlagIcon,
+  ShieldCheckIcon,
+  ExclamationCircleIcon,
+  CheckBadgeIcon,
+  CurrencyEuroIcon,
+  BanknotesIcon,
+  CalculatorIcon,
+  ClipboardDocumentListIcon,
+  IdentificationIcon,
+  TruckIcon as TransportIcon,
+  BuildingOfficeIcon,
+  UserGroupIcon,
+  PhoneIcon,
+  EnvelopeIcon,
+  MapPinIcon,
+  CalendarIcon,
+  SunIcon,
+  CloudIcon,
+  SparklesIcon
 } from '@heroicons/react/24/outline'
 import { TradeRoutes } from '@/components/trade/trade-routes'
 import { CustomsRegulations } from '@/components/trade/customs-regulations'
@@ -28,6 +82,138 @@ export default function TradePage() {
   const [showOriginSelector, setShowOriginSelector] = useState(false)
   const [showDestinationSelector, setShowDestinationSelector] = useState(false)
   const [showLanguageSelector, setShowLanguageSelector] = useState(false)
+  
+  // Advanced state management
+  const [viewMode, setViewMode] = useState<'overview' | 'routes' | 'analysis' | 'documents'>('overview')
+  const [showFilters, setShowFilters] = useState(false)
+  const [showExport, setShowExport] = useState(false)
+  const [isRefreshing, setIsRefreshing] = useState(false)
+  const [realTimeData, setRealTimeData] = useState(true)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedPeriod, setSelectedPeriod] = useState('7days')
+  const [showAdvanced, setShowAdvanced] = useState(false)
+  const [selectedCurrency, setSelectedCurrency] = useState('USD')
+  const [tradeValue, setTradeValue] = useState(10000)
+  
+  const chartRef = useRef<HTMLDivElement>(null)
+
+  // Enhanced trade data
+  const [tradeData] = useState({
+    routes: [
+      {
+        id: 1,
+        name: 'Lagos-Accra Route',
+        origin: 'Lagos, Nigeria',
+        destination: 'Accra, Ghana',
+        distance: 450,
+        duration: '8-12 hours',
+        cost: 200,
+        currency: 'USD',
+        status: 'active',
+        efficiency: 92,
+        popularity: 85,
+        risk: 'low',
+        lastUpdated: new Date(Date.now() - 2 * 60 * 60 * 1000)
+      },
+      {
+        id: 2,
+        name: 'Monrovia-Abidjan Route',
+        origin: 'Monrovia, Liberia',
+        destination: 'Abidjan, Côte d\'Ivoire',
+        distance: 320,
+        duration: '6-8 hours',
+        cost: 150,
+        currency: 'USD',
+        status: 'active',
+        efficiency: 88,
+        popularity: 72,
+        risk: 'medium',
+        lastUpdated: new Date(Date.now() - 4 * 60 * 60 * 1000)
+      },
+      {
+        id: 3,
+        name: 'Dakar-Bamako Route',
+        origin: 'Dakar, Senegal',
+        destination: 'Bamako, Mali',
+        distance: 680,
+        duration: '12-16 hours',
+        cost: 300,
+        currency: 'USD',
+        status: 'active',
+        efficiency: 78,
+        popularity: 65,
+        risk: 'medium',
+        lastUpdated: new Date(Date.now() - 1 * 60 * 60 * 1000)
+      }
+    ],
+    marketTrends: [
+      { commodity: 'Rice', price: 450, change: 5.2, trend: 'up', volume: 1200 },
+      { commodity: 'Maize', price: 380, change: -2.1, trend: 'down', volume: 800 },
+      { commodity: 'Cassava', price: 120, change: 8.5, trend: 'up', volume: 1500 },
+      { commodity: 'Tomato', price: 320, change: 12.3, trend: 'up', volume: 600 }
+    ],
+    borderConditions: [
+      {
+        border: 'Seme Border',
+        countries: 'Nigeria-Benin',
+        status: 'normal',
+        waitTime: '2-4 hours',
+        efficiency: 85,
+        lastUpdate: new Date(Date.now() - 30 * 60 * 1000)
+      },
+      {
+        border: 'Aflao Border',
+        countries: 'Ghana-Togo',
+        status: 'busy',
+        waitTime: '4-6 hours',
+        efficiency: 72,
+        lastUpdate: new Date(Date.now() - 45 * 60 * 1000)
+      }
+    ]
+  })
+
+  const periods = [
+    { id: '24hours', name: '24 Hours', hours: 24 },
+    { id: '7days', name: '7 Days', hours: 168 },
+    { id: '30days', name: '30 Days', hours: 720 },
+    { id: '90days', name: '90 Days', hours: 2160 }
+  ]
+
+  const currencies = [
+    { code: 'USD', name: 'US Dollar', symbol: '$' },
+    { code: 'EUR', name: 'Euro', symbol: '€' },
+    { code: 'NGN', name: 'Nigerian Naira', symbol: '₦' },
+    { code: 'GHS', name: 'Ghanaian Cedi', symbol: '₵' },
+    { code: 'XOF', name: 'West African CFA Franc', symbol: 'CFA' }
+  ]
+
+  const viewModes = [
+    { id: 'overview', name: 'Overview', icon: Squares2X2Icon },
+    { id: 'routes', name: 'Routes', icon: MapIcon },
+    { id: 'analysis', name: 'Analysis', icon: ChartBarIcon },
+    { id: 'documents', name: 'Documents', icon: DocumentTextIcon }
+  ]
+
+  // Real-time data simulation
+  useEffect(() => {
+    if (realTimeData) {
+      const interval = setInterval(() => {
+        console.log('Updating trade data...')
+      }, 30000) // Update every 30 seconds
+      return () => clearInterval(interval)
+    }
+  }, [realTimeData])
+
+  const handleRefresh = async () => {
+    setIsRefreshing(true)
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    setIsRefreshing(false)
+  }
+
+  const handleExport = (format: string) => {
+    console.log(`Exporting trade data as ${format}`)
+    setShowExport(false)
+  }
 
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
@@ -44,241 +230,582 @@ export default function TradePage() {
 
   return (
     <div className="min-h-screen bg-gray-50 pb-24 lg:pb-0">
-      {/* Mobile App Header */}
+      {/* Enhanced Header */}
       <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
-        <div className="max-w-md lg:max-w-7xl mx-auto px-4 py-3 lg:py-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 lg:w-12 lg:h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-              <TruckIcon className="w-6 h-6 lg:w-7 lg:h-7 text-purple-600" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-600 rounded-xl flex items-center justify-center">
+                <TruckIcon className="w-7 h-7 text-white" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">Trade Intelligence</h1>
+                <p className="text-gray-600">Advanced cross-border commerce platform</p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-lg lg:text-2xl xl:text-3xl font-bold text-gray-900">Trade 🚛</h1>
-              <p className="text-sm lg:text-base xl:text-lg text-gray-600">Cross-border commerce</p>
+            
+            <div className="flex items-center space-x-3">
+              {/* Real-time Toggle */}
+              <button
+                onClick={() => setRealTimeData(!realTimeData)}
+                className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
+                  realTimeData 
+                    ? 'bg-green-100 text-green-700' 
+                    : 'bg-gray-100 text-gray-600'
+                }`}
+              >
+                <div className={`w-2 h-2 rounded-full ${realTimeData ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
+                <span className="text-sm font-medium">Live Data</span>
+              </button>
+
+              {/* Refresh Button */}
+              <button
+                onClick={handleRefresh}
+                disabled={isRefreshing}
+                className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50"
+                title="Refresh Data"
+              >
+                <ArrowPathIcon className={`w-5 h-5 ${isRefreshing ? 'animate-spin' : ''}`} />
+              </button>
+
+              {/* View Mode Toggle */}
+              <div className="flex items-center space-x-1 bg-gray-100 rounded-lg p-1">
+                {viewModes.map((mode) => {
+                  const Icon = mode.icon
+                  return (
+                    <button
+                      key={mode.id}
+                      onClick={() => setViewMode(mode.id as any)}
+                      className={`p-2 rounded-md transition-colors ${
+                        viewMode === mode.id
+                          ? 'bg-white text-purple-600 shadow-sm'
+                          : 'text-gray-600 hover:text-gray-900'
+                      }`}
+                      title={mode.name}
+                    >
+                      <Icon className="w-4 h-4" />
+                    </button>
+                  )
+                })}
+              </div>
+
+              {/* Filters */}
+              <button
+                onClick={() => setShowFilters(!showFilters)}
+                className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                title="Filters"
+              >
+                <FunnelIcon className="w-5 h-5" />
+              </button>
+
+              {/* Export */}
+              <button
+                onClick={() => setShowExport(!showExport)}
+                className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                title="Export Data"
+              >
+                <DownloadIcon className="w-5 h-5" />
+              </button>
+
+              {/* Period Selector */}
+              <select
+                value={selectedPeriod}
+                onChange={(e) => setSelectedPeriod(e.target.value)}
+                className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
+              >
+                {periods.map(period => (
+                  <option key={period.id} value={period.id}>{period.name}</option>
+                ))}
+              </select>
             </div>
           </div>
+
+          {/* Advanced Search and Filters */}
+          {(showFilters || showAdvanced) && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="mt-4 pt-4 border-t border-gray-200"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                {/* Search */}
+                <div className="relative">
+                  <MagnifyingGlassIcon className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Search routes, commodities..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  />
+                </div>
+
+                {/* Currency Selector */}
+                <div className="relative">
+                  <select
+                    value={selectedCurrency}
+                    onChange={(e) => setSelectedCurrency(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  >
+                    {currencies.map(currency => (
+                      <option key={currency.code} value={currency.code}>
+                        {currency.symbol} {currency.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Trade Value */}
+                <div className="flex space-x-2">
+                  <input
+                    type="number"
+                    value={tradeValue}
+                    onChange={(e) => setTradeValue(Number(e.target.value))}
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                    placeholder="Trade Value"
+                  />
+                  <span className="px-3 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm">
+                    {currencies.find(c => c.code === selectedCurrency)?.symbol}
+                  </span>
+                </div>
+
+                {/* Advanced Toggle */}
+                <button
+                  onClick={() => setShowAdvanced(!showAdvanced)}
+                  className="flex items-center space-x-2 px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  <AdjustmentsHorizontalIcon className="w-4 h-4" />
+                  <span className="text-sm">Advanced</span>
+                </button>
+              </div>
+            </motion.div>
+          )}
         </div>
       </div>
-      <div className="max-w-md lg:max-w-4xl xl:max-w-6xl mx-auto px-4 py-6">
-
-      {/* Route & Language Selection */}
-      <motion.div 
-        className="bg-white rounded-xl shadow-sm p-4 lg:p-6 mb-6"
-        variants={fadeInUp}
-        initial="initial"
-        animate="animate"
-        transition={{ duration: 0.6 }}
-      >
-        <h2 className="text-lg lg:text-xl font-semibold text-gray-900 mb-4">Select Trade Route & Language</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          {/* Origin Selection */}
-          <div className="relative">
-            <label className="block text-sm font-medium text-gray-700 mb-2">From (Origin)</label>
-            <button
-              onClick={() => setShowOriginSelector(!showOriginSelector)}
-              className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-md bg-white text-left focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
-            >
-              <div className="flex items-center space-x-2">
-                <GlobeAltIcon className="w-4 h-4 text-gray-500" />
-                <span className="text-sm font-medium">{selectedOrigin}</span>
-              </div>
-              <ChevronDownIcon className="w-4 h-4 text-gray-400" />
-            </button>
-            
-            {showOriginSelector && (
-              <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
-                {[
-                  { name: 'Lagos, Nigeria', flag: '🇳🇬' },
-                  { name: 'Accra, Ghana', flag: '🇬🇭' },
-                  { name: 'Monrovia, Liberia', flag: '🇱🇷' },
-                  { name: 'Dakar, Senegal', flag: '🇸🇳' },
-                  { name: 'Abidjan, Côte d\'Ivoire', flag: '🇨🇮' },
-                  { name: 'Bamako, Mali', flag: '🇲🇱' },
-                  { name: 'Ouagadougou, Burkina Faso', flag: '🇧🇫' },
-                  { name: 'Niamey, Niger', flag: '🇳🇪' },
-                  { name: 'Conakry, Guinea', flag: '🇬🇳' },
-                  { name: 'Freetown, Sierra Leone', flag: '🇸🇱' }
-                ].map((location) => (
-                  <button
-                    key={location.name}
-                    onClick={() => {
-                      setSelectedOrigin(location.name)
-                      setShowOriginSelector(false)
-                    }}
-                    className="w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-gray-50"
-                  >
-                    <span className="text-lg">{location.flag}</span>
-                    <span className="text-sm">{location.name}</span>
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Destination Selection */}
-          <div className="relative">
-            <label className="block text-sm font-medium text-gray-700 mb-2">To (Destination)</label>
-            <button
-              onClick={() => setShowDestinationSelector(!showDestinationSelector)}
-              className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-md bg-white text-left focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
-            >
-              <div className="flex items-center space-x-2">
-                <GlobeAltIcon className="w-4 h-4 text-gray-500" />
-                <span className="text-sm font-medium">{selectedDestination}</span>
-              </div>
-              <ChevronDownIcon className="w-4 h-4 text-gray-400" />
-            </button>
-            
-            {showDestinationSelector && (
-              <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
-                {[
-                  { name: 'Lagos, Nigeria', flag: '🇳🇬' },
-                  { name: 'Accra, Ghana', flag: '🇬🇭' },
-                  { name: 'Monrovia, Liberia', flag: '🇱🇷' },
-                  { name: 'Dakar, Senegal', flag: '🇸🇳' },
-                  { name: 'Abidjan, Côte d\'Ivoire', flag: '🇨🇮' },
-                  { name: 'Bamako, Mali', flag: '🇲🇱' },
-                  { name: 'Ouagadougou, Burkina Faso', flag: '🇧🇫' },
-                  { name: 'Niamey, Niger', flag: '🇳🇪' },
-                  { name: 'Conakry, Guinea', flag: '🇬🇳' },
-                  { name: 'Freetown, Sierra Leone', flag: '🇸🇱' }
-                ].map((location) => (
-                  <button
-                    key={location.name}
-                    onClick={() => {
-                      setSelectedDestination(location.name)
-                      setShowDestinationSelector(false)
-                    }}
-                    className="w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-gray-50"
-                  >
-                    <span className="text-lg">{location.flag}</span>
-                    <span className="text-sm">{location.name}</span>
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Language Selection */}
-          <div className="relative">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Language</label>
-            <button
-              onClick={() => setShowLanguageSelector(!showLanguageSelector)}
-              className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-md bg-white text-left focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
-            >
-              <div className="flex items-center space-x-2">
-                <LanguageIcon className="w-4 h-4 text-gray-500" />
-                <span className="text-sm font-medium">English</span>
-              </div>
-              <ChevronDownIcon className="w-4 h-4 text-gray-400" />
-            </button>
-            
-            {showLanguageSelector && (
-              <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
-                {availableLanguages.map((lang) => (
-                  <button
-                    key={lang.code}
-                    onClick={() => {
-                      setLanguage(lang.code)
-                      setShowLanguageSelector(false)
-                    }}
-                    className="w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-gray-50"
-                  >
-                    <span className="text-lg">{lang.flag}</span>
-                    <span className="text-sm">{lang.name}</span>
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <motion.div
+      <div className="max-w-7xl mx-auto px-4 py-6">
+        {/* Enhanced Route Selection */}
+        <motion.div 
+          className="bg-white rounded-xl shadow-lg p-6 mb-8"
+          variants={fadeInUp}
           initial="initial"
           animate="animate"
-          variants={staggerChildren}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-8"
-        >
-          {/* Trade Routes */}
-          <motion.div variants={fadeInUp} transition={{ duration: 0.6 }} className="lg:col-span-2">
-            <TradeRoutes 
-              origin={selectedOrigin} 
-              destination={selectedDestination}
-              commodity={selectedCommodity}
-            />
-          </motion.div>
-
-          {/* Quick Stats */}
-          <motion.div variants={fadeInUp} transition={{ duration: 0.6 }} className="space-y-6">
-            <div className="bg-white rounded-2xl p-6 shadow-soft">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Trade Overview</h3>
-              <div className="space-y-4">
-                {[
-                  { label: 'Distance', value: '450 km', icon: MapIcon, color: 'text-primary-600' },
-                  { label: 'Duration', value: '8-12 hrs', icon: ClockIcon, color: 'text-warning-600' },
-                  { label: 'Cost', value: '$200-400', icon: CurrencyDollarIcon, color: 'text-success-600' },
-                  { label: 'Border Crossings', value: '1', icon: ExclamationTriangleIcon, color: 'text-danger-600' },
-                ].map((stat, index) => (
-                  <div key={index} className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <stat.icon className={`w-5 h-5 ${stat.color}`} />
-                      <span className="text-gray-700">{stat.label}</span>
-                    </div>
-                    <span className="font-semibold text-gray-900">{stat.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-white rounded-2xl p-6 shadow-soft">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Required Documents</h3>
-              <div className="space-y-2">
-                {[
-                  'Commercial Invoice',
-                  'Packing List',
-                  'Certificate of Origin',
-                  'Import Permit',
-                  'Phytosanitary Certificate',
-                ].map((doc, index) => (
-                  <div key={index} className="flex items-center space-x-2 text-sm">
-                    <DocumentTextIcon className="w-4 h-4 text-primary-600" />
-                    <span className="text-gray-700">{doc}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-
-        {/* Feature Grid */}
-        <motion.div
-          variants={fadeInUp}
           transition={{ duration: 0.6 }}
-          className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
-          <CustomsRegulations 
-            origin={selectedOrigin} 
-            destination={selectedDestination}
-            commodity={selectedCommodity}
-          />
-          <DocumentationRequirements 
-            commodity={selectedCommodity}
-            value={10000}
-          />
-          <BorderConditions 
-            borderCrossing="Seme Border"
-            countryPair={`${selectedOrigin.split(',')[0]}-${selectedDestination.split(',')[0]}`}
-          />
-          <TariffCalculator 
-            commodityCode="1001"
-            origin={selectedOrigin}
-            destination={selectedDestination}
-            value={10000}
-          />
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold text-gray-900">Trade Route Configuration</h2>
+            <div className="flex items-center space-x-2">
+              <button className="p-2 text-gray-400 hover:text-gray-600 rounded-lg">
+                <EyeIcon className="w-4 h-4" />
+              </button>
+              <button className="p-2 text-gray-400 hover:text-gray-600 rounded-lg">
+                <ShareIcon className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+            {/* Origin Selection */}
+            <div className="relative">
+              <label className="block text-sm font-medium text-gray-700 mb-2">From (Origin)</label>
+              <button
+                onClick={() => setShowOriginSelector(!showOriginSelector)}
+                className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-md bg-white text-left focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+              >
+                <div className="flex items-center space-x-2">
+                  <GlobeAltIcon className="w-4 h-4 text-gray-500" />
+                  <span className="text-sm font-medium">{selectedOrigin}</span>
+                </div>
+                <ChevronDownIcon className="w-4 h-4 text-gray-400" />
+              </button>
+              
+              {showOriginSelector && (
+                <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                  {[
+                    { name: 'Lagos, Nigeria', flag: '🇳🇬' },
+                    { name: 'Accra, Ghana', flag: '🇬🇭' },
+                    { name: 'Monrovia, Liberia', flag: '🇱🇷' },
+                    { name: 'Dakar, Senegal', flag: '🇸🇳' },
+                    { name: 'Abidjan, Côte d\'Ivoire', flag: '🇨🇮' },
+                    { name: 'Bamako, Mali', flag: '🇲🇱' },
+                    { name: 'Ouagadougou, Burkina Faso', flag: '🇧🇫' },
+                    { name: 'Niamey, Niger', flag: '🇳🇪' },
+                    { name: 'Conakry, Guinea', flag: '🇬🇳' },
+                    { name: 'Freetown, Sierra Leone', flag: '🇸🇱' }
+                  ].map((location) => (
+                    <button
+                      key={location.name}
+                      onClick={() => {
+                        setSelectedOrigin(location.name)
+                        setShowOriginSelector(false)
+                      }}
+                      className="w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-gray-50"
+                    >
+                      <span className="text-lg">{location.flag}</span>
+                      <span className="text-sm">{location.name}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Destination Selection */}
+            <div className="relative">
+              <label className="block text-sm font-medium text-gray-700 mb-2">To (Destination)</label>
+              <button
+                onClick={() => setShowDestinationSelector(!showDestinationSelector)}
+                className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-md bg-white text-left focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+              >
+                <div className="flex items-center space-x-2">
+                  <GlobeAltIcon className="w-4 h-4 text-gray-500" />
+                  <span className="text-sm font-medium">{selectedDestination}</span>
+                </div>
+                <ChevronDownIcon className="w-4 h-4 text-gray-400" />
+              </button>
+              
+              {showDestinationSelector && (
+                <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                  {[
+                    { name: 'Lagos, Nigeria', flag: '🇳🇬' },
+                    { name: 'Accra, Ghana', flag: '🇬🇭' },
+                    { name: 'Monrovia, Liberia', flag: '🇱🇷' },
+                    { name: 'Dakar, Senegal', flag: '🇸🇳' },
+                    { name: 'Abidjan, Côte d\'Ivoire', flag: '🇨🇮' },
+                    { name: 'Bamako, Mali', flag: '🇲🇱' },
+                    { name: 'Ouagadougou, Burkina Faso', flag: '🇧🇫' },
+                    { name: 'Niamey, Niger', flag: '🇳🇪' },
+                    { name: 'Conakry, Guinea', flag: '🇬🇳' },
+                    { name: 'Freetown, Sierra Leone', flag: '🇸🇱' }
+                  ].map((location) => (
+                    <button
+                      key={location.name}
+                      onClick={() => {
+                        setSelectedDestination(location.name)
+                        setShowDestinationSelector(false)
+                      }}
+                      className="w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-gray-50"
+                    >
+                      <span className="text-lg">{location.flag}</span>
+                      <span className="text-sm">{location.name}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Commodity Selection */}
+            <div className="relative">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Commodity</label>
+              <select
+                value={selectedCommodity}
+                onChange={(e) => setSelectedCommodity(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+              >
+                <option value="Agricultural Products">Agricultural Products</option>
+                <option value="Manufactured Goods">Manufactured Goods</option>
+                <option value="Raw Materials">Raw Materials</option>
+                <option value="Textiles">Textiles</option>
+                <option value="Electronics">Electronics</option>
+              </select>
+            </div>
+
+            {/* Language Selection */}
+            <div className="relative">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Language</label>
+              <button
+                onClick={() => setShowLanguageSelector(!showLanguageSelector)}
+                className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-md bg-white text-left focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+              >
+                <div className="flex items-center space-x-2">
+                  <LanguageIcon className="w-4 h-4 text-gray-500" />
+                  <span className="text-sm font-medium">English</span>
+                </div>
+                <ChevronDownIcon className="w-4 h-4 text-gray-400" />
+              </button>
+              
+              {showLanguageSelector && (
+                <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                  {availableLanguages.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => {
+                        setLanguage(lang.code)
+                        setShowLanguageSelector(false)
+                      }}
+                      className="w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-gray-50"
+                    >
+                      <span className="text-lg">{lang.flag}</span>
+                      <span className="text-sm">{lang.name}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
         </motion.div>
-      </div>
+
+        {/* Dynamic Content Based on View Mode */}
+        {viewMode === 'overview' && (
+          <motion.div
+            initial="initial"
+            animate="animate"
+            variants={staggerChildren}
+            className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+          >
+            {/* Trade Routes */}
+            <motion.div variants={fadeInUp} transition={{ duration: 0.6 }} className="lg:col-span-2">
+              <TradeRoutes 
+                origin={selectedOrigin} 
+                destination={selectedDestination}
+                commodity={selectedCommodity}
+              />
+            </motion.div>
+
+            {/* Quick Stats */}
+            <motion.div variants={fadeInUp} transition={{ duration: 0.6 }} className="space-y-6">
+              <div className="bg-white rounded-xl shadow-lg p-6">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Trade Overview</h3>
+                <div className="space-y-4">
+                  {[
+                    { label: 'Distance', value: '450 km', icon: MapIcon, color: 'text-blue-600' },
+                    { label: 'Duration', value: '8-12 hrs', icon: ClockIcon, color: 'text-yellow-600' },
+                    { label: 'Cost', value: '$200-400', icon: CurrencyDollarIcon, color: 'text-green-600' },
+                    { label: 'Border Crossings', value: '1', icon: ExclamationTriangleIcon, color: 'text-red-600' },
+                  ].map((stat, index) => (
+                    <div key={index} className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <stat.icon className={`w-5 h-5 ${stat.color}`} />
+                        <span className="text-gray-700">{stat.label}</span>
+                      </div>
+                      <span className="font-semibold text-gray-900">{stat.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl shadow-lg p-6">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Required Documents</h3>
+                <div className="space-y-2">
+                  {[
+                    'Commercial Invoice',
+                    'Packing List',
+                    'Certificate of Origin',
+                    'Import Permit',
+                    'Phytosanitary Certificate',
+                  ].map((doc, index) => (
+                    <div key={index} className="flex items-center space-x-2 text-sm">
+                      <DocumentTextIcon className="w-4 h-4 text-purple-600" />
+                      <span className="text-gray-700">{doc}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+
+        {viewMode === 'routes' && (
+          <motion.div
+            variants={fadeInUp}
+            transition={{ duration: 0.6 }}
+            className="space-y-6"
+          >
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-6">Available Trade Routes</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {tradeData.routes.map((route) => (
+                  <motion.div
+                    key={route.id}
+                    className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <div className="flex items-start justify-between mb-3">
+                      <h4 className="font-semibold text-gray-900">{route.name}</h4>
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        route.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                      }`}>
+                        {route.status}
+                      </span>
+                    </div>
+                    <div className="space-y-2 text-sm text-gray-600">
+                      <div className="flex items-center justify-between">
+                        <span>Distance:</span>
+                        <span className="font-medium">{route.distance} km</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span>Duration:</span>
+                        <span className="font-medium">{route.duration}</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span>Cost:</span>
+                        <span className="font-medium">${route.cost} {route.currency}</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span>Efficiency:</span>
+                        <span className="font-medium">{route.efficiency}%</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {viewMode === 'analysis' && (
+          <motion.div
+            variants={fadeInUp}
+            transition={{ duration: 0.6 }}
+            className="space-y-6"
+          >
+            {/* Market Trends */}
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-6">Market Trends</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {tradeData.marketTrends.map((trend, index) => (
+                  <div key={index} className="border border-gray-200 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-gray-900">{trend.commodity}</h4>
+                      <div className={`flex items-center space-x-1 ${
+                        trend.trend === 'up' ? 'text-green-600' : 'text-red-600'
+                      }`}>
+                        {trend.trend === 'up' ? (
+                          <TrendingUpIcon className="w-4 h-4" />
+                        ) : (
+                          <TrendingDownIcon className="w-4 h-4" />
+                        )}
+                        <span className="text-sm font-medium">
+                          {trend.change > 0 ? '+' : ''}{trend.change}%
+                        </span>
+                      </div>
+                    </div>
+                    <div className="text-2xl font-bold text-gray-900 mb-1">
+                      ${trend.price}/ton
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      Volume: {trend.volume} tons
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Border Conditions */}
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-6">Border Conditions</h3>
+              <div className="space-y-4">
+                {tradeData.borderConditions.map((border, index) => (
+                  <div key={index} className="border border-gray-200 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-gray-900">{border.border}</h4>
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        border.status === 'normal' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                      }`}>
+                        {border.status}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <span className="text-gray-600">Countries:</span>
+                        <span className="font-medium ml-2">{border.countries}</span>
+                      </div>
+                      <div>
+                        <span className="text-gray-600">Wait Time:</span>
+                        <span className="font-medium ml-2">{border.waitTime}</span>
+                      </div>
+                      <div>
+                        <span className="text-gray-600">Efficiency:</span>
+                        <span className="font-medium ml-2">{border.efficiency}%</span>
+                      </div>
+                      <div>
+                        <span className="text-gray-600">Last Update:</span>
+                        <span className="font-medium ml-2">{border.lastUpdate.toLocaleTimeString()}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {viewMode === 'documents' && (
+          <motion.div
+            variants={fadeInUp}
+            transition={{ duration: 0.6 }}
+            className="space-y-6"
+          >
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-6">Documentation Requirements</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <CustomsRegulations 
+                  origin={selectedOrigin} 
+                  destination={selectedDestination}
+                  commodity={selectedCommodity}
+                />
+                <DocumentationRequirements 
+                  commodity={selectedCommodity}
+                  value={tradeValue}
+                />
+                <BorderConditions 
+                  borderCrossing="Seme Border"
+                  countryPair={`${selectedOrigin.split(',')[0]}-${selectedDestination.split(',')[0]}`}
+                />
+                <TariffCalculator 
+                  commodityCode="1001"
+                  origin={selectedOrigin}
+                  destination={selectedDestination}
+                  value={tradeValue}
+                />
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Export Modal */}
+        {showExport && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-white rounded-xl shadow-xl max-w-md w-full"
+            >
+              <div className="p-6 border-b border-gray-200">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold text-gray-900">Export Trade Data</h3>
+                  <button
+                    onClick={() => setShowExport(false)}
+                    className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                  >
+                    <XMarkIcon className="w-5 h-5 text-gray-500" />
+                  </button>
+                </div>
+              </div>
+              <div className="p-6">
+                <div className="space-y-4">
+                  {[
+                    { id: 'pdf', name: 'PDF Report', icon: DocumentChartBarIcon },
+                    { id: 'excel', name: 'Excel Spreadsheet', icon: TableCellsIcon },
+                    { id: 'csv', name: 'CSV Data', icon: TableCellsIcon },
+                    { id: 'image', name: 'Image Export', icon: ArrowDownTrayIcon }
+                  ].map((format) => {
+                    const Icon = format.icon
+                    return (
+                      <button
+                        key={format.id}
+                        onClick={() => handleExport(format.id)}
+                        className="w-full flex items-center space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                      >
+                        <Icon className="w-5 h-5 text-gray-600" />
+                        <span className="font-medium text-gray-900">{format.name}</span>
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
       </div>
     </div>
   )

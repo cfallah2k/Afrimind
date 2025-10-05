@@ -107,68 +107,78 @@ export function CropRecommendations({ location, season }: CropRecommendationsPro
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-2xl p-6 shadow-soft"
+      className="bg-white rounded-xl shadow-sm p-4 sm:p-6"
     >
-      <div className="flex items-center space-x-2 mb-6">
-        <SunIcon className="w-6 h-6 text-success-600" />
-        <h3 className="text-lg font-semibold text-gray-900">Crop Recommendations</h3>
+      <div className="flex items-center space-x-2 mb-4 sm:mb-6">
+        <SunIcon className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Crop Recommendations</h3>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         {recommendations?.recommendedCrops.map((crop: any, index: number) => (
-          <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-3">
-              <h4 className="font-semibold text-gray-900">{crop.name}</h4>
+          <div key={index} className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <h4 className="text-sm sm:text-base font-semibold text-gray-900">{crop.name}</h4>
               <div className={`px-2 py-1 rounded-full text-xs font-medium ${getSuitabilityColor(crop.suitability)}`}>
                 {getSuitabilityText(crop.suitability)}
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div>
-                <span className="text-gray-600">Planting:</span>
-                <div className="font-medium">{crop.plantingPeriod}</div>
+            <div className="grid grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm">
+              <div className="flex flex-col">
+                <span className="text-gray-500 text-xs">Planting</span>
+                <span className="font-medium text-gray-900 text-xs sm:text-sm">{crop.plantingPeriod}</span>
               </div>
-              <div>
-                <span className="text-gray-600">Yield:</span>
-                <div className="font-medium">{crop.expectedYield}</div>
+              <div className="flex flex-col">
+                <span className="text-gray-500 text-xs">Yield</span>
+                <span className="font-medium text-gray-900 text-xs sm:text-sm">{crop.expectedYield}</span>
               </div>
-              <div>
-                <span className="text-gray-600">Market:</span>
-                <div className="font-medium">{crop.marketDemand}</div>
+              <div className="flex flex-col">
+                <span className="text-gray-500 text-xs">Market</span>
+                <span className="font-medium text-gray-900 text-xs sm:text-sm">{crop.marketDemand}</span>
               </div>
-              <div>
-                <span className="text-gray-600">Profit:</span>
-                <div className="font-medium">{crop.profitability}</div>
+              <div className="flex flex-col">
+                <span className="text-gray-500 text-xs">Profit</span>
+                <span className="font-medium text-gray-900 text-xs sm:text-sm">{crop.profitability}</span>
               </div>
             </div>
 
-            <div className="mt-3 flex flex-wrap gap-1">
-              {crop.benefits.map((benefit: any, benefitIndex: number) => (
+            <div className="mt-2 sm:mt-3 flex flex-wrap gap-1">
+              {crop.benefits.slice(0, 2).map((benefit: any, benefitIndex: number) => (
                 <span
                   key={benefitIndex}
-                  className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-success-100 text-success-800"
+                  className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-green-100 text-green-800"
                 >
                   <CheckCircleIcon className="w-3 h-3 mr-1" />
                   {benefit}
                 </span>
               ))}
+              {crop.benefits.length > 2 && (
+                <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-gray-100 text-gray-600">
+                  +{crop.benefits.length - 2} more
+                </span>
+              )}
             </div>
           </div>
         ))}
       </div>
 
-      {/* Soil Improvement Tips */}
-      <div className="mt-6 p-4 bg-warning-50 rounded-lg">
-        <h4 className="font-semibold text-warning-800 mb-2">Soil Improvement Tips</h4>
-        <ul className="text-sm text-warning-700 space-y-1">
-          {recommendations?.soilImprovementTips.map((tip: any, index: number) => (
-            <li key={index} className="flex items-start space-x-2">
-              <div className="w-1.5 h-1.5 bg-warning-500 rounded-full mt-2 flex-shrink-0"></div>
-              <span>{tip}</span>
-            </li>
+      {/* Soil Improvement Tips - Compact version */}
+      <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-yellow-50 rounded-lg">
+        <h4 className="font-semibold text-yellow-800 mb-2 text-xs sm:text-sm">Soil Tips</h4>
+        <div className="text-xs text-yellow-700 space-y-1">
+          {recommendations?.soilImprovementTips.slice(0, 1).map((tip: any, index: number) => (
+            <div key={index} className="flex items-start space-x-2">
+              <div className="w-1 h-1 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></div>
+              <span className="text-xs">{tip}</span>
+            </div>
           ))}
-        </ul>
+          {recommendations?.soilImprovementTips.length > 1 && (
+            <div className="text-yellow-600 text-xs mt-1">
+              +{recommendations.soilImprovementTips.length - 1} more tips
+            </div>
+          )}
+        </div>
       </div>
     </motion.div>
   )
