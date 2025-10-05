@@ -5,6 +5,7 @@ import { Providers } from '@/components/providers'
 import { Toaster } from 'react-hot-toast'
 import { MobileAppWrapper } from '@/components/mobile-app-wrapper'
 import { ResponsiveNavigation } from '@/components/responsive-navigation'
+import { EnvChecker } from '@/components/env-checker'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -44,6 +45,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body className="font-sans antialiased">
         <Providers>
+          <EnvChecker />
           <ResponsiveNavigation />
           <MobileAppWrapper>
             {children}
