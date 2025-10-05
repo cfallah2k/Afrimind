@@ -64,7 +64,10 @@ export function MobileAppHeader({
           {/* Right side */}
           <div className="flex items-center space-x-2">
             {showNotifications && (
-              <button className="relative p-2 rounded-lg hover:bg-gray-100 transition-colors">
+              <button 
+                onClick={() => window.location.href = '/farming/notifications'}
+                className="relative p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              >
                 <BellIcon className="w-5 h-5 text-gray-600" />
                 {notificationCount > 0 && (
                   <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
@@ -74,13 +77,31 @@ export function MobileAppHeader({
               </button>
             )}
             
-            <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+            <button 
+              onClick={() => {
+                if (navigator.share) {
+                  navigator.share({
+                    title: 'AfriMind - West Africa Farming Platform',
+                    text: 'Check out AfriMind, the smart farming platform for West Africa!',
+                    url: window.location.href
+                  })
+                } else {
+                  // Fallback for browsers that don't support Web Share API
+                  navigator.clipboard.writeText(window.location.href)
+                  alert('Link copied to clipboard!')
+                }
+              }}
+              className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            >
               <ShareIcon className="w-5 h-5 text-gray-600" />
             </button>
             
             {session?.user ? (
               <div className="flex items-center space-x-2">
-                <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                <button 
+                  onClick={() => window.location.href = '/ai/chat'}
+                  className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                >
                   <CpuChipIcon className="w-5 h-5 text-blue-600" />
                 </button>
                 <button
