@@ -19,7 +19,7 @@ import {
   ArrowTrendingUpIcon,
   ArrowTrendingDownIcon
 } from '@heroicons/react/24/outline'
-import { westAfricaPredictions, liberiaSpecificData, liberiaFarmingTips, liberiaGovernmentSupport } from '@/lib/west-africa-data'
+import { westAfricaPredictions, liberiaSpecificData, liberiaFarmingTips, liberiaGovernmentSupport, westAfricaCrops } from '@/lib/west-africa-data'
 
 interface CropPredictionModalProps {
   isOpen: boolean
@@ -232,7 +232,7 @@ export function CropPredictionModal({ isOpen, onClose, cropData }: CropPredictio
   }
 
   // Get Liberia-specific crop info
-  const liberiaCropInfo = liberiaSpecificData.commonCrops.find(crop => crop.id === cropData.crop)
+  const liberiaCropInfo = westAfricaCrops.liberia.commonCrops.find(crop => crop.id === cropData.crop)
 
   return (
     <AnimatePresence>
