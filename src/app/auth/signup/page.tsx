@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
+import { useLocalAuth } from '@/hooks/use-local-auth'
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -21,6 +22,7 @@ export default function SignUpPage() {
   const [error, setError] = useState('')
 
   const router = useRouter()
+  const { signUp } = useLocalAuth()
 
   const countries = [
     { code: 'NG', name: 'Nigeria', flag: '🇳🇬' },
@@ -85,19 +87,18 @@ export default function SignUpPage() {
     }
 
     try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
+      const result = await signUp(
+        formData.name,
+        formData.email,
+        formData.password,
+        formData.country,
+        formData.language
+      )
 
-      if (response.ok) {
-        router.push('/auth/signin?message=Account created successfully')
+      if (result) {
+        router.push('/')
       } else {
-        const data = await response.json()
-        setError(data.message || 'An error occurred')
+        setError('An error occurred during registration')
       }
     } catch (error) {
       setError('An error occurred. Please try again.')

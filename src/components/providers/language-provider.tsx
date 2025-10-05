@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import { useSession } from 'next-auth/react'
+import { useLocalAuth } from '@/hooks/use-local-auth'
 import { languages, countries, getTranslation, getSupportedLanguages } from '@/lib/i18n'
 
 interface LanguageContextType {
@@ -30,15 +30,15 @@ interface LanguageProviderProps {
 }
 
 export function LanguageProvider({ children }: LanguageProviderProps) {
-  const session = useSession()
+  const { data: session } = useLocalAuth()
   const [currentLanguage, setCurrentLanguage] = useState('en')
   const [currentCountry, setCurrentCountry] = useState('NG')
 
   // Initialize language and country from session or localStorage
   useEffect(() => {
-    if (session?.data?.user) {
-      setCurrentLanguage(session.data.user.language || 'en')
-      setCurrentCountry(session.data.user.country || 'NG')
+    if (session?.user) {
+      setCurrentLanguage(session.user.language || 'en')
+      setCurrentCountry(session.user.country || 'NG')
     } else {
       const savedLanguage = localStorage.getItem('afrimind-language')
       const savedCountry = localStorage.getItem('afrimind-country')

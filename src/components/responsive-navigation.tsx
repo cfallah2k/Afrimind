@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useSession, signOut } from 'next-auth/react'
+import { useLocalAuth } from '@/hooks/use-local-auth'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   HomeIcon,
@@ -25,7 +25,7 @@ export function ResponsiveNavigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const pathname = usePathname()
-  const session = useSession()
+  const { data: session, signOut } = useLocalAuth()
   const { t } = useLanguage()
 
   useEffect(() => {
@@ -89,7 +89,7 @@ export function ResponsiveNavigation() {
             {/* Desktop Auth */}
             <div className="flex items-center space-x-4">
               <LanguageSelector />
-              {session?.data ? (
+              {session?.user ? (
                 <div className="flex items-center space-x-3">
                   <Link
                     href="/ai/chat"
@@ -102,7 +102,7 @@ export function ResponsiveNavigation() {
                     <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
                       <UserIcon className="w-5 h-5 text-green-600" />
                     </div>
-                    <span className="text-sm text-gray-700">{session.data?.user?.name}</span>
+                    <span className="text-sm text-gray-700">{session.user?.name}</span>
                     <button
                       onClick={() => signOut()}
                       className="text-sm text-gray-500 hover:text-gray-700 transition-colors"
@@ -190,7 +190,7 @@ export function ResponsiveNavigation() {
                 
                 {/* Mobile Auth */}
                 <div className="pt-4 border-t border-gray-200">
-                  {session?.data ? (
+                  {session?.user ? (
                     <div className="space-y-3">
                       <Link
                         href="/ai/chat"
@@ -202,7 +202,7 @@ export function ResponsiveNavigation() {
                       </Link>
                       <div className="flex items-center space-x-3 p-3">
                         <UserIcon className="w-5 h-5 text-gray-400" />
-                        <span className="text-sm text-gray-600">{session.data?.user?.name}</span>
+                        <span className="text-sm text-gray-600">{session.user?.name}</span>
                       </div>
                       <button
                         onClick={() => {

@@ -10,7 +10,7 @@ import {
   ShareIcon,
   HeartIcon
 } from '@heroicons/react/24/outline'
-import { useSession, signOut } from 'next-auth/react'
+import { useLocalAuth } from '@/hooks/use-local-auth'
 import { useLanguage } from './providers/language-provider'
 import LanguageSelector from './ui/language-selector'
 
@@ -31,7 +31,7 @@ export function MobileAppHeader({
   showNotifications = true,
   notificationCount = 0
 }: MobileAppHeaderProps) {
-  const session = useSession()
+  const { data: session, signOut } = useLocalAuth()
   const { t } = useLanguage()
 
   return (
@@ -78,7 +78,7 @@ export function MobileAppHeader({
               <ShareIcon className="w-5 h-5 text-gray-600" />
             </button>
             
-            {session?.data ? (
+            {session?.user ? (
               <div className="flex items-center space-x-2">
                 <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
                   <CpuChipIcon className="w-5 h-5 text-blue-600" />

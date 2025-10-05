@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { signIn, getSession } from 'next-auth/react'
+import { useLocalAuth } from '@/hooks/use-local-auth'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
@@ -13,6 +13,7 @@ export default function SignInPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
+  const { signIn } = useLocalAuth()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -20,19 +21,12 @@ export default function SignInPage() {
     setError('')
 
     try {
-      const result = await signIn('credentials', {
-        email,
-        password,
-        redirect: false,
-      })
-
-      if (result?.error) {
-        setError('Invalid email or password')
+      const result = await signIn(email, password)
+      
+      if (result) {
+        router.push('/')
       } else {
-        const session = await getSession()
-        if (session) {
-          router.push('/')
-        }
+        setError('Invalid email or password')
       }
     } catch (error) {
       setError('An error occurred. Please try again.')
