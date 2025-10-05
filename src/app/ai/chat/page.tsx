@@ -30,8 +30,8 @@ import {
   ExclamationTriangleIcon,
   InformationCircleIcon,
   HeartIcon,
-  ThumbUpIcon,
-  ThumbDownIcon,
+  HandThumbUpIcon as ThumbUpIcon,
+  HandThumbDownIcon as ThumbDownIcon,
   ChatBubbleLeftRightIcon,
   ArrowLeftIcon
 } from '@heroicons/react/24/outline'

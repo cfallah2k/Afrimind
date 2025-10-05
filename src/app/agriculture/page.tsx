@@ -23,7 +23,7 @@ import {
   ArrowPathIcon,
   EyeIcon,
   ShareIcon,
-  DownloadIcon,
+  ArrowDownTrayIcon as DownloadIcon,
   FunnelIcon,
   MagnifyingGlassIcon,
   AdjustmentsHorizontalIcon,

@@ -19,7 +19,7 @@ import {
   CheckCircleIcon,
   LightBulbIcon,
   EyeIcon,
-  DownloadIcon,
+  ArrowDownTrayIcon as DownloadIcon,
   ShareIcon,
   FunnelIcon,
   MagnifyingGlassIcon,
