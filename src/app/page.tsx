@@ -21,6 +21,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { LoadingSpinner } from '@/components/ui/loading-spinner'
 import { MobilePullToRefresh } from '@/components/mobile-pull-to-refresh'
+import { useLocalAuth } from '@/hooks/use-local-auth'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -29,6 +30,7 @@ const fadeInUp = {
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true)
+  const { data: session } = useLocalAuth()
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -37,6 +39,13 @@ export default function HomePage() {
 
     return () => clearTimeout(timer)
   }, [])
+
+  const getGreeting = () => {
+    const hour = new Date().getHours()
+    if (hour < 12) return 'Good morning'
+    if (hour < 17) return 'Good afternoon'
+    return 'Good evening'
+  }
 
   if (isLoading) {
     return <LoadingSpinner />
@@ -51,6 +60,13 @@ export default function HomePage() {
       href: '/farming/tracker'
     },
     {
+      title: 'Farmer Network',
+      description: 'Connect with fellow farmers',
+      icon: UsersIcon,
+      color: 'orange',
+      href: '/farmer-network'
+    },
+    {
       title: 'AI Chat',
       description: 'Get AI-powered farming advice',
       icon: CpuChipIcon,
@@ -62,7 +78,7 @@ export default function HomePage() {
       description: 'Check current market prices',
       icon: TrendingUpIcon,
       color: 'purple',
-      href: '/agriculture'
+      href: '/market-prices'
     },
     {
       title: 'Learning',
@@ -134,7 +150,7 @@ export default function HomePage() {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-2xl font-bold text-gray-900 mb-2">
-            Good morning! 👋
+            {getGreeting()}{session?.user?.name ? `, ${session.user.name}` : ''}! 👋
           </h1>
           <p className="text-gray-600">
             Ready to grow with AfriMind today?

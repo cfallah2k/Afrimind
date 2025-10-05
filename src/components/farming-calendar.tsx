@@ -18,14 +18,17 @@ import {
 interface FarmingCalendarProps {
   isOpen: boolean
   onClose: () => void
+  farmingEntries?: any[]
+  savedPhotos?: any[]
+  savedVoiceNotes?: any[]
 }
 
-export function FarmingCalendar({ isOpen, onClose }: FarmingCalendarProps) {
+export function FarmingCalendar({ isOpen, onClose, farmingEntries = [], savedPhotos = [], savedVoiceNotes = [] }: FarmingCalendarProps) {
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [view, setView] = useState<'month' | 'week' | 'day'>('month')
 
-  // Sample farming events
-  const farmingEvents = [
+  // Combine sample events with actual farming entries
+  const sampleEvents = [
     {
       id: 1,
       title: 'Planting Day',
@@ -63,6 +66,45 @@ export function FarmingCalendar({ isOpen, onClose }: FarmingCalendarProps) {
       completed: false
     }
   ]
+
+  // Convert farming entries to calendar events
+  const entryEvents = farmingEntries.map((entry, index) => ({
+    id: `entry-${entry.id}`,
+    title: entry.activity || 'Farming Activity',
+    date: new Date(entry.date),
+    type: entry.activity?.toLowerCase().includes('plant') ? 'planting' : 
+          entry.activity?.toLowerCase().includes('weed') ? 'maintenance' :
+          entry.activity?.toLowerCase().includes('fertil') ? 'fertilizing' :
+          entry.activity?.toLowerCase().includes('harvest') ? 'harvesting' : 'maintenance',
+    description: entry.notes || 'Farming activity recorded',
+    location: entry.location || 'Field',
+    completed: true
+  }))
+
+  // Convert photos to calendar events
+  const photoEvents = savedPhotos.map((photo, index) => ({
+    id: `photo-${photo.id}`,
+    title: 'Crop Photo',
+    date: new Date(photo.date),
+    type: 'maintenance',
+    description: `Photo of ${photo.crop} crop`,
+    location: photo.location || 'Field',
+    completed: true
+  }))
+
+  // Convert voice notes to calendar events
+  const voiceEvents = savedVoiceNotes.map((note, index) => ({
+    id: `voice-${note.id}`,
+    title: 'Voice Note',
+    date: new Date(note.date),
+    type: 'maintenance',
+    description: `Voice note about ${note.crop} farming`,
+    location: note.location || 'Field',
+    completed: true
+  }))
+
+  // Combine all events
+  const farmingEvents = [...sampleEvents, ...entryEvents, ...photoEvents, ...voiceEvents]
 
   const eventTypes = {
     planting: { icon: SunIcon, color: 'green', bgColor: 'bg-green-100', textColor: 'text-green-800' },

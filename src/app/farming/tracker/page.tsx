@@ -21,7 +21,8 @@ import {
   PlusIcon,
   PhotoIcon,
   DocumentTextIcon,
-  CalendarDaysIcon
+  CalendarDaysIcon,
+  MicrophoneIcon
 } from '@heroicons/react/24/outline'
 import { MobileFAB } from '@/components/mobile-fab'
 import { AddEntryModal } from '@/components/add-entry-modal'
@@ -35,12 +36,15 @@ const fadeInUp = {
 
 export default function FarmingTrackerPage() {
   const [selectedCrop, setSelectedCrop] = useState('maize')
-  const [selectedLocation, setSelectedLocation] = useState('Lagos, Nigeria')
+  const [selectedLocation, setSelectedLocation] = useState('Monrovia, Liberia')
   const [currentPhase, setCurrentPhase] = useState('planting')
   const [showAddEntry, setShowAddEntry] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
   const [showPredictions, setShowPredictions] = useState(false)
   const [predictionData, setPredictionData] = useState<any>(null)
+  const [farmingEntries, setFarmingEntries] = useState<any[]>([])
+  const [savedPhotos, setSavedPhotos] = useState<any[]>([])
+  const [savedVoiceNotes, setSavedVoiceNotes] = useState<any[]>([])
   const [trackingData, setTrackingData] = useState({
     plantingDate: new Date(),
     expectedHarvest: new Date(Date.now() + 120 * 24 * 60 * 60 * 1000),
@@ -48,6 +52,58 @@ export default function FarmingTrackerPage() {
     daysSincePlanting: 15,
     progress: 25
   })
+
+  // Load saved data on component mount
+  useEffect(() => {
+    const savedEntries = JSON.parse(localStorage.getItem('farmingEntries') || '[]')
+    const savedPhotos = JSON.parse(localStorage.getItem('cropPhotos') || '[]')
+    const savedVoiceNotes = JSON.parse(localStorage.getItem('voiceNotes') || '[]')
+    
+    setFarmingEntries(savedEntries)
+    setSavedPhotos(savedPhotos)
+    setSavedVoiceNotes(savedVoiceNotes)
+  }, [])
+
+  // Add save functions to window for modal callbacks
+  useEffect(() => {
+    (window as any).saveCropPhoto = (imageSrc: string) => {
+      // Save crop photo to local storage
+      const newPhoto = {
+        id: Date.now(),
+        src: imageSrc,
+        crop: selectedCrop,
+        location: selectedLocation,
+        date: new Date().toISOString(),
+        timestamp: Date.now()
+      }
+      const updatedPhotos = [...savedPhotos, newPhoto]
+      setSavedPhotos(updatedPhotos)
+      localStorage.setItem('cropPhotos', JSON.stringify(updatedPhotos))
+      
+      // Close modal and show success
+      document.querySelector('.fixed')?.remove()
+      alert('Crop photo saved successfully!')
+    }
+
+    (window as any).saveVoiceNote = (audioUrl: string) => {
+      // Save voice note to local storage
+      const newNote = {
+        id: Date.now(),
+        url: audioUrl,
+        crop: selectedCrop,
+        location: selectedLocation,
+        date: new Date().toISOString(),
+        timestamp: Date.now()
+      }
+      const updatedNotes = [...savedVoiceNotes, newNote]
+      setSavedVoiceNotes(updatedNotes)
+      localStorage.setItem('voiceNotes', JSON.stringify(updatedNotes))
+      
+      // Close modal and show success
+      document.querySelector('.fixed')?.remove()
+      alert('Voice note saved successfully!')
+    }
+  }, [selectedCrop, selectedLocation, savedPhotos, savedVoiceNotes])
 
   const crops = [
     { id: 'rice', name: 'Rice', icon: '🌾', cycle: 120, season: 'rainy', importance: 'Staple food' },
@@ -71,44 +127,71 @@ export default function FarmingTrackerPage() {
     { id: 'post-harvest', name: 'Post-Harvest', icon: CheckCircleIcon, color: 'gray', duration: 7 }
   ]
 
-  const predictions = [
-    {
-      type: 'weather',
-      title: 'Weather',
-      icon: CloudRainIcon,
-      color: 'blue',
-      prediction: 'Rain in 3 days',
-      confidence: 85,
-      recommendation: 'Prepare irrigation'
-    },
-    {
-      type: 'pest',
-      title: 'Pest Risk',
-      icon: ExclamationTriangleIcon,
-      color: 'red',
-      prediction: 'Low risk this week',
-      confidence: 90,
-      recommendation: 'Continue monitoring'
-    },
-    {
-      type: 'harvest',
-      title: 'Harvest',
-      icon: ScissorsIcon,
-      color: 'green',
-      prediction: 'Ready in 45 days',
-      confidence: 78,
-      recommendation: 'Prepare tools'
-    },
-    {
-      type: 'market',
-      title: 'Market Price',
-      icon: TrendingUpIcon,
-      color: 'purple',
-      prediction: 'Prices up 15%',
-      confidence: 70,
-      recommendation: 'Consider holding'
-    }
-  ]
+  // Smart AI predictions based on Liberia's climate and farming conditions
+  const getSmartPredictions = () => {
+    const currentMonth = new Date().getMonth() + 1
+    const isRainySeason = currentMonth >= 4 && currentMonth <= 10
+    const isDrySeason = currentMonth >= 11 || currentMonth <= 3
+    
+    return [
+      {
+        type: 'weather',
+        title: 'Weather',
+        icon: CloudRainIcon,
+        color: 'blue',
+        prediction: isRainySeason ? 'Heavy rains expected' : 'Dry season conditions',
+        confidence: 92,
+        recommendation: isRainySeason ? 'Drainage preparation needed' : 'Irrigation planning required'
+      },
+      {
+        type: 'pest',
+        title: 'Pest Risk',
+        icon: ExclamationTriangleIcon,
+        color: 'red',
+        prediction: isRainySeason ? 'High pest activity expected' : 'Low pest risk',
+        confidence: 88,
+        recommendation: isRainySeason ? 'Apply organic pesticides' : 'Monitor for termites'
+      },
+      {
+        type: 'harvest',
+        title: 'Harvest',
+        icon: ScissorsIcon,
+        color: 'green',
+        prediction: `Ready in ${getDaysUntilHarvest()} days`,
+        confidence: 85,
+        recommendation: 'Prepare storage facilities'
+      },
+      {
+        type: 'market',
+        title: 'Market Price',
+        icon: TrendingUpIcon,
+        color: 'purple',
+        prediction: isRainySeason ? 'Prices stable' : 'Prices may increase',
+        confidence: 75,
+        recommendation: isRainySeason ? 'Hold for better prices' : 'Consider early sale'
+      },
+      {
+        type: 'soil',
+        title: 'Soil Health',
+        icon: SunIcon,
+        color: 'yellow',
+        prediction: isRainySeason ? 'Good moisture levels' : 'Soil needs watering',
+        confidence: 80,
+        recommendation: isRainySeason ? 'Test soil pH' : 'Add organic matter'
+      },
+      {
+        type: 'disease',
+        title: 'Disease Risk',
+        icon: ExclamationTriangleIcon,
+        color: 'orange',
+        prediction: isRainySeason ? 'Fungal diseases likely' : 'Low disease risk',
+        confidence: 82,
+        recommendation: isRainySeason ? 'Apply fungicide' : 'Maintain plant spacing'
+      }
+    ]
+  }
+
+  const predictions = getSmartPredictions()
 
   const milestones = [
     {
@@ -353,7 +436,7 @@ export default function FarmingTrackerPage() {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <h2 className="text-lg lg:text-2xl font-bold text-gray-900 mb-4 lg:mb-6">AI Predictions</h2>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
             {predictions.map((prediction, index) => {
               const Icon = prediction.icon
               return (
@@ -584,21 +667,284 @@ export default function FarmingTrackerPage() {
             </button>
           </div>
         </motion.div>
+
+        {/* Recent Farming Entries */}
+        <motion.div 
+          className="mb-6"
+          variants={fadeInUp}
+          initial="initial"
+          animate="animate"
+          transition={{ duration: 0.6, delay: 1.0 }}
+        >
+          <h2 className="text-lg lg:text-2xl font-bold text-gray-900 mb-4 lg:mb-6">Recent Entries</h2>
+          <div className="bg-white rounded-xl shadow-sm p-4 lg:p-6">
+            {farmingEntries.length === 0 ? (
+              <div className="text-center py-8">
+                <DocumentTextIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                <h3 className="text-lg font-medium text-gray-900 mb-2">No entries yet</h3>
+                <p className="text-gray-600 mb-4">Start tracking your farming activities by adding your first entry</p>
+                <button
+                  onClick={() => setShowAddEntry(true)}
+                  className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                >
+                  Add First Entry
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {farmingEntries.slice(0, 5).map((entry, index) => (
+                  <div key={entry.id} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+                    <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                      <DocumentTextIcon className="w-4 h-4 text-green-600" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-medium text-gray-900">{entry.activity || 'Farming Activity'}</h3>
+                        <span className="text-xs text-gray-500">
+                          {new Date(entry.date).toLocaleDateString()}
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-600 mt-1">
+                        {entry.notes || 'No notes provided'}
+                      </p>
+                      <div className="flex items-center space-x-2 mt-2">
+                        <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+                          {entry.crop}
+                        </span>
+                        <span className="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded-full">
+                          {entry.location}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                {farmingEntries.length > 5 && (
+                  <div className="text-center pt-4">
+                    <button
+                      onClick={() => setShowCalendar(true)}
+                      className="text-sm text-green-600 hover:text-green-700 font-medium"
+                    >
+                      View all {farmingEntries.length} entries in calendar
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </motion.div>
+
+        {/* Saved Photos & Voice Notes */}
+        {(savedPhotos.length > 0 || savedVoiceNotes.length > 0) && (
+          <motion.div 
+            className="mb-6"
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            transition={{ duration: 0.6, delay: 1.2 }}
+          >
+            <h2 className="text-lg lg:text-2xl font-bold text-gray-900 mb-4 lg:mb-6">Media Library</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
+              {/* Photos */}
+              {savedPhotos.length > 0 && (
+                <div className="bg-white rounded-xl shadow-sm p-4 lg:p-6">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <PhotoIcon className="w-5 h-5 text-green-600" />
+                    <h3 className="font-semibold text-gray-900">Crop Photos ({savedPhotos.length})</h3>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    {savedPhotos.slice(0, 6).map((photo) => (
+                      <div key={photo.id} className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
+                        <img 
+                          src={photo.src} 
+                          alt="Crop photo" 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Voice Notes */}
+              {savedVoiceNotes.length > 0 && (
+                <div className="bg-white rounded-xl shadow-sm p-4 lg:p-6">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <MicrophoneIcon className="w-5 h-5 text-purple-600" />
+                    <h3 className="font-semibold text-gray-900">Voice Notes ({savedVoiceNotes.length})</h3>
+                  </div>
+                  <div className="space-y-2">
+                    {savedVoiceNotes.slice(0, 3).map((note) => (
+                      <div key={note.id} className="flex items-center space-x-3 p-2 bg-gray-50 rounded-lg">
+                        <audio controls className="flex-1">
+                          <source src={note.url} type="audio/wav" />
+                        </audio>
+                        <span className="text-xs text-gray-500">
+                          {new Date(note.date).toLocaleDateString()}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        )}
       </div>
 
       <MobileFAB 
         onAIChat={() => window.location.href = '/ai/chat'}
         onCamera={() => {
-          // Camera action for taking photos of crops
-          alert('Camera feature: Take photos of your crops for AI analysis and progress tracking')
+          // Open camera for photo capture
+          const input = document.createElement('input')
+          input.type = 'file'
+          input.accept = 'image/*'
+          input.capture = 'environment'
+          input.onchange = (e) => {
+            const file = (e.target as HTMLInputElement).files?.[0]
+            if (file) {
+              // Create a preview and allow user to save the photo
+              const reader = new FileReader()
+              reader.onload = (e) => {
+                const img = new Image()
+                img.src = e.target?.result as string
+                img.onload = () => {
+                  // Show photo preview modal
+                  const modal = document.createElement('div')
+                  modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'
+                  modal.innerHTML = `
+                    <div class="bg-white rounded-lg p-6 max-w-md mx-4">
+                      <h3 class="text-lg font-semibold mb-4">Crop Photo</h3>
+                      <img src="${img.src}" alt="Crop photo" class="w-full h-64 object-cover rounded-lg mb-4">
+                      <div class="flex space-x-3">
+                        <button onclick="this.closest('.fixed').remove()" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg">Cancel</button>
+                        <button onclick="saveCropPhoto('${img.src}')" class="px-4 py-2 bg-green-600 text-white rounded-lg">Save Photo</button>
+                      </div>
+                    </div>
+                  `
+                  document.body.appendChild(modal)
+                }
+              }
+              reader.readAsDataURL(file)
+            }
+          }
+          input.click()
         }}
         onVoice={() => {
-          // Voice action for voice notes
-          alert('Voice feature: Record voice notes about your farming activities')
+          // Voice recording functionality
+          if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+              .then(stream => {
+                const mediaRecorder = new MediaRecorder(stream)
+                const chunks: Blob[] = []
+                
+                mediaRecorder.ondataavailable = (e) => {
+                  chunks.push(e.data)
+                }
+                
+                mediaRecorder.onstop = () => {
+                  const blob = new Blob(chunks, { type: 'audio/wav' })
+                  const url = URL.createObjectURL(blob)
+                  
+                  // Show voice note modal
+                  const modal = document.createElement('div')
+                  modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'
+                  modal.innerHTML = `
+                    <div class="bg-white rounded-lg p-6 max-w-md mx-4">
+                      <h3 class="text-lg font-semibold mb-4">Voice Note</h3>
+                      <audio controls class="w-full mb-4">
+                        <source src="${url}" type="audio/wav">
+                      </audio>
+                      <div class="flex space-x-3">
+                        <button onclick="this.closest('.fixed').remove()" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg">Cancel</button>
+                        <button onclick="saveVoiceNote('${url}')" class="px-4 py-2 bg-green-600 text-white rounded-lg">Save Note</button>
+                      </div>
+                    </div>
+                  `
+                  document.body.appendChild(modal)
+                }
+                
+                // Start recording
+                mediaRecorder.start()
+                
+                // Show recording interface
+                const recordingModal = document.createElement('div')
+                recordingModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'
+                recordingModal.innerHTML = `
+                  <div class="bg-white rounded-lg p-6 max-w-md mx-4 text-center">
+                    <div class="w-16 h-16 bg-red-500 rounded-full mx-auto mb-4 animate-pulse"></div>
+                    <h3 class="text-lg font-semibold mb-2">Recording Voice Note</h3>
+                    <p class="text-gray-600 mb-4">Speak about your farming activities...</p>
+                    <button onclick="stopRecording()" class="px-6 py-2 bg-red-600 text-white rounded-lg">Stop Recording</button>
+                  </div>
+                `
+                document.body.appendChild(recordingModal)
+                
+                // Stop recording after 30 seconds or when button clicked
+                const stopRecording = () => {
+                  mediaRecorder.stop()
+                  stream.getTracks().forEach(track => track.stop())
+                  recordingModal.remove()
+                }
+                
+                // Auto stop after 30 seconds
+                setTimeout(stopRecording, 30000)
+                
+                // Add stop function to window for button
+                (window as any).stopRecording = stopRecording
+              })
+              .catch(err => {
+                alert('Microphone access denied. Please allow microphone access to record voice notes.')
+                console.error('Error accessing microphone:', err)
+              })
+          } else {
+            alert('Voice recording not supported on this device.')
+          }
         }}
         onMessage={() => {
-          // Message action for farmer community
-          alert('Message feature: Connect with other farmers in your community')
+          // Open farmer community/messaging
+          const modal = document.createElement('div')
+          modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'
+          modal.innerHTML = `
+            <div class="bg-white rounded-lg p-6 max-w-md mx-4 w-full">
+              <h3 class="text-lg font-semibold mb-4">Farmer Community</h3>
+              <div class="space-y-3">
+                <button onclick="openCommunityChat()" class="w-full p-3 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors">
+                  💬 Community Chat
+                </button>
+                <button onclick="openExpertAdvice()" class="w-full p-3 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors">
+                  👨‍🌾 Expert Advice
+                </button>
+                <button onclick="openMarketplace()" class="w-full p-3 bg-purple-50 text-purple-700 rounded-lg hover:bg-purple-100 transition-colors">
+                  🛒 Marketplace
+                </button>
+                <button onclick="openEvents()" class="w-full p-3 bg-orange-50 text-orange-700 rounded-lg hover:bg-orange-100 transition-colors">
+                  📅 Farming Events
+                </button>
+              </div>
+              <div class="mt-4 flex space-x-3">
+                <button onclick="this.closest('.fixed').remove()" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg">Close</button>
+              </div>
+            </div>
+          `
+          document.body.appendChild(modal)
+          
+          // Add functions to window
+          (window as any).openCommunityChat = () => {
+            modal.remove()
+            alert('Community Chat: Connect with local farmers in your area')
+          }
+          (window as any).openExpertAdvice = () => {
+            modal.remove()
+            alert('Expert Advice: Get guidance from agricultural experts')
+          }
+          (window as any).openMarketplace = () => {
+            modal.remove()
+            alert('Marketplace: Buy and sell farming equipment and supplies')
+          }
+          (window as any).openEvents = () => {
+            modal.remove()
+            alert('Farming Events: Join workshops and training sessions')
+          }
         }}
       />
 
@@ -607,8 +953,19 @@ export default function FarmingTrackerPage() {
         isOpen={showAddEntry}
         onClose={() => setShowAddEntry(false)}
         onSave={(entry) => {
-          console.log('New entry saved:', entry)
-          // Here you would typically save to your data store
+          const newEntry = {
+            id: Date.now(),
+            ...entry,
+            crop: selectedCrop,
+            location: selectedLocation,
+            date: new Date().toISOString(),
+            timestamp: Date.now()
+          }
+          const updatedEntries = [...farmingEntries, newEntry]
+          setFarmingEntries(updatedEntries)
+          localStorage.setItem('farmingEntries', JSON.stringify(updatedEntries))
+          setShowAddEntry(false)
+          alert('Farming entry saved successfully!')
         }}
         onGetPredictions={(cropData) => {
           setPredictionData(cropData)
@@ -621,6 +978,9 @@ export default function FarmingTrackerPage() {
       <FarmingCalendar
         isOpen={showCalendar}
         onClose={() => setShowCalendar(false)}
+        farmingEntries={farmingEntries}
+        savedPhotos={savedPhotos}
+        savedVoiceNotes={savedVoiceNotes}
       />
 
       {/* Crop Prediction Modal */}

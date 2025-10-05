@@ -15,7 +15,9 @@ import {
   MapPinIcon,
   Bars3Icon,
   XMarkIcon,
-  HomeIcon
+  HomeIcon,
+  UserIcon,
+  UserGroupIcon
 } from '@heroicons/react/24/outline'
 import { useLocalAuth } from '@/hooks/use-local-auth'
 import { useLanguage } from './providers/language-provider'
@@ -32,25 +34,51 @@ export function NavigationDropdown() {
   const [isOpen, setIsOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const mobileMenuRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
   const { data: session, signOut } = useLocalAuth()
   const { t } = useLanguage()
 
-  // Close dropdown when clicking outside
+  // Close dropdown when clicking outside or mouse leaves
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      const target = event.target as Node
+      const isOutsideDropdown = dropdownRef.current && !dropdownRef.current.contains(target)
+      const isOutsideMobileMenu = mobileMenuRef.current && !mobileMenuRef.current.contains(target)
+      
+      if (isOutsideDropdown) {
         setIsOpen(false)
+      }
+      if (isOutsideMobileMenu) {
+        setIsMobileMenuOpen(false)
+      }
+    }
+
+    function handleTouchStart(event: TouchEvent) {
+      const target = event.target as Node
+      const isOutsideDropdown = dropdownRef.current && !dropdownRef.current.contains(target)
+      const isOutsideMobileMenu = mobileMenuRef.current && !mobileMenuRef.current.contains(target)
+      
+      if (isOutsideDropdown) {
+        setIsOpen(false)
+      }
+      if (isOutsideMobileMenu) {
+        setIsMobileMenuOpen(false)
       }
     }
 
     document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
+    document.addEventListener('touchstart', handleTouchStart)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('touchstart', handleTouchStart)
+    }
   }, [])
 
   const mainNavigation: DropdownItem[] = [
     { name: t('nav.home'), href: '/', icon: HomeIcon, description: 'Dashboard' },
     { name: t('nav.agriculture'), href: '/agriculture', icon: GlobeAltIcon, description: 'Smart farming' },
+    { name: 'Market Prices', href: '/market-prices', icon: CurrencyDollarIcon, description: 'Crop prices & currency' },
     { name: t('nav.trade'), href: '/trade', icon: TruckIcon, description: 'Cross-border commerce' },
     { name: t('nav.culture'), href: '/culture', icon: LanguageIcon, description: 'Cultural preservation' },
     { name: t('nav.finance'), href: '/finance', icon: CurrencyDollarIcon, description: 'Financial inclusion' }
@@ -76,12 +104,19 @@ export function NavigationDropdown() {
     { name: 'Location', href: '/location', icon: MapPinIcon, description: 'Set your location' }
   ]
 
+  const userNavigation: DropdownItem[] = [
+    { name: 'Profile', href: '/profile', icon: UserIcon, description: 'Manage your profile' },
+    { name: 'Farmer Network', href: '/farmer-network', icon: UserGroupIcon, description: 'Connect with farmers' },
+    { name: 'AI Chat', href: '/ai/chat', icon: CpuChipIcon, description: 'Chat with AI' }
+  ]
+
   const allNavigation = [
     { title: 'Main', items: mainNavigation },
     { title: 'Farming', items: farmingNavigation },
     { title: 'AI', items: aiNavigation },
     { title: 'Learning', items: learningNavigation },
-    { title: 'Location', items: locationNavigation }
+    { title: 'Location', items: locationNavigation },
+    ...(session?.user ? [{ title: 'Account', items: userNavigation }] : [])
   ]
 
   return (
@@ -89,7 +124,11 @@ export function NavigationDropdown() {
       {/* Desktop Navigation */}
       <div className="hidden lg:flex items-center space-x-4">
         {/* Main Navigation Dropdown */}
-        <div className="relative" ref={dropdownRef}>
+        <div 
+          className="relative" 
+          ref={dropdownRef}
+          onMouseLeave={() => setIsOpen(false)}
+        >
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
@@ -141,6 +180,21 @@ export function NavigationDropdown() {
                       </div>
                     </div>
                   ))}
+                  
+                  {/* Sign Out Button for Desktop */}
+                  {session?.user && (
+                    <div className="mt-6 pt-4 border-t border-gray-200">
+                      <button
+                        onClick={() => {
+                          signOut()
+                          setIsOpen(false)
+                        }}
+                        className="w-full text-left px-3 py-2 text-gray-700 hover:bg-red-50 hover:text-red-700 rounded-lg transition-colors"
+                      >
+                        Sign Out
+                      </button>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             )}
@@ -153,13 +207,6 @@ export function NavigationDropdown() {
         {/* User Menu */}
         {session?.user ? (
           <div className="flex items-center space-x-3">
-            <Link
-              href="/ai/chat"
-              className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              <CpuChipIcon className="w-4 h-4" />
-              <span className="font-medium">AI Chat</span>
-            </Link>
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
                 <span className="text-sm font-medium text-green-700">
@@ -170,12 +217,6 @@ export function NavigationDropdown() {
                 <div className="font-medium text-gray-900">{session.user.name}</div>
                 <div className="text-gray-500">{session.user.country}</div>
               </div>
-              <button
-                onClick={signOut}
-                className="text-sm text-gray-500 hover:text-gray-700 transition-colors"
-              >
-                Sign Out
-              </button>
             </div>
           </div>
         ) : (
@@ -197,7 +238,7 @@ export function NavigationDropdown() {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="lg:hidden">
+      <div className="lg:hidden relative" ref={mobileMenuRef}>
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="p-2 rounded-lg hover:bg-gray-100 transition-colors"

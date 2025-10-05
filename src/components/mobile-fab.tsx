@@ -30,25 +30,29 @@ export function MobileFAB({
     {
       icon: CpuChipIcon,
       label: 'AI Chat',
-      color: 'blue',
+      bgColor: 'bg-blue-500',
+      hoverColor: 'hover:bg-blue-600',
       onClick: onAIChat
     },
     {
       icon: CameraIcon,
       label: 'Camera',
-      color: 'green',
+      bgColor: 'bg-green-500',
+      hoverColor: 'hover:bg-green-600',
       onClick: onCamera
     },
     {
       icon: MicrophoneIcon,
       label: 'Voice',
-      color: 'purple',
+      bgColor: 'bg-purple-500',
+      hoverColor: 'hover:bg-purple-600',
       onClick: onVoice
     },
     {
       icon: ChatBubbleLeftRightIcon,
       label: 'Message',
-      color: 'orange',
+      bgColor: 'bg-orange-500',
+      hoverColor: 'hover:bg-orange-600',
       onClick: onMessage
     }
   ]
@@ -67,18 +71,29 @@ export function MobileFAB({
             {actions.map((action, index) => {
               const Icon = action.icon
               return (
-                <motion.button
+                <motion.div
                   key={action.label}
-                  onClick={action.onClick}
-                  className={`w-12 h-12 bg-${action.color}-500 rounded-full shadow-lg flex items-center justify-center text-white hover:bg-${action.color}-600 transition-colors`}
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+                  className="relative group"
                 >
-                  <Icon className="w-5 h-5" />
-                </motion.button>
+                  <motion.button
+                    onClick={action.onClick}
+                    className={`w-12 h-12 ${action.bgColor} rounded-full shadow-lg flex items-center justify-center text-white ${action.hoverColor} transition-colors`}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    title={action.label}
+                  >
+                    <Icon className="w-5 h-5" />
+                  </motion.button>
+                  
+                  {/* Tooltip */}
+                  <div className="absolute right-16 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                    {action.label}
+                    <div className="absolute left-full top-1/2 transform -translate-y-1/2 w-0 h-0 border-l-4 border-l-gray-900 border-t-4 border-t-transparent border-b-4 border-b-transparent"></div>
+                  </div>
+                </motion.div>
               )
             })}
           </motion.div>
