@@ -301,14 +301,14 @@ export function AddEntryModal({ isOpen, onClose, onSave, onGetPredictions }: Add
                         type="button"
                         onClick={() => setWeather(weather.id)}
                         className={`p-3 rounded-lg border-2 transition-colors ${
-                          weather.id === selectedWeather
+                          weather.id === selectedWeather?.id
                             ? 'border-blue-500 bg-blue-50'
                             : 'border-gray-200 hover:border-gray-300'
                         }`}
                       >
                         <div className="flex items-center space-x-2">
                           <Icon className={`w-4 h-4 ${
-                            weather.id === selectedWeather ? 'text-blue-600' : 'text-gray-400'
+                            weather.id === selectedWeather?.id ? 'text-blue-600' : 'text-gray-400'
                           }`} />
                           <span className="text-sm font-medium">{weather.name}</span>
                         </div>
