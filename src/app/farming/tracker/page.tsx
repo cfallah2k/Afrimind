@@ -867,7 +867,7 @@ export default function FarmingTrackerPage() {
                 mediaRecorder.start()
                 
                 // Show recording interface
-                const recordingModal: HTMLDivElement = document.createElement('div')
+                const recordingModal = document.createElement('div') as HTMLDivElement
                 recordingModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'
                 recordingModal.innerHTML = `
                   <div class="bg-white rounded-lg p-6 max-w-md mx-4 text-center">
@@ -882,7 +882,9 @@ export default function FarmingTrackerPage() {
                 const stopRecording = () => {
                   mediaRecorder.stop()
                   stream.getTracks().forEach(track => track.stop())
-                  recordingModal.remove()
+                  if (recordingModal && recordingModal.parentNode) {
+                    recordingModal.parentNode.removeChild(recordingModal)
+                  }
                 }
                 
                 document.body.appendChild(recordingModal)
