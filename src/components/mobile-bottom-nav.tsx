@@ -43,27 +43,6 @@ export function MobileBottomNav() {
       color: 'green'
     },
     { 
-      name: 'Trade', 
-      href: '/trade', 
-      icon: TruckIcon, 
-      iconSolid: TruckIconSolid,
-      color: 'purple'
-    },
-    { 
-      name: 'Culture', 
-      href: '/culture', 
-      icon: LanguageIcon, 
-      iconSolid: LanguageIconSolid,
-      color: 'orange'
-    },
-    { 
-      name: 'Finance', 
-      href: '/finance', 
-      icon: CurrencyDollarIcon, 
-      iconSolid: CurrencyDollarIconSolid,
-      color: 'yellow'
-    },
-    { 
       name: 'AI', 
       href: '/ai', 
       icon: CpuChipIcon, 
@@ -76,13 +55,6 @@ export function MobileBottomNav() {
       icon: BookOpenIcon, 
       iconSolid: BookOpenIconSolid,
       color: 'pink'
-    },
-    { 
-      name: 'Location', 
-      href: '/location', 
-      icon: MapPinIcon, 
-      iconSolid: MapPinIconSolid,
-      color: 'red'
     }
   ]
 

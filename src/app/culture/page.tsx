@@ -35,80 +35,23 @@ export default function CulturePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-accent-50 via-white to-primary-50">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-accent-600 to-primary-600 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial="initial"
-            animate="animate"
-            variants={staggerChildren}
-            className="text-center"
-          >
-            <motion.div
-              variants={fadeInUp}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-8"
-            >
-              <LanguageIcon className="w-4 h-4 mr-2" />
-              Cultural Preservation
-            </motion.div>
-
-            <motion.h1
-              variants={fadeInUp}
-              transition={{ duration: 0.6 }}
-              className="text-4xl md:text-6xl font-bold mb-6"
-            >
-              Preserving African Heritage
-            </motion.h1>
-
-            <motion.p
-              variants={fadeInUp}
-              transition={{ duration: 0.6 }}
-              className="text-xl md:text-2xl text-accent-100 max-w-4xl mx-auto mb-8"
-            >
-              AI that understands African languages, cultures, and local contexts 
-              to preserve and promote our rich cultural heritage.
-            </motion.p>
-
-            {/* Culture Selector */}
-            <motion.div
-              variants={fadeInUp}
-              transition={{ duration: 0.6 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
-            >
-              <div className="flex items-center space-x-2 bg-white/20 rounded-lg px-4 py-2">
-                <LanguageIcon className="w-5 h-5" />
-                <select
-                  value={selectedLanguage}
-                  onChange={(e) => setSelectedLanguage(e.target.value)}
-                  className="bg-transparent text-white border-none outline-none"
-                >
-                  <option value="Yoruba">Yoruba</option>
-                  <option value="Hausa">Hausa</option>
-                  <option value="Igbo">Igbo</option>
-                  <option value="Swahili">Swahili</option>
-                  <option value="Amharic">Amharic</option>
-                </select>
-              </div>
-              <div className="flex items-center space-x-2 bg-white/20 rounded-lg px-4 py-2">
-                <GlobeAltIcon className="w-5 h-5" />
-                <select
-                  value={selectedCountry}
-                  onChange={(e) => setSelectedCountry(e.target.value)}
-                  className="bg-transparent text-white border-none outline-none"
-                >
-                  <option value="Nigeria">Nigeria</option>
-                  <option value="Kenya">Kenya</option>
-                  <option value="Ghana">Ghana</option>
-                  <option value="Ethiopia">Ethiopia</option>
-                  <option value="South Africa">South Africa</option>
-                </select>
-              </div>
-            </motion.div>
-          </motion.div>
+    <div className="min-h-screen bg-gray-50 pb-24 lg:pb-0">
+      {/* Mobile App Header */}
+      <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
+        <div className="max-w-md lg:max-w-7xl mx-auto px-4 py-3 lg:py-4">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 lg:w-12 lg:h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+              <LanguageIcon className="w-6 h-6 lg:w-7 lg:h-7 text-orange-600" />
+            </div>
+            <div>
+              <h1 className="text-lg lg:text-2xl xl:text-3xl font-bold text-gray-900">Culture 🌍</h1>
+              <p className="text-sm lg:text-base xl:text-lg text-gray-600">Preserve West African heritage</p>
+            </div>
+          </div>
         </div>
       </div>
+
+      <div className="max-w-md lg:max-w-4xl xl:max-w-6xl mx-auto px-4 py-6">
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

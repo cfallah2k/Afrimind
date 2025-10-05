@@ -172,30 +172,21 @@ export default function LocationPage() {
   const selectedCountryData = countries.find(c => c.code === selectedCountry)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50">
-      {/* Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <motion.div 
-            className="text-center"
-            variants={fadeInUp}
-            initial="initial"
-            animate="animate"
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              Designed for
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">
-                {' '}Every Community
-              </span>
-            </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Whether you're in a bustling city or a remote village, AfriMind adapts to your needs, 
-              connectivity, and local context across Africa.
-            </p>
-          </motion.div>
+    <div className="min-h-screen bg-gray-50 pb-24 lg:pb-0">
+      {/* Mobile App Header */}
+      <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
+        <div className="max-w-md lg:max-w-7xl mx-auto px-4 py-3 lg:py-4">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 lg:w-12 lg:h-12 bg-red-100 rounded-xl flex items-center justify-center">
+              <MapPinIcon className="w-6 h-6 lg:w-7 lg:h-7 text-red-600" />
+            </div>
+            <div>
+              <h1 className="text-lg lg:text-2xl xl:text-3xl font-bold text-gray-900">Location 📍</h1>
+              <p className="text-sm lg:text-base xl:text-lg text-gray-600">Personalized for your area</p>
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
 
       {/* Location Selection */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
