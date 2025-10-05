@@ -11,7 +11,7 @@ import {
   SunIcon,
   CloudIcon as CloudRainIcon,
   ScissorsIcon,
-  SeedlingIcon,
+  SparklesIcon as SeedlingIcon,
   ClockIcon,
   MapPinIcon,
   ArrowTrendingUpIcon as TrendingUpIcon,
