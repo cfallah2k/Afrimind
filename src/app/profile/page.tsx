@@ -69,10 +69,10 @@ export default function ProfilePage() {
     if (session?.user) {
       setProfileData(prev => ({
         ...prev,
-        name: session.user.name || '',
-        email: session.user.email || '',
-        country: session.user.country || '',
-        language: session.user.language || 'en'
+        name: session.user?.name || '',
+        email: session.user?.email || '',
+        country: session.user?.country || '',
+        language: session.user?.language || 'en'
       }))
     }
   }, [session])
