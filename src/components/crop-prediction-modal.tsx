@@ -6,7 +6,7 @@ import {
   XMarkIcon,
   SunIcon,
   CloudIcon,
-  DropletIcon,
+  BeakerIcon as DropletIcon,
   ScissorsIcon,
   CheckCircleIcon,
   ExclamationTriangleIcon,

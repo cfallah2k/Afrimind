@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
+import {
   XMarkIcon,
   PhotoIcon,
   DocumentTextIcon,
@@ -10,7 +10,7 @@ import {
   MapPinIcon,
   SunIcon,
   CloudIcon,
-  DropletIcon,
+  BeakerIcon as DropletIcon,
   ScissorsIcon,
   CheckCircleIcon,
   ChartBarIcon

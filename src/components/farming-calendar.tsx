@@ -9,7 +9,7 @@ import {
   MapPinIcon,
   SunIcon,
   CloudIcon,
-  DropletIcon,
+  BeakerIcon as DropletIcon,
   ScissorsIcon,
   CheckCircleIcon,
   ExclamationTriangleIcon
