@@ -1,37 +1,10 @@
-import { withAuth } from 'next-auth/middleware'
 import { NextResponse } from 'next/server'
 
-export default withAuth(
-  function middleware(req) {
-    // Add any additional middleware logic here
-    return NextResponse.next()
-  },
-  {
-    callbacks: {
-      authorized: ({ token, req }) => {
-        // Allow access to public routes
-        const publicRoutes = [
-          '/',
-          '/agriculture',
-          '/trade', 
-          '/culture',
-          '/finance',
-          '/ai',
-          '/auth/signin',
-          '/auth/signup',
-          '/api/auth'
-        ]
-        
-        if (publicRoutes.some(route => req.nextUrl.pathname.startsWith(route))) {
-          return true
-        }
-        
-        // Require authentication for protected routes
-        return !!token
-      },
-    },
-  }
-)
+export function middleware(req: any) {
+  // Simple middleware without authentication requirements
+  // All routes are public for the demo version
+  return NextResponse.next()
+}
 
 export const config = {
   matcher: [
