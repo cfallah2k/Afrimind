@@ -30,12 +30,29 @@ const fadeInUp = {
 export default function LocationPage() {
   const { t } = useLanguage()
   const [selectedLocation, setSelectedLocation] = useState<'rural' | 'urban' | null>(null)
-  const [selectedCountry, setSelectedCountry] = useState('NG')
+  const [selectedCountry, setSelectedCountry] = useState('LR')
 
   const countries = [
+    // West African Countries (with special focus on Liberia)
+    { code: 'LR', name: 'Liberia', flag: '🇱🇷', ruralPop: '60%', urbanPop: '40%' },
     { code: 'NG', name: 'Nigeria', flag: '🇳🇬', ruralPop: '65%', urbanPop: '35%' },
-    { code: 'KE', name: 'Kenya', flag: '🇰🇪', ruralPop: '70%', urbanPop: '30%' },
     { code: 'GH', name: 'Ghana', flag: '🇬🇭', ruralPop: '55%', urbanPop: '45%' },
+    { code: 'SN', name: 'Senegal', flag: '🇸🇳', ruralPop: '60%', urbanPop: '40%' },
+    { code: 'CI', name: 'Côte d\'Ivoire', flag: '🇨🇮', ruralPop: '65%', urbanPop: '35%' },
+    { code: 'ML', name: 'Mali', flag: '🇲🇱', ruralPop: '70%', urbanPop: '30%' },
+    { code: 'BF', name: 'Burkina Faso', flag: '🇧🇫', ruralPop: '75%', urbanPop: '25%' },
+    { code: 'NE', name: 'Niger', flag: '🇳🇪', ruralPop: '80%', urbanPop: '20%' },
+    { code: 'GN', name: 'Guinea', flag: '🇬🇳', ruralPop: '70%', urbanPop: '30%' },
+    { code: 'SL', name: 'Sierra Leone', flag: '🇸🇱', ruralPop: '65%', urbanPop: '35%' },
+    { code: 'GM', name: 'Gambia', flag: '🇬🇲', ruralPop: '60%', urbanPop: '40%' },
+    { code: 'GW', name: 'Guinea-Bissau', flag: '🇬🇼', ruralPop: '70%', urbanPop: '30%' },
+    { code: 'CV', name: 'Cape Verde', flag: '🇨🇻', ruralPop: '40%', urbanPop: '60%' },
+    { code: 'TG', name: 'Togo', flag: '🇹🇬', ruralPop: '65%', urbanPop: '35%' },
+    { code: 'BJ', name: 'Benin', flag: '🇧🇯', ruralPop: '60%', urbanPop: '40%' },
+    { code: 'MR', name: 'Mauritania', flag: '🇲🇷', ruralPop: '65%', urbanPop: '35%' },
+    
+    // Other African Countries
+    { code: 'KE', name: 'Kenya', flag: '🇰🇪', ruralPop: '70%', urbanPop: '30%' },
     { code: 'ZA', name: 'South Africa', flag: '🇿🇦', ruralPop: '35%', urbanPop: '65%' },
     { code: 'EG', name: 'Egypt', flag: '🇪🇬', ruralPop: '40%', urbanPop: '60%' },
     { code: 'ET', name: 'Ethiopia', flag: '🇪🇹', ruralPop: '80%', urbanPop: '20%' },

@@ -14,9 +14,26 @@ export const languages = [
 ]
 
 export const countries = [
+  // West African Countries (with special focus on Liberia)
+  { code: 'LR', name: 'Liberia', flag: '🇱🇷', languages: ['en'] },
   { code: 'NG', name: 'Nigeria', flag: '🇳🇬', languages: ['en', 'ha', 'yo', 'ig'] },
-  { code: 'KE', name: 'Kenya', flag: '🇰🇪', languages: ['en', 'sw'] },
   { code: 'GH', name: 'Ghana', flag: '🇬🇭', languages: ['en'] },
+  { code: 'SN', name: 'Senegal', flag: '🇸🇳', languages: ['fr'] },
+  { code: 'CI', name: 'Côte d\'Ivoire', flag: '🇨🇮', languages: ['fr'] },
+  { code: 'ML', name: 'Mali', flag: '🇲🇱', languages: ['fr'] },
+  { code: 'BF', name: 'Burkina Faso', flag: '🇧🇫', languages: ['fr'] },
+  { code: 'NE', name: 'Niger', flag: '🇳🇪', languages: ['fr'] },
+  { code: 'GN', name: 'Guinea', flag: '🇬🇳', languages: ['fr'] },
+  { code: 'SL', name: 'Sierra Leone', flag: '🇸🇱', languages: ['en'] },
+  { code: 'GM', name: 'Gambia', flag: '🇬🇲', languages: ['en'] },
+  { code: 'GW', name: 'Guinea-Bissau', flag: '🇬🇼', languages: ['pt'] },
+  { code: 'CV', name: 'Cape Verde', flag: '🇨🇻', languages: ['pt'] },
+  { code: 'TG', name: 'Togo', flag: '🇹🇬', languages: ['fr'] },
+  { code: 'BJ', name: 'Benin', flag: '🇧🇯', languages: ['fr'] },
+  { code: 'MR', name: 'Mauritania', flag: '🇲🇷', languages: ['ar', 'fr'] },
+  
+  // Other African Countries
+  { code: 'KE', name: 'Kenya', flag: '🇰🇪', languages: ['en', 'sw'] },
   { code: 'ZA', name: 'South Africa', flag: '🇿🇦', languages: ['en', 'zu', 'xh'] },
   { code: 'EG', name: 'Egypt', flag: '🇪🇬', languages: ['ar', 'en'] },
   { code: 'MA', name: 'Morocco', flag: '🇲🇦', languages: ['ar', 'fr'] },
@@ -24,8 +41,6 @@ export const countries = [
   { code: 'TZ', name: 'Tanzania', flag: '🇹🇿', languages: ['sw', 'en'] },
   { code: 'UG', name: 'Uganda', flag: '🇺🇬', languages: ['en'] },
   { code: 'RW', name: 'Rwanda', flag: '🇷🇼', languages: ['en', 'fr'] },
-  { code: 'SN', name: 'Senegal', flag: '🇸🇳', languages: ['fr'] },
-  { code: 'CI', name: 'Côte d\'Ivoire', flag: '🇨🇮', languages: ['fr'] },
   { code: 'CM', name: 'Cameroon', flag: '🇨🇲', languages: ['fr', 'en'] },
   { code: 'DZ', name: 'Algeria', flag: '🇩🇿', languages: ['ar', 'fr'] },
   { code: 'TN', name: 'Tunisia', flag: '🇹🇳', languages: ['ar', 'fr'] },

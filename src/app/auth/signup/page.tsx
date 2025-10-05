@@ -25,9 +25,26 @@ export default function SignUpPage() {
   const { signUp } = useLocalAuth()
 
   const countries = [
+    // West African Countries (with special focus on Liberia)
+    { code: 'LR', name: 'Liberia', flag: '🇱🇷' },
     { code: 'NG', name: 'Nigeria', flag: '🇳🇬' },
-    { code: 'KE', name: 'Kenya', flag: '🇰🇪' },
     { code: 'GH', name: 'Ghana', flag: '🇬🇭' },
+    { code: 'SN', name: 'Senegal', flag: '🇸🇳' },
+    { code: 'CI', name: 'Côte d\'Ivoire', flag: '🇨🇮' },
+    { code: 'ML', name: 'Mali', flag: '🇲🇱' },
+    { code: 'BF', name: 'Burkina Faso', flag: '🇧🇫' },
+    { code: 'NE', name: 'Niger', flag: '🇳🇪' },
+    { code: 'GN', name: 'Guinea', flag: '🇬🇳' },
+    { code: 'SL', name: 'Sierra Leone', flag: '🇸🇱' },
+    { code: 'GM', name: 'Gambia', flag: '🇬🇲' },
+    { code: 'GW', name: 'Guinea-Bissau', flag: '🇬🇼' },
+    { code: 'CV', name: 'Cape Verde', flag: '🇨🇻' },
+    { code: 'TG', name: 'Togo', flag: '🇹🇬' },
+    { code: 'BJ', name: 'Benin', flag: '🇧🇯' },
+    { code: 'MR', name: 'Mauritania', flag: '🇲🇷' },
+    
+    // Other African Countries
+    { code: 'KE', name: 'Kenya', flag: '🇰🇪' },
     { code: 'ZA', name: 'South Africa', flag: '🇿🇦' },
     { code: 'EG', name: 'Egypt', flag: '🇪🇬' },
     { code: 'MA', name: 'Morocco', flag: '🇲🇦' },
@@ -35,8 +52,6 @@ export default function SignUpPage() {
     { code: 'TZ', name: 'Tanzania', flag: '🇹🇿' },
     { code: 'UG', name: 'Uganda', flag: '🇺🇬' },
     { code: 'RW', name: 'Rwanda', flag: '🇷🇼' },
-    { code: 'SN', name: 'Senegal', flag: '🇸🇳' },
-    { code: 'CI', name: 'Côte d\'Ivoire', flag: '🇨🇮' },
     { code: 'CM', name: 'Cameroon', flag: '🇨🇲' },
     { code: 'DZ', name: 'Algeria', flag: '🇩🇿' },
     { code: 'TN', name: 'Tunisia', flag: '🇹🇳' },

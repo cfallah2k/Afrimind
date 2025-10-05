@@ -32,13 +32,13 @@ interface LanguageProviderProps {
 export function LanguageProvider({ children }: LanguageProviderProps) {
   const { data: session } = useLocalAuth()
   const [currentLanguage, setCurrentLanguage] = useState('en')
-  const [currentCountry, setCurrentCountry] = useState('NG')
+  const [currentCountry, setCurrentCountry] = useState('LR')
 
   // Initialize language and country from session or localStorage
   useEffect(() => {
     if (session?.user) {
       setCurrentLanguage(session.user.language || 'en')
-      setCurrentCountry(session.user.country || 'NG')
+      setCurrentCountry(session.user.country || 'LR')
     } else {
       const savedLanguage = localStorage.getItem('afrimind-language')
       const savedCountry = localStorage.getItem('afrimind-country')
