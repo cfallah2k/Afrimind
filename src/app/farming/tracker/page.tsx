@@ -866,6 +866,13 @@ export default function FarmingTrackerPage() {
                 // Start recording
                 mediaRecorder.start()
                 
+                // Stop recording function
+                const stopRecording = () => {
+                  mediaRecorder.stop()
+                  stream.getTracks().forEach(track => track.stop())
+                  recordingModal.remove()
+                }
+                
                 // Show recording interface
                 const recordingModal = document.createElement('div')
                 recordingModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'
@@ -879,18 +886,13 @@ export default function FarmingTrackerPage() {
                 `
                 document.body.appendChild(recordingModal)
                 
-                // Stop recording after 30 seconds or when button clicked
-                const stopRecording = () => {
-                  mediaRecorder.stop()
-                  stream.getTracks().forEach(track => track.stop())
-                  recordingModal.remove()
-                }
-                
-                // Auto stop after 30 seconds
-                setTimeout(stopRecording, 30000)
-                
                 // Add stop function to window for button
                 (window as any).stopRecording = stopRecording
+                
+                // Auto stop after 30 seconds
+                const timeoutId = setTimeout(() => {
+                  stopRecording()
+                }, 30000)
               })
               .catch(err => {
                 alert('Microphone access denied. Please allow microphone access to record voice notes.')
