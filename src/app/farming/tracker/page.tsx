@@ -907,47 +907,56 @@ export default function FarmingTrackerPage() {
         }}
         onMessage={() => {
           // Open farmer community/messaging
-          const modal = document.createElement('div')
-          modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'
-          modal.innerHTML = `
-            <div class="bg-white rounded-lg p-6 max-w-md mx-4 w-full">
-              <h3 class="text-lg font-semibold mb-4">Farmer Community</h3>
-              <div class="space-y-3">
-                <button onclick="openCommunityChat()" class="w-full p-3 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors">
-                  💬 Community Chat
-                </button>
-                <button onclick="openExpertAdvice()" class="w-full p-3 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors">
-                  👨‍🌾 Expert Advice
-                </button>
-                <button onclick="openMarketplace()" class="w-full p-3 bg-purple-50 text-purple-700 rounded-lg hover:bg-purple-100 transition-colors">
-                  🛒 Marketplace
-                </button>
-                <button onclick="openEvents()" class="w-full p-3 bg-orange-50 text-orange-700 rounded-lg hover:bg-orange-100 transition-colors">
-                  📅 Farming Events
-                </button>
-              </div>
-              <div class="mt-4 flex space-x-3">
-                <button onclick="this.closest('.fixed').remove()" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg">Close</button>
+          const modalHtml = `
+            <div class="afm-community-modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+              <div class="bg-white rounded-lg p-6 max-w-md mx-4 w-full">
+                <h3 class="text-lg font-semibold mb-4">Farmer Community</h3>
+                <div class="space-y-3">
+                  <button onclick="openCommunityChat()" class="w-full p-3 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors">
+                    💬 Community Chat
+                  </button>
+                  <button onclick="openExpertAdvice()" class="w-full p-3 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors">
+                    👨‍🌾 Expert Advice
+                  </button>
+                  <button onclick="openMarketplace()" class="w-full p-3 bg-purple-50 text-purple-700 rounded-lg hover:bg-purple-100 transition-colors">
+                    🛒 Marketplace
+                  </button>
+                  <button onclick="openEvents()" class="w-full p-3 bg-orange-50 text-orange-700 rounded-lg hover:bg-orange-100 transition-colors">
+                    📅 Farming Events
+                  </button>
+                </div>
+                <div class="mt-4 flex space-x-3">
+                  <button onclick="this.closest('.fixed').remove()" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg">Close</button>
+                </div>
               </div>
             </div>
           `
-          document.body.appendChild(modal)
+          document.body.insertAdjacentHTML('beforeend', modalHtml)
+          const modal = document.querySelector('.afm-community-modal') as HTMLDivElement | null
           
           // Add functions to window
           (window as any).openCommunityChat = () => {
-            modal.remove()
+            if (modal && modal.parentNode) {
+              modal.parentNode.removeChild(modal)
+            }
             alert('Community Chat: Connect with local farmers in your area')
           }
           (window as any).openExpertAdvice = () => {
-            modal.remove()
+            if (modal && modal.parentNode) {
+              modal.parentNode.removeChild(modal)
+            }
             alert('Expert Advice: Get guidance from agricultural experts')
           }
           (window as any).openMarketplace = () => {
-            modal.remove()
+            if (modal && modal.parentNode) {
+              modal.parentNode.removeChild(modal)
+            }
             alert('Marketplace: Buy and sell farming equipment and supplies')
           }
           (window as any).openEvents = () => {
-            modal.remove()
+            if (modal && modal.parentNode) {
+              modal.parentNode.removeChild(modal)
+            }
             alert('Farming Events: Join workshops and training sessions')
           }
         }}
