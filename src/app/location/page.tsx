@@ -17,7 +17,8 @@ import {
   AcademicCapIcon,
   HeartIcon,
   ShieldCheckIcon,
-  LightBulbIcon
+  LightBulbIcon,
+  CheckCircleIcon
 } from '@heroicons/react/24/outline'
 import { useLanguage } from '@/components/providers/language-provider'
 
