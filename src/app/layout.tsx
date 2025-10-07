@@ -4,9 +4,9 @@ import './globals.css'
 import { Providers } from '@/components/providers'
 import { Toaster } from 'react-hot-toast'
 import { MobileAppWrapper } from '@/components/mobile-app-wrapper'
-import { ResponsiveNavigation } from '@/components/responsive-navigation'
-import { EnvChecker } from '@/components/env-checker'
 import { ConditionalAuthGuard } from '@/components/conditional-auth-guard'
+import { ConditionalNavigation } from '@/components/conditional-navigation'
+import { EnvChecker } from '@/components/env-checker'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -48,7 +48,7 @@ export default function RootLayout({
         <Providers>
           <EnvChecker />
           <ConditionalAuthGuard>
-            <ResponsiveNavigation />
+            <ConditionalNavigation />
             <MobileAppWrapper>
               {children}
             </MobileAppWrapper>
