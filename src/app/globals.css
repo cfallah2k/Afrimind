@@ -165,9 +165,26 @@
   .text-gradient {
     @apply bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent;
   }
+
+  /* Responsive subheader helpers */
+  .subheader {
+    @apply flex items-center justify-between gap-2 sm:gap-3;
+  }
+  .subheader-title {
+    @apply text-base sm:text-lg lg:text-xl font-semibold text-gray-900 truncate;
+  }
+  .subheader-desc {
+    @apply text-xs sm:text-sm lg:text-base text-gray-600 truncate;
+  }
+  .subheader-actions {
+    @apply flex items-center gap-2 sm:gap-3 shrink-0;
+  }
 }
 
 @layer utilities {
+  /* Clamp helpers for long headings */
+  .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+  .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;

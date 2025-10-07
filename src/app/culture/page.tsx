@@ -1,38 +1,41 @@
 export default function CulturePage() {
   return (
     <div className="min-h-screen bg-gray-50 pb-24 lg:pb-0">
-      {/* Mobile Header */}
-      <div className="lg:hidden bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
-        <div className="max-w-md mx-auto px-4 py-3">
-          <h1 className="text-lg font-semibold text-gray-900">Culture Hub 🌍</h1>
-          <p className="text-sm text-gray-600">West African Heritage & Languages</p>
+  {/* Mobile Header */}
+  <div className="lg:hidden bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
+    <div className="max-w-md mx-auto px-4 py-3">
+      <div className="subheader">
+        <div className="min-w-0">
+          <h1 className="subheader-title line-clamp-1">West African Culture Hub</h1>
+          <p className="subheader-desc line-clamp-1">Discover languages, traditions & heritage</p>
         </div>
       </div>
+    </div>
+  </div>
 
-      {/* Desktop Header */}
-      <div className="hidden lg:block bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <h1 className="text-xl font-bold text-gray-900">West African Culture Hub</h1>
-          <div className="flex items-center space-x-4">
-            <div className="text-sm text-gray-600">
-              Discover languages, traditions & heritage
-            </div>
-          </div>
+  {/* Desktop Header */}
+  <div className="hidden lg:block bg-white shadow-sm border-b border-gray-200">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className="subheader">
+        <div className="min-w-0">
+          <h1 className="text-2xl font-bold text-gray-900">West African Culture Hub</h1>
+          <p className="text-gray-600">Discover languages, traditions & heritage</p>
         </div>
       </div>
+    </div>
+  </div>
 
       <main className="max-w-md lg:max-w-4xl xl:max-w-6xl mx-auto px-4 py-6">
         {/* Hero Section */}
         <div className="mb-8">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              West African Culture Hub 🌍
-            </h1>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Discover the rich cultural heritage, languages, and traditions of West Africa. 
-              Connect with communities, learn languages, and explore cultural practices.
-            </p>
-          </div>
+  <div className="text-center mb-8">
+    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 line-clamp-2">
+      West African Culture Hub 🌍
+    </h1>
+    <p className="text-sm sm:text-base lg:text-lg text-gray-600 max-w-3xl mx-auto line-clamp-2">
+      Discover the rich cultural heritage, languages, and traditions of West Africa. Connect with communities, learn languages, and explore cultural practices.
+    </p>
+  </div>
         </div>
 
         {/* Language Translation Tool */}

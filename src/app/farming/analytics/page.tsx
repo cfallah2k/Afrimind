@@ -101,102 +101,573 @@ export default function FarmingAnalyticsPage() {
     { id: 'image', name: 'Image Export', icon: ArrowDownTrayIcon }
   ]
 
-  // Enhanced farming cycles with more detailed data
+  // Enhanced farming cycles with all West African market products (Liberia as default)
   const [farmingCycles] = useState([
+    // Staple Crops
     {
       id: 1,
-      crop: 'Maize',
-      variety: 'Improved Maize',
-      startDate: new Date('2024-01-15'),
-      endDate: new Date('2024-05-15'),
-      yield: 2.5,
-      profit: 450,
-      cost: 280,
+      crop: 'Rice',
+      variety: 'NERICA Rice (Liberia)',
+      startDate: new Date('2024-03-15'),
+      endDate: new Date('2024-07-15'),
+      yield: 3.2,
+      profit: 1,250,
+      cost: 450,
       status: 'completed',
       season: 'rainy',
-      location: 'Field A',
-      area: 2.5,
-      weatherImpact: 85,
-      efficiency: 92,
+      location: 'Bong County, Liberia',
+      area: 2.0,
+      weatherImpact: 88,
+      efficiency: 94,
       quality: 'A+',
-      marketPrice: 180,
-      notes: 'Excellent growth with minimal pest issues'
+      marketPrice: 320,
+      notes: 'Excellent yield in Liberia\'s rainy season. Ready for export to Nigeria.'
     },
     {
       id: 2,
-      crop: 'Rice',
-      variety: 'NERICA Rice',
-      startDate: new Date('2024-03-01'),
-      endDate: new Date('2024-06-01'),
-      yield: 1.8,
-      profit: 320,
-      cost: 200,
-      status: 'completed',
-      season: 'rainy',
-      location: 'Field B',
-      area: 1.8,
-      weatherImpact: 78,
-      efficiency: 88,
-      quality: 'A',
-      marketPrice: 220,
-      notes: 'Good yield despite heavy rainfall'
+      crop: 'Cassava',
+      variety: 'TMS Cassava (West Africa)',
+      startDate: new Date('2024-01-01'),
+      endDate: new Date('2024-12-31'),
+      yield: 0,
+      profit: 0,
+      cost: 280,
+      status: 'ongoing',
+      season: 'all',
+      location: 'Lofa County, Liberia',
+      area: 3.5,
+      weatherImpact: 0,
+      efficiency: 0,
+      quality: 'N/A',
+      marketPrice: 120,
+      notes: 'Long-term crop. High demand in Ghana and Nigeria markets.'
     },
     {
       id: 3,
+      crop: 'Yam',
+      variety: 'White Yam (Liberia)',
+      startDate: new Date('2024-04-01'),
+      endDate: new Date('2024-10-15'),
+      yield: 4.5,
+      profit: 1,350,
+      cost: 600,
+      status: 'completed',
+      season: 'rainy',
+      location: 'Grand Gedeh County, Liberia',
+      area: 2.2,
+      weatherImpact: 90,
+      efficiency: 92,
+      quality: 'A+',
+      marketPrice: 300,
+      notes: 'High-quality yam. Strong demand in Nigeria and Ghana markets.'
+    },
+    {
+      id: 4,
+      crop: 'Plantain',
+      variety: 'Horn Plantain (Liberia)',
+      startDate: new Date('2024-03-01'),
+      endDate: new Date('2024-09-30'),
+      yield: 6.8,
+      profit: 1,190,
+      cost: 340,
+      status: 'completed',
+      season: 'rainy',
+      location: 'River Cess County, Liberia',
+      area: 1.8,
+      weatherImpact: 85,
+      efficiency: 88,
+      quality: 'A',
+      marketPrice: 175,
+      notes: 'Good yield for local consumption and regional trade.'
+    },
+    {
+      id: 5,
+      crop: 'Sweet Potato',
+      variety: 'Orange Sweet Potato',
+      startDate: new Date('2024-05-15'),
+      endDate: new Date('2024-11-30'),
+      yield: 3.5,
+      profit: 1,050,
+      cost: 420,
+      status: 'completed',
+      season: 'rainy',
+      location: 'Maryland County, Liberia',
+      area: 2.0,
+      weatherImpact: 87,
+      efficiency: 91,
+      quality: 'A',
+      marketPrice: 225,
+      notes: 'Nutritious crop with good market demand across West Africa.'
+    },
+    
+    // Cereal Crops
+    {
+      id: 6,
+      crop: 'Maize',
+      variety: 'Improved Maize (Liberia)',
+      startDate: new Date('2024-05-01'),
+      endDate: new Date('2024-08-30'),
+      yield: 2.1,
+      profit: 420,
+      cost: 250,
+      status: 'completed',
+      season: 'rainy',
+      location: 'Montserrado County, Liberia',
+      area: 1.5,
+      weatherImpact: 82,
+      efficiency: 87,
+      quality: 'A',
+      marketPrice: 200,
+      notes: 'Good yield for local consumption and regional trade.'
+    },
+    {
+      id: 7,
+      crop: 'Sorghum',
+      variety: 'Red Sorghum (Liberia)',
+      startDate: new Date('2024-04-15'),
+      endDate: new Date('2024-09-15'),
+      yield: 1.8,
+      profit: 630,
+      cost: 350,
+      status: 'completed',
+      season: 'rainy',
+      location: 'Grand Kru County, Liberia',
+      area: 1.2,
+      weatherImpact: 83,
+      efficiency: 86,
+      quality: 'A',
+      marketPrice: 350,
+      notes: 'Drought-resistant crop. Good for dry season farming.'
+    },
+    {
+      id: 8,
+      crop: 'Millet',
+      variety: 'Pearl Millet (Liberia)',
+      startDate: new Date('2024-04-01'),
+      endDate: new Date('2024-08-30'),
+      yield: 1.5,
+      profit: 525,
+      cost: 300,
+      status: 'completed',
+      season: 'rainy',
+      location: 'River Gee County, Liberia',
+      area: 1.0,
+      weatherImpact: 80,
+      efficiency: 84,
+      quality: 'A',
+      marketPrice: 275,
+      notes: 'Traditional grain crop. High nutritional value.'
+    },
+    
+    // Cash Crops
+    {
+      id: 9,
+      crop: 'Cocoa',
+      variety: 'Forastero Cocoa',
+      startDate: new Date('2024-02-01'),
+      endDate: new Date('2024-11-30'),
+      yield: 0,
+      profit: 0,
+      cost: 400,
+      status: 'ongoing',
+      season: 'all',
+      location: 'Sinoe County, Liberia',
+      area: 2.5,
+      weatherImpact: 0,
+      efficiency: 0,
+      quality: 'N/A',
+      marketPrice: 800,
+      notes: 'Long-term crop. High export potential to Ghana and Ivory Coast.'
+    },
+    {
+      id: 10,
+      crop: 'Coffee',
+      variety: 'Liberica Coffee (Liberia)',
+      startDate: new Date('2024-01-15'),
+      endDate: new Date('2024-12-15'),
+      yield: 0,
+      profit: 0,
+      cost: 500,
+      status: 'ongoing',
+      season: 'all',
+      location: 'Bomi County, Liberia',
+      area: 1.8,
+      weatherImpact: 0,
+      efficiency: 0,
+      quality: 'N/A',
+      marketPrice: 450,
+      notes: 'Premium Liberian coffee. High export value to Europe and America.'
+    },
+    
+    // Oil Crops
+    {
+      id: 11,
+      crop: 'Palm Oil',
+      variety: 'Tenera Palm (Liberia)',
+      startDate: new Date('2024-06-01'),
+      endDate: new Date('2024-09-30'),
+      yield: 2.8,
+      profit: 1,680,
+      cost: 520,
+      status: 'completed',
+      season: 'rainy',
+      location: 'Grand Bassa County, Liberia',
+      area: 1.2,
+      weatherImpact: 92,
+      efficiency: 96,
+      quality: 'A+',
+      marketPrice: 600,
+      notes: 'Premium quality palm oil. High export demand to Senegal and Mali.'
+    },
+    {
+      id: 12,
+      crop: 'Groundnut',
+      variety: 'Virginia Groundnut',
+      startDate: new Date('2024-04-01'),
+      endDate: new Date('2024-08-15'),
+      yield: 1.5,
+      profit: 750,
+      cost: 300,
+      status: 'completed',
+      season: 'rainy',
+      location: 'Nimba County, Liberia',
+      area: 1.8,
+      weatherImpact: 85,
+      efficiency: 89,
+      quality: 'A',
+      marketPrice: 500,
+      notes: 'Good yield. High demand in Senegal and Mali for export.'
+    },
+    
+    // Legumes
+    {
+      id: 13,
+      crop: 'Cowpea',
+      variety: 'Black-eyed Pea (Liberia)',
+      startDate: new Date('2024-05-01'),
+      endDate: new Date('2024-09-15'),
+      yield: 1.2,
+      profit: 540,
+      cost: 360,
+      status: 'completed',
+      season: 'rainy',
+      location: 'Gbarpolu County, Liberia',
+      area: 1.5,
+      weatherImpact: 88,
+      efficiency: 90,
+      quality: 'A',
+      marketPrice: 450,
+      notes: 'High protein legume. Good for soil nitrogen fixation.'
+    },
+    
+    // Vegetables
+    {
+      id: 14,
       crop: 'Tomato',
-      variety: 'Cherry Tomato',
+      variety: 'Cherry Tomato (Liberia)',
       startDate: new Date('2024-06-15'),
       endDate: new Date('2024-09-15'),
       yield: 3.2,
-      profit: 680,
-      cost: 350,
+      profit: 1,360,
+      cost: 680,
       status: 'completed',
       season: 'dry',
-      location: 'Greenhouse',
+      location: 'Margibi County, Liberia',
       area: 0.8,
       weatherImpact: 95,
       efficiency: 96,
       quality: 'A+',
-      marketPrice: 250,
-      notes: 'Premium quality, high market demand'
+      marketPrice: 425,
+      notes: 'Premium quality tomatoes. High market demand locally and regionally.'
     },
     {
-      id: 4,
-      crop: 'Cassava',
-      variety: 'TMS Cassava',
-      startDate: new Date('2024-08-01'),
-      endDate: new Date('2025-05-01'),
+      id: 15,
+      crop: 'Onion',
+      variety: 'Red Onion (Liberia)',
+      startDate: new Date('2024-05-01'),
+      endDate: new Date('2024-09-30'),
+      yield: 2.5,
+      profit: 1,125,
+      cost: 650,
+      status: 'completed',
+      season: 'rainy',
+      location: 'Grand Cape Mount County, Liberia',
+      area: 1.0,
+      weatherImpact: 89,
+      efficiency: 92,
+      quality: 'A',
+      marketPrice: 325,
+      notes: 'Essential kitchen crop. Strong local and regional demand.'
+    },
+    {
+      id: 16,
+      crop: 'Okra',
+      variety: 'Green Okra (Liberia)',
+      startDate: new Date('2024-04-15'),
+      endDate: new Date('2024-10-15'),
+      yield: 2.8,
+      profit: 1,050,
+      cost: 420,
+      status: 'completed',
+      season: 'rainy',
+      location: 'Bong County, Liberia',
+      area: 1.2,
+      weatherImpact: 87,
+      efficiency: 89,
+      quality: 'A',
+      marketPrice: 375,
+      notes: 'Popular vegetable. Good for local markets and regional trade.'
+    },
+    {
+      id: 17,
+      crop: 'Eggplant',
+      variety: 'Purple Eggplant (Liberia)',
+      startDate: new Date('2024-05-01'),
+      endDate: new Date('2024-10-30'),
+      yield: 2.2,
+      profit: 990,
+      cost: 440,
+      status: 'completed',
+      season: 'rainy',
+      location: 'Lofa County, Liberia',
+      area: 1.0,
+      weatherImpact: 85,
+      efficiency: 88,
+      quality: 'A',
+      marketPrice: 450,
+      notes: 'Nutritious vegetable. Growing demand in urban markets.'
+    },
+    {
+      id: 18,
+      crop: 'Cabbage',
+      variety: 'Green Cabbage (Liberia)',
+      startDate: new Date('2024-06-01'),
+      endDate: new Date('2024-11-30'),
+      yield: 3.5,
+      profit: 1,225,
+      cost: 525,
+      status: 'completed',
+      season: 'rainy',
+      location: 'Montserrado County, Liberia',
+      area: 1.5,
+      weatherImpact: 90,
+      efficiency: 93,
+      quality: 'A',
+      marketPrice: 300,
+      notes: 'Cool season crop. Good for highland areas.'
+    },
+    {
+      id: 19,
+      crop: 'Carrot',
+      variety: 'Orange Carrot (Liberia)',
+      startDate: new Date('2024-05-15'),
+      endDate: new Date('2024-10-15'),
+      yield: 2.8,
+      profit: 1,400,
+      cost: 700,
+      status: 'completed',
+      season: 'rainy',
+      location: 'Bong County, Liberia',
+      area: 1.0,
+      weatherImpact: 88,
+      efficiency: 91,
+      quality: 'A',
+      marketPrice: 500,
+      notes: 'High-value vegetable. Strong demand in urban markets.'
+    },
+    {
+      id: 20,
+      crop: 'Lettuce',
+      variety: 'Green Lettuce (Liberia)',
+      startDate: new Date('2024-06-01'),
+      endDate: new Date('2024-11-15'),
+      yield: 4.2,
+      profit: 1,260,
+      cost: 420,
+      status: 'completed',
+      season: 'rainy',
+      location: 'Margibi County, Liberia',
+      area: 1.2,
+      weatherImpact: 92,
+      efficiency: 94,
+      quality: 'A',
+      marketPrice: 375,
+      notes: 'Leafy green vegetable. Popular in urban markets.'
+    },
+    {
+      id: 21,
+      crop: 'Spinach',
+      variety: 'Green Spinach (Liberia)',
+      startDate: new Date('2024-05-01'),
+      endDate: new Date('2024-10-30'),
+      yield: 3.8,
+      profit: 1,140,
+      cost: 380,
+      status: 'completed',
+      season: 'rainy',
+      location: 'Grand Bassa County, Liberia',
+      area: 1.0,
+      weatherImpact: 89,
+      efficiency: 92,
+      quality: 'A',
+      marketPrice: 250,
+      notes: 'Nutritious leafy green. High demand for health-conscious consumers.'
+    },
+    
+    // Spices
+    {
+      id: 22,
+      crop: 'Pepper',
+      variety: 'Hot Pepper (Liberia)',
+      startDate: new Date('2024-04-01'),
+      endDate: new Date('2024-11-30'),
+      yield: 1.8,
+      profit: 1,440,
+      cost: 720,
+      status: 'completed',
+      season: 'rainy',
+      location: 'Nimba County, Liberia',
+      area: 0.8,
+      weatherImpact: 86,
+      efficiency: 89,
+      quality: 'A',
+      marketPrice: 800,
+      notes: 'High-value spice crop. Strong demand in local and regional markets.'
+    },
+    {
+      id: 23,
+      crop: 'Ginger',
+      variety: 'Fresh Ginger (Liberia)',
+      startDate: new Date('2024-03-01'),
+      endDate: new Date('2024-12-31'),
+      yield: 0,
+      profit: 0,
+      cost: 600,
+      status: 'ongoing',
+      season: 'all',
+      location: 'Grand Gedeh County, Liberia',
+      area: 1.5,
+      weatherImpact: 0,
+      efficiency: 0,
+      quality: 'N/A',
+      marketPrice: 1400,
+      notes: 'Long-term spice crop. High export value to international markets.'
+    },
+    {
+      id: 24,
+      crop: 'Turmeric',
+      variety: 'Yellow Turmeric (Liberia)',
+      startDate: new Date('2024-03-15'),
+      endDate: new Date('2024-12-31'),
+      yield: 0,
+      profit: 0,
+      cost: 500,
+      status: 'ongoing',
+      season: 'all',
+      location: 'River Cess County, Liberia',
+      area: 1.2,
+      weatherImpact: 0,
+      efficiency: 0,
+      quality: 'N/A',
+      marketPrice: 1200,
+      notes: 'Medicinal spice crop. Growing demand in health markets.'
+    },
+    
+    // Fruits
+    {
+      id: 25,
+      crop: 'Banana',
+      variety: 'Plantain Banana (Liberia)',
+      startDate: new Date('2024-01-01'),
+      endDate: new Date('2024-12-31'),
+      yield: 0,
+      profit: 0,
+      cost: 200,
+      status: 'ongoing',
+      season: 'all',
+      location: 'Grand Cape Mount County, Liberia',
+      area: 2.0,
+      weatherImpact: 0,
+      efficiency: 0,
+      quality: 'N/A',
+      marketPrice: 200,
+      notes: 'Perennial fruit crop. Year-round production for local markets.'
+    },
+    {
+      id: 26,
+      crop: 'Mango',
+      variety: 'Sweet Mango (Liberia)',
+      startDate: new Date('2024-01-01'),
+      endDate: new Date('2024-12-31'),
+      yield: 0,
+      profit: 0,
+      cost: 300,
+      status: 'ongoing',
+      season: 'all',
+      location: 'Maryland County, Liberia',
+      area: 1.5,
+      weatherImpact: 0,
+      efficiency: 0,
+      quality: 'N/A',
+      marketPrice: 450,
+      notes: 'Tropical fruit tree. High value for local and export markets.'
+    },
+    {
+      id: 27,
+      crop: 'Orange',
+      variety: 'Sweet Orange (Liberia)',
+      startDate: new Date('2024-01-01'),
+      endDate: new Date('2024-12-31'),
+      yield: 0,
+      profit: 0,
+      cost: 250,
+      status: 'ongoing',
+      season: 'all',
+      location: 'Grand Kru County, Liberia',
+      area: 1.2,
+      weatherImpact: 0,
+      efficiency: 0,
+      quality: 'N/A',
+      marketPrice: 350,
+      notes: 'Citrus fruit tree. Good for vitamin C and local consumption.'
+    },
+    {
+      id: 28,
+      crop: 'Pineapple',
+      variety: 'Sweet Pineapple (Liberia)',
+      startDate: new Date('2024-01-01'),
+      endDate: new Date('2024-12-31'),
+      yield: 0,
+      profit: 0,
+      cost: 400,
+      status: 'ongoing',
+      season: 'all',
+      location: 'River Gee County, Liberia',
+      area: 1.8,
+      weatherImpact: 0,
+      efficiency: 0,
+      quality: 'N/A',
+      marketPrice: 600,
+      notes: 'Tropical fruit. High export potential to regional markets.'
+    },
+    {
+      id: 29,
+      crop: 'Papaya',
+      variety: 'Red Papaya (Liberia)',
+      startDate: new Date('2024-01-01'),
+      endDate: new Date('2024-12-31'),
       yield: 0,
       profit: 0,
       cost: 150,
       status: 'ongoing',
       season: 'all',
-      location: 'Field C',
-      area: 3.0,
+      location: 'Gbarpolu County, Liberia',
+      area: 1.0,
       weatherImpact: 0,
       efficiency: 0,
       quality: 'N/A',
-      marketPrice: 80,
-      notes: 'Long-term crop, still growing'
-    },
-    {
-      id: 5,
-      crop: 'Beans',
-      variety: 'Cowpea',
-      startDate: new Date('2024-09-01'),
-      endDate: new Date('2024-11-15'),
-      yield: 1.2,
-      profit: 180,
-      cost: 120,
-      status: 'completed',
-      season: 'dry',
-      location: 'Field D',
-      area: 1.5,
-      weatherImpact: 90,
-      efficiency: 85,
-      quality: 'A',
-      marketPrice: 150,
-      notes: 'Good nitrogen fixation for soil'
+      marketPrice: 275,
+      notes: 'Fast-growing fruit tree. Good for local markets and nutrition.'
     }
   ])
 
@@ -266,38 +737,56 @@ export default function FarmingAnalyticsPage() {
     {
       type: 'success',
       title: 'Best Performing Crop',
-      description: 'Tomato farming has been your most profitable crop this season',
+      description: 'Rice farming has been your most profitable crop this season in Liberia',
       icon: StarIcon,
       color: 'green',
-      value: '+68% profit',
-      recommendation: 'Consider expanding tomato cultivation'
+      value: '+72% profit',
+      recommendation: 'Consider expanding rice cultivation to 2 hectares'
     },
     {
       type: 'warning',
       title: 'Weather Alert',
-      description: 'Below-average rainfall predicted for next month',
+      description: 'Below-average rainfall predicted for next month in West Africa',
       icon: ExclamationTriangleIcon,
       color: 'yellow',
-      value: '-20% rainfall',
-      recommendation: 'Prepare irrigation systems'
+      value: '-25% rainfall',
+      recommendation: 'Prepare irrigation systems and water storage'
     },
     {
       type: 'info',
       title: 'Market Opportunity',
-      description: 'Rice prices are expected to rise in the coming weeks',
+      description: 'Cassava prices are expected to rise in Nigeria and Ghana',
       icon: TrendingUpIcon,
       color: 'blue',
-      value: '+15% price increase',
-      recommendation: 'Consider planting rice for next season'
+      value: '+18% price increase',
+      recommendation: 'Consider planting cassava for export to Nigeria'
     },
     {
       type: 'tip',
       title: 'Efficiency Tip',
-      description: 'Your maize yield could improve with better spacing',
+      description: 'Your palm oil yield could improve with better spacing',
       icon: LightBulbIcon,
       color: 'purple',
-      value: '+25% potential yield',
-      recommendation: 'Adjust planting density to 30cm spacing'
+      value: '+30% potential yield',
+      recommendation: 'Adjust planting density to 9m x 9m spacing'
+    },
+    {
+      type: 'success',
+      title: 'Cross-Border Opportunity',
+      description: 'High demand for groundnut in Senegal and Mali',
+      icon: GlobeAltIcon,
+      color: 'orange',
+      value: '+22% profit margin',
+      recommendation: 'Consider groundnut export to Senegal'
+    },
+    {
+      type: 'info',
+      title: 'Seasonal Alert',
+      description: 'Planting season approaching for maize in West Africa',
+      icon: SunIcon,
+      color: 'green',
+      value: 'Optimal timing',
+      recommendation: 'Prepare maize seeds for March planting'
     }
   ]
 
@@ -499,8 +988,8 @@ export default function FarmingAnalyticsPage() {
         >
           {metrics.map((metric, index) => {
             const Icon = metric.icon
-            const value = metric.id === 'yield' ? getTotalYield().toFixed(1) :
-                         metric.id === 'profit' ? getTotalProfit().toLocaleString() :
+            const value = metric.id === 'yield' ? '8.7' :
+                         metric.id === 'profit' ? '1,630' :
                          metric.id === 'growth' ? '12.5' :
                          metric.id === 'efficiency' ? '89.2' :
                          metric.id === 'cost' ? '1,250' :
@@ -893,7 +1382,14 @@ export default function FarmingAnalyticsPage() {
           animate="animate"
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Weather Trends</h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-gray-900">West African Weather Trends</h2>
+            <div className="flex items-center space-x-2 text-sm text-gray-600">
+              <span>🇱🇷 Liberia Focus</span>
+              <span>•</span>
+              <span>Updated: {new Date().toLocaleTimeString()}</span>
+            </div>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
               <div className="flex items-center justify-center space-x-2 mb-2">
@@ -901,9 +1397,9 @@ export default function FarmingAnalyticsPage() {
                 <span className="font-semibold text-gray-900">Rainfall</span>
               </div>
               <div className="text-2xl font-bold text-blue-600 mb-1">
-                {weatherData.reduce((sum, month) => sum + month.rainfall, 0)}mm
+                1,250mm
               </div>
-              <div className="text-sm text-gray-600">Annual total</div>
+              <div className="text-sm text-gray-600">Annual total • Monrovia, Liberia</div>
             </div>
             
             <div className="text-center">
@@ -912,9 +1408,9 @@ export default function FarmingAnalyticsPage() {
                 <span className="font-semibold text-gray-900">Temperature</span>
               </div>
               <div className="text-2xl font-bold text-yellow-600 mb-1">
-                {Math.round(weatherData.reduce((sum, month) => sum + month.temperature, 0) / weatherData.length)}°C
+                27°C
               </div>
-              <div className="text-sm text-gray-600">Average</div>
+              <div className="text-sm text-gray-600">Average • West Africa</div>
             </div>
             
             <div className="text-center">
@@ -923,9 +1419,21 @@ export default function FarmingAnalyticsPage() {
                 <span className="font-semibold text-gray-900">Humidity</span>
               </div>
               <div className="text-2xl font-bold text-gray-600 mb-1">
-                {Math.round(weatherData.reduce((sum, month) => sum + month.humidity, 0) / weatherData.length)}%
+                82%
               </div>
-              <div className="text-sm text-gray-600">Average</div>
+              <div className="text-sm text-gray-600">Average • Coastal regions</div>
+            </div>
+          </div>
+          
+          {/* Additional Weather Info */}
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-blue-50 rounded-lg p-4">
+              <h4 className="font-semibold text-blue-900 mb-2">Rainy Season Alert</h4>
+              <p className="text-sm text-blue-800">Heavy rainfall expected from April to October. Prepare drainage systems.</p>
+            </div>
+            <div className="bg-yellow-50 rounded-lg p-4">
+              <h4 className="font-semibold text-yellow-900 mb-2">Dry Season Notice</h4>
+              <p className="text-sm text-yellow-800">November to March: Plan irrigation for dry season crops.</p>
             </div>
           </div>
         </motion.div>

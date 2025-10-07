@@ -17,7 +17,10 @@ import {
   TruckIcon,
   CheckCircleIcon,
   LockClosedIcon,
-  ChevronDownIcon
+  ChevronDownIcon,
+  FireIcon,
+  ChartBarIcon,
+  CalendarIcon
 } from '@heroicons/react/24/outline'
 import { useLanguage } from '@/components/providers/language-provider'
 
@@ -32,6 +35,7 @@ export default function LearningPage() {
   const [selectedLevel, setSelectedLevel] = useState('all')
   const [showLanguageSelector, setShowLanguageSelector] = useState(false)
   const [showCountrySelector, setShowCountrySelector] = useState(false)
+  const [activeTab, setActiveTab] = useState('overview')
 
   const categories = [
     { id: 'agriculture', name: 'Agriculture', icon: GlobeAltIcon, color: 'green' },
@@ -45,6 +49,74 @@ export default function LearningPage() {
     { id: 'beginner', name: 'Beginner', color: 'green' },
     { id: 'intermediate', name: 'Intermediate', color: 'blue' },
     { id: 'advanced', name: 'Advanced', color: 'purple' }
+  ]
+
+  // Learning progress data
+  const learningStats = {
+    dayStreak: 7,
+    totalTime: '24h',
+    enrolledCourses: 3,
+    lessonsCompleted: 22,
+    studyStreak: '7 days',
+    totalHours: '24h'
+  }
+
+  const achievements = [
+    { id: 1, title: 'Liberia Learning Pioneer', icon: TrophyIcon, color: 'yellow', earned: true, description: 'Completed your first course in Liberia' },
+    { id: 2, title: 'West African Scholar', icon: FireIcon, color: 'red', earned: true, description: '7-day learning streak achieved' },
+    { id: 3, title: 'Regional Knowledge Seeker', icon: BookOpenIcon, color: 'blue', earned: false, description: 'Complete 5 West African courses' },
+    { id: 4, title: 'ECOWAS Study Champion', icon: StarIcon, color: 'purple', earned: false, description: 'Master all regional subjects' }
+  ]
+
+  const recentActivity = [
+    { id: 1, title: 'Completed lesson: Soil Management', course: 'Smart Farming Fundamentals', time: '2 hours ago', region: 'Liberia' },
+    { id: 2, title: 'Started new course: Cross-Border Trade', course: 'Trade Mastery', time: '1 day ago', region: 'Ghana' },
+    { id: 3, title: 'Earned achievement: First Course', course: 'Agriculture', time: '3 days ago', region: 'Liberia' }
+  ]
+
+  const myCourses = [
+    {
+      id: 1,
+      title: 'Smart Farming Fundamentals',
+      instructor: 'Dr. Amina Okafor',
+      category: 'Agriculture',
+      lastAccessed: '2 days ago',
+      nextLesson: 'Water Management Techniques',
+      progress: 75,
+      completedLessons: 9,
+      totalLessons: 12,
+      isEnrolled: true,
+      region: 'Liberia',
+      description: 'Learn modern agricultural techniques for West African climates'
+    },
+    {
+      id: 2,
+      title: 'Cross-Border Trade Mastery',
+      instructor: 'Kwame Asante',
+      category: 'Trade',
+      lastAccessed: '1 week ago',
+      nextLesson: 'Customs Documentation',
+      progress: 45,
+      completedLessons: 8,
+      totalLessons: 18,
+      isEnrolled: true,
+      region: 'Ghana',
+      description: 'Master West African trade regulations and logistics'
+    },
+    {
+      id: 3,
+      title: 'West African Languages & Culture',
+      instructor: 'Prof. Fatima Hassan',
+      category: 'Culture',
+      lastAccessed: '3 days ago',
+      nextLesson: 'Business Etiquette',
+      progress: 20,
+      completedLessons: 5,
+      totalLessons: 24,
+      isEnrolled: true,
+      region: 'Senegal',
+      description: 'Explore West African languages and cultural practices'
+    }
   ]
 
   const courses = [
@@ -180,269 +252,221 @@ export default function LearningPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-24 lg:pb-0">
+    <div className="min-h-screen bg-gray-50 max-w-md mx-auto shadow-2xl relative w-full">
+      {/* Mobile Status Bar */}
+      <div className="bg-black text-white text-xs px-3 sm:px-4 py-1 flex justify-between items-center">
+        <span className="text-xs">9:41</span>
+        <div className="flex items-center space-x-1">
+          <div className="w-3 h-1.5 sm:w-4 sm:h-2 bg-white rounded-sm"></div>
+          <div className="w-3 h-1.5 sm:w-4 sm:h-2 bg-white rounded-sm"></div>
+          <div className="w-3 h-1.5 sm:w-4 sm:h-2 bg-white rounded-sm"></div>
+        </div>
+        <span className="text-xs">100%</span>
+      </div>
 
-      {/* Language & Country Selection */}
-      <section className="py-8 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <motion.div 
-            className="bg-white rounded-xl shadow-sm p-4 lg:p-6"
-            variants={fadeInUp}
-            initial="initial"
-            animate="animate"
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-lg lg:text-xl font-semibold text-gray-900 mb-4">Select Learning Language & Region</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              {/* Language Selection */}
-              <div className="relative">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Learning Language</label>
-                <button
-                  onClick={() => setShowLanguageSelector(!showLanguageSelector)}
-                  className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-md bg-white text-left focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                >
-                  <div className="flex items-center space-x-2">
-                    <LanguageIcon className="w-4 h-4 text-gray-500" />
-                    <span className="text-sm font-medium">English</span>
-                  </div>
-                  <ChevronDownIcon className="w-4 h-4 text-gray-400" />
-                </button>
-                
-                {showLanguageSelector && (
-                  <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
-                    {availableLanguages.map((lang) => (
-                      <button
-                        key={lang.code}
-                        onClick={() => {
-                          setLanguage(lang.code)
-                          setShowLanguageSelector(false)
-                        }}
-                        className="w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-gray-50"
-                      >
-                        <span className="text-lg">{lang.flag}</span>
-                        <span className="text-sm">{lang.name}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
+      {/* Mobile App Header */}
+      <div className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
+        <div className="px-3 sm:px-4 py-2 sm:py-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2 sm:space-x-3 min-w-0">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-green-500 to-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                <BookOpenIcon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </div>
-
-              {/* Country Selection */}
-              <div className="relative">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Country/Region</label>
-                <button
-                  onClick={() => setShowCountrySelector(!showCountrySelector)}
-                  className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-md bg-white text-left focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                >
-                  <div className="flex items-center space-x-2">
-                    <GlobeAltIcon className="w-4 h-4 text-gray-500" />
-                    <span className="text-sm font-medium">Liberia</span>
-                  </div>
-                  <ChevronDownIcon className="w-4 h-4 text-gray-400" />
-                </button>
-                
-                {showCountrySelector && (
-                  <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
-                    {availableCountries.map((country) => (
-                      <button
-                        key={country.code}
-                        onClick={() => {
-                          setCountry(country.code)
-                          setShowCountrySelector(false)
-                        }}
-                        className="w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-gray-50"
-                      >
-                        <span className="text-lg">{country.flag}</span>
-                        <span className="text-sm">{country.name}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
+              <div className="min-w-0 flex-1">
+                <h1 className="text-sm sm:text-base font-bold text-gray-900 truncate">My Learning</h1>
+                <p className="text-xs text-gray-500">Track your progress and continue your journey in West Africa</p>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
-      </section>
+      </div>
 
-      {/* Categories & Filters */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <motion.div 
-            className="text-center mb-12"
-            variants={fadeInUp}
-            initial="initial"
-            animate="animate"
-            transition={{ duration: 0.6 }}
+      {/* Learning Stats */}
+      <div className="px-3 sm:px-4 py-4 sm:py-6">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
+          <div className="bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-gray-200">
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <FireIcon className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" />
+              </div>
+              <div className="min-w-0">
+                <div className="text-lg sm:text-xl font-bold text-gray-900">{learningStats.dayStreak}</div>
+                <div className="text-xs sm:text-sm text-gray-600">Day Streak</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-gray-200">
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <ClockIcon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+              </div>
+              <div className="min-w-0">
+                <div className="text-lg sm:text-xl font-bold text-gray-900">{learningStats.totalTime}</div>
+                <div className="text-xs sm:text-sm text-gray-600">Total Time</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-gray-200">
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <BookOpenIcon className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+              </div>
+              <div className="min-w-0">
+                <div className="text-lg sm:text-xl font-bold text-gray-900">{learningStats.enrolledCourses}</div>
+                <div className="text-xs sm:text-sm text-gray-600">Enrolled Courses</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-gray-200">
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <CheckCircleIcon className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
+              </div>
+              <div className="min-w-0">
+                <div className="text-lg sm:text-xl font-bold text-gray-900">{learningStats.lessonsCompleted}</div>
+                <div className="text-xs sm:text-sm text-gray-600">Lessons Completed</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Tab Navigation */}
+        <div className="flex space-x-1 mb-4 sm:mb-6 bg-gray-100 rounded-lg p-1">
+          <button
+            onClick={() => setActiveTab('overview')}
+            className={`flex-1 py-2 px-3 rounded-md text-xs sm:text-sm font-medium transition-colors ${
+              activeTab === 'overview'
+                ? 'bg-white text-gray-900 shadow-sm'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Explore Learning Categories
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Choose from our diverse range of courses designed specifically for African contexts
-            </p>
-          </motion.div>
+            My Courses
+          </button>
+          <button
+            onClick={() => setActiveTab('achievements')}
+            className={`flex-1 py-2 px-3 rounded-md text-xs sm:text-sm font-medium transition-colors ${
+              activeTab === 'achievements'
+                ? 'bg-white text-gray-900 shadow-sm'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            Achievements
+          </button>
+          <button
+            onClick={() => setActiveTab('activity')}
+            className={`flex-1 py-2 px-3 rounded-md text-xs sm:text-sm font-medium transition-colors ${
+              activeTab === 'activity'
+                ? 'bg-white text-gray-900 shadow-sm'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            Recent Activity
+          </button>
+        </div>
 
-          {/* Category Filters */}
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <button
-              onClick={() => setSelectedCategory('all')}
-              className={`px-6 py-3 rounded-full font-medium transition-colors ${
-                selectedCategory === 'all'
-                  ? 'bg-green-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              All Categories
-            </button>
-            {categories.map((category) => {
-              const Icon = category.icon
-              return (
-                <button
-                  key={category.id}
-                  onClick={() => setSelectedCategory(category.id)}
-                  className={`flex items-center space-x-2 px-6 py-3 rounded-full font-medium transition-colors ${
-                    selectedCategory === category.id
-                      ? `bg-${category.color}-600 text-white`
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
-                >
-                  <Icon className="w-5 h-5" />
-                  <span>{category.name}</span>
-                </button>
-              )
-            })}
-          </div>
+        {/* Tab Content */}
+        {activeTab === 'overview' && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="space-y-3 sm:space-y-4"
+          >
+            {myCourses.map((course, index) => (
+              <div key={course.id} className="bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-gray-200">
+                <div className="flex items-start justify-between mb-2 sm:mb-3">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-sm sm:text-base font-semibold text-gray-900 truncate">{course.title}</h3>
+                    <p className="text-xs sm:text-sm text-gray-600">by {course.instructor}</p>
+                    <p className="text-xs text-gray-500">{course.category} • {course.region} • Last accessed {course.lastAccessed}</p>
+                  </div>
+                </div>
+                
+                <div className="mb-2 sm:mb-3">
+                  <div className="flex items-center justify-between text-xs sm:text-sm text-gray-600 mb-1">
+                    <span>Next: {course.nextLesson}</span>
+                    <span>{course.progress}%</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-1.5 sm:h-2">
+                    <div 
+                      className="bg-gradient-to-r from-green-500 to-blue-500 h-1.5 sm:h-2 rounded-full transition-all duration-500"
+                      style={{ width: `${course.progress}%` }}
+                    ></div>
+                  </div>
+                  <div className="flex items-center justify-between text-xs text-gray-500 mt-1">
+                    <span>{course.completedLessons}/{course.totalLessons} lessons</span>
+                    <span>Progress {course.progress}%</span>
+                  </div>
+                </div>
 
-          {/* Level Filters */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <button
-              onClick={() => setSelectedLevel('all')}
-              className={`px-6 py-2 rounded-full font-medium transition-colors ${
-                selectedLevel === 'all'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              All Levels
-            </button>
-            {levels.map((level) => (
-              <button
-                key={level.id}
-                onClick={() => setSelectedLevel(level.id)}
-                className={`px-6 py-2 rounded-full font-medium transition-colors ${
-                  selectedLevel === level.id
-                    ? `bg-${level.color}-600 text-white`
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {level.name}
-              </button>
+                <div className="flex space-x-2">
+                  <button className="flex-1 bg-gradient-to-r from-green-500 to-blue-500 text-white py-2 px-3 rounded-lg font-medium text-xs sm:text-sm hover:shadow-md transition-all">
+                    Continue Learning
+                  </button>
+                  <button className="px-3 py-2 border border-gray-300 text-gray-700 rounded-lg text-xs sm:text-sm hover:bg-gray-50 transition-colors">
+                    View Course
+                  </button>
+                </div>
+              </div>
             ))}
-          </div>
-        </div>
-      </section>
+          </motion.div>
+        )}
 
-      {/* Courses Grid */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredCourses.map((course, index) => {
-              const CategoryIcon = getCategoryIcon(course.category)
-              const categoryColor = getCategoryColor(course.category)
-              const levelColor = getLevelColor(course.level)
-              
+        {activeTab === 'achievements' && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="space-y-3 sm:space-y-4"
+          >
+            {achievements.map((achievement, index) => {
+              const Icon = achievement.icon
               return (
-                <motion.div
-                  key={course.id}
-                  className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-                  variants={fadeInUp}
-                  initial="initial"
-                  animate="animate"
-                  transition={{ duration: 0.6, delay: 0.1 * index }}
-                >
-                  {/* Course Image */}
-                  <div className="relative h-48 bg-gradient-to-br from-green-400 to-blue-500">
-                    <div className="absolute inset-0 bg-black bg-opacity-20"></div>
-                    <div className="absolute top-4 left-4">
-                      <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-${categoryColor}-100 text-${categoryColor}-800`}>
-                        <CategoryIcon className="w-4 h-4 mr-1" />
-                        {categories.find(c => c.id === course.category)?.name}
-                      </span>
+                <div key={achievement.id} className={`bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-gray-200 ${!achievement.earned ? 'opacity-50' : ''}`}>
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-8 h-8 sm:w-10 sm:h-10 bg-${achievement.color}-100 rounded-lg flex items-center justify-center flex-shrink-0`}>
+                      <Icon className={`w-4 h-4 sm:w-5 sm:h-5 text-${achievement.color}-600`} />
                     </div>
-                    <div className="absolute top-4 right-4">
-                      <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-${levelColor}-100 text-${levelColor}-800`}>
-                        {course.level}
-                      </span>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-sm sm:text-base font-semibold text-gray-900">{achievement.title}</h3>
+                      <p className="text-xs sm:text-sm text-gray-600">
+                        {achievement.description}
+                      </p>
                     </div>
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <div className="flex items-center justify-between text-white">
-                        <div className="flex items-center space-x-2">
-                          <PlayIcon className="w-5 h-5" />
-                          <span>{course.lessons} lessons</span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <StarIcon className="w-4 h-4 text-yellow-400" />
-                          <span>{course.rating}</span>
-                        </div>
-                      </div>
-                    </div>
+                    {achievement.earned && (
+                      <CheckCircleIcon className="w-5 h-5 text-green-600 flex-shrink-0" />
+                    )}
                   </div>
-
-                  {/* Course Content */}
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                      {course.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 line-clamp-2">
-                      {course.description}
-                    </p>
-
-                    {/* Instructor */}
-                    <div className="flex items-center space-x-3 mb-4">
-                      <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-blue-500 rounded-full flex items-center justify-center">
-                        <span className="text-white font-semibold text-sm">
-                          {course.instructor.split(' ').map(n => n[0]).join('')}
-                        </span>
-                      </div>
-                      <div>
-                        <div className="font-medium text-gray-900 text-sm">
-                          {course.instructor}
-                        </div>
-                        <div className="text-gray-500 text-xs">
-                          {course.instructorTitle}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Course Stats */}
-                    <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                      <div className="flex items-center space-x-4">
-                        <div className="flex items-center space-x-1">
-                          <ClockIcon className="w-4 h-4" />
-                          <span>{course.duration}</span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <UsersIcon className="w-4 h-4" />
-                          <span>{course.students.toLocaleString()}</span>
-                        </div>
-                      </div>
-                      <div className="font-semibold text-green-600">
-                        {course.price}
-                      </div>
-                    </div>
-
-                    {/* Action Button */}
-                    <button className="w-full bg-green-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-green-700 transition-colors">
-                      {course.isEnrolled ? 'Continue Learning' : 'Enroll Now'}
-                    </button>
-                  </div>
-                </motion.div>
+                </div>
               )
             })}
-          </div>
-        </div>
-      </section>
+          </motion.div>
+        )}
 
+        {activeTab === 'activity' && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="space-y-3 sm:space-y-4"
+          >
+            {recentActivity.map((activity, index) => (
+              <div key={activity.id} className="bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-gray-200">
+                <div className="flex items-start space-x-3">
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <CalendarIcon className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-sm sm:text-base font-semibold text-gray-900">{activity.title}</h3>
+                    <p className="text-xs sm:text-sm text-gray-600">{activity.course}</p>
+                    <p className="text-xs text-gray-500">{activity.region} • {activity.time}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        )}
+      </div>
     </div>
   )
 }

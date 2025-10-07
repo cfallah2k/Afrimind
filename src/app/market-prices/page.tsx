@@ -104,7 +104,61 @@ const countries = [
     flag: '🇸🇱',
     rate: 0.05, // 1 LRD = 20 SLL (approximate)
     timezone: 'GMT'
-  }
+  },
+  { 
+    id: 'benin', 
+    name: 'Benin', 
+    currency: 'XOF', 
+    symbol: 'CFA', 
+    flag: '🇧🇯',
+    rate: 0.0008,
+    timezone: 'WAT'
+  },
+  { 
+    id: 'togo', 
+    name: 'Togo', 
+    currency: 'XOF', 
+    symbol: 'CFA', 
+    flag: '🇹🇬',
+    rate: 0.0008,
+    timezone: 'GMT'
+  },
+  { 
+    id: 'gambia', 
+    name: 'Gambia', 
+    currency: 'GMD', 
+    symbol: 'D', 
+    flag: '🇬🇲',
+    rate: 0.12,
+    timezone: 'GMT'
+  },
+  { 
+    id: 'guinea-bissau', 
+    name: 'Guinea-Bissau', 
+    currency: 'XOF', 
+    symbol: 'CFA', 
+    flag: '🇬🇼',
+    rate: 0.0008,
+    timezone: 'GMT'
+  },
+  { 
+    id: 'niger', 
+    name: 'Niger', 
+    currency: 'XOF', 
+    symbol: 'CFA', 
+    flag: '🇳🇪',
+    rate: 0.0008,
+    timezone: 'WAT'
+  },
+  { 
+    id: 'cape-verde', 
+    name: 'Cape Verde', 
+    currency: 'CVE', 
+    symbol: 'Esc', 
+    flag: '🇨🇻',
+    rate: 0.005,
+    timezone: 'CVT'
+  },
 ]
 
 // Common crops with their prices in different countries
@@ -122,8 +176,14 @@ const cropPrices = [
       'ivory-coast': { buy: 1062, sell: 1188, unit: 'per kg' },
       mali: { buy: 1062, sell: 1188, unit: 'per kg' },
       'burkina-faso': { buy: 1062, sell: 1188, unit: 'per kg' },
+      benin: { buy: 1062, sell: 1188, unit: 'per kg' },
+      togo: { buy: 1062, sell: 1188, unit: 'per kg' },
       guinea: { buy: 8500, sell: 9500, unit: 'per kg' },
-      'sierra-leone': { buy: 17, sell: 19, unit: 'per kg' }
+      'sierra-leone': { buy: 17, sell: 19, unit: 'per kg' },
+      'guinea-bissau': { buy: 1062, sell: 1188, unit: 'per kg' },
+      niger: { buy: 1062, sell: 1188, unit: 'per kg' },
+      'cape-verde': { buy: 95, sell: 110, unit: 'per kg' },
+      gambia: { buy: 55, sell: 65, unit: 'per kg' }
     }
   },
   {
@@ -139,8 +199,14 @@ const cropPrices = [
       'ivory-coast': { buy: 437, sell: 562, unit: 'per kg' },
       mali: { buy: 437, sell: 562, unit: 'per kg' },
       'burkina-faso': { buy: 437, sell: 562, unit: 'per kg' },
+      benin: { buy: 437, sell: 562, unit: 'per kg' },
+      togo: { buy: 437, sell: 562, unit: 'per kg' },
       guinea: { buy: 3500, sell: 4500, unit: 'per kg' },
-      'sierra-leone': { buy: 7, sell: 9, unit: 'per kg' }
+      'sierra-leone': { buy: 7, sell: 9, unit: 'per kg' },
+      'guinea-bissau': { buy: 437, sell: 562, unit: 'per kg' },
+      niger: { buy: 437, sell: 562, unit: 'per kg' },
+      'cape-verde': { buy: 40, sell: 52, unit: 'per kg' },
+      gambia: { buy: 22, sell: 28, unit: 'per kg' }
     }
   },
   {
@@ -156,8 +222,14 @@ const cropPrices = [
       'ivory-coast': { buy: 750, sell: 937, unit: 'per kg' },
       mali: { buy: 750, sell: 937, unit: 'per kg' },
       'burkina-faso': { buy: 750, sell: 937, unit: 'per kg' },
+      benin: { buy: 750, sell: 937, unit: 'per kg' },
+      togo: { buy: 750, sell: 937, unit: 'per kg' },
       guinea: { buy: 6000, sell: 7500, unit: 'per kg' },
-      'sierra-leone': { buy: 12, sell: 15, unit: 'per kg' }
+      'sierra-leone': { buy: 12, sell: 15, unit: 'per kg' },
+      'guinea-bissau': { buy: 750, sell: 937, unit: 'per kg' },
+      niger: { buy: 750, sell: 937, unit: 'per kg' },
+      'cape-verde': { buy: 70, sell: 88, unit: 'per kg' },
+      gambia: { buy: 35, sell: 44, unit: 'per kg' }
     }
   },
   {
@@ -173,8 +245,14 @@ const cropPrices = [
       'ivory-coast': { buy: 3125, sell: 4000, unit: 'per kg' },
       mali: { buy: 3125, sell: 4000, unit: 'per kg' },
       'burkina-faso': { buy: 3125, sell: 4000, unit: 'per kg' },
+      benin: { buy: 3125, sell: 4000, unit: 'per kg' },
+      togo: { buy: 3125, sell: 4000, unit: 'per kg' },
       guinea: { buy: 25000, sell: 32000, unit: 'per kg' },
-      'sierra-leone': { buy: 50, sell: 64, unit: 'per kg' }
+      'sierra-leone': { buy: 50, sell: 64, unit: 'per kg' },
+      'guinea-bissau': { buy: 3125, sell: 4000, unit: 'per kg' },
+      niger: { buy: 3125, sell: 4000, unit: 'per kg' },
+      'cape-verde': { buy: 295, sell: 380, unit: 'per kg' },
+      gambia: { buy: 155, sell: 200, unit: 'per kg' }
     }
   },
   {
@@ -190,8 +268,14 @@ const cropPrices = [
       'ivory-coast': { buy: 1500, sell: 1875, unit: 'per liter' },
       mali: { buy: 1500, sell: 1875, unit: 'per liter' },
       'burkina-faso': { buy: 1500, sell: 1875, unit: 'per liter' },
+      benin: { buy: 1500, sell: 1875, unit: 'per liter' },
+      togo: { buy: 1500, sell: 1875, unit: 'per liter' },
       guinea: { buy: 12000, sell: 15000, unit: 'per liter' },
-      'sierra-leone': { buy: 24, sell: 30, unit: 'per liter' }
+      'sierra-leone': { buy: 24, sell: 30, unit: 'per liter' },
+      'guinea-bissau': { buy: 1500, sell: 1875, unit: 'per liter' },
+      niger: { buy: 1500, sell: 1875, unit: 'per liter' },
+      'cape-verde': { buy: 140, sell: 175, unit: 'per liter' },
+      gambia: { buy: 70, sell: 88, unit: 'per liter' }
     }
   },
   {
@@ -207,8 +291,543 @@ const cropPrices = [
       'ivory-coast': { buy: 4750, sell: 5625, unit: 'per kg' },
       mali: { buy: 4750, sell: 5625, unit: 'per kg' },
       'burkina-faso': { buy: 4750, sell: 5625, unit: 'per kg' },
+      benin: { buy: 4750, sell: 5625, unit: 'per kg' },
+      togo: { buy: 4750, sell: 5625, unit: 'per kg' },
       guinea: { buy: 38000, sell: 45000, unit: 'per kg' },
-      'sierra-leone': { buy: 76, sell: 90, unit: 'per kg' }
+      'sierra-leone': { buy: 76, sell: 90, unit: 'per kg' },
+      'guinea-bissau': { buy: 4750, sell: 5625, unit: 'per kg' },
+      niger: { buy: 4750, sell: 5625, unit: 'per kg' },
+      'cape-verde': { buy: 460, sell: 550, unit: 'per kg' },
+      gambia: { buy: 240, sell: 300, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'yam',
+    name: 'Yam',
+    icon: '🍠',
+    category: 'Staple',
+    prices: {
+      liberia: { buy: 0.45, sell: 0.60, unit: 'per kg' },
+      nigeria: { buy: 225, sell: 300, unit: 'per kg' },
+      ghana: { buy: 3.0, sell: 4.0, unit: 'per kg' },
+      senegal: { buy: 562, sell: 750, unit: 'per kg' },
+      'ivory-coast': { buy: 562, sell: 750, unit: 'per kg' },
+      mali: { buy: 562, sell: 750, unit: 'per kg' },
+      'burkina-faso': { buy: 562, sell: 750, unit: 'per kg' },
+      benin: { buy: 562, sell: 750, unit: 'per kg' },
+      togo: { buy: 562, sell: 750, unit: 'per kg' },
+      guinea: { buy: 4500, sell: 6000, unit: 'per kg' },
+      'sierra-leone': { buy: 9, sell: 12, unit: 'per kg' },
+      'guinea-bissau': { buy: 562, sell: 750, unit: 'per kg' },
+      niger: { buy: 562, sell: 750, unit: 'per kg' },
+      'cape-verde': { buy: 55, sell: 70, unit: 'per kg' },
+      gambia: { buy: 28, sell: 35, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'plantain',
+    name: 'Plantain',
+    icon: '🍌',
+    category: 'Staple',
+    prices: {
+      liberia: { buy: 0.25, sell: 0.35, unit: 'per kg' },
+      nigeria: { buy: 125, sell: 175, unit: 'per kg' },
+      ghana: { buy: 1.7, sell: 2.3, unit: 'per kg' },
+      senegal: { buy: 312, sell: 437, unit: 'per kg' },
+      'ivory-coast': { buy: 312, sell: 437, unit: 'per kg' },
+      mali: { buy: 312, sell: 437, unit: 'per kg' },
+      'burkina-faso': { buy: 312, sell: 437, unit: 'per kg' },
+      benin: { buy: 312, sell: 437, unit: 'per kg' },
+      togo: { buy: 312, sell: 437, unit: 'per kg' },
+      guinea: { buy: 2500, sell: 3500, unit: 'per kg' },
+      'sierra-leone': { buy: 5, sell: 7, unit: 'per kg' },
+      'guinea-bissau': { buy: 312, sell: 437, unit: 'per kg' },
+      niger: { buy: 312, sell: 437, unit: 'per kg' },
+      'cape-verde': { buy: 30, sell: 40, unit: 'per kg' },
+      gambia: { buy: 15, sell: 20, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'groundnut',
+    name: 'Groundnut',
+    icon: '🥜',
+    category: 'Oil Crop',
+    prices: {
+      liberia: { buy: 0.80, sell: 1.10, unit: 'per kg' },
+      nigeria: { buy: 400, sell: 550, unit: 'per kg' },
+      ghana: { buy: 5.3, sell: 7.3, unit: 'per kg' },
+      senegal: { buy: 1000, sell: 1375, unit: 'per kg' },
+      'ivory-coast': { buy: 1000, sell: 1375, unit: 'per kg' },
+      mali: { buy: 1000, sell: 1375, unit: 'per kg' },
+      'burkina-faso': { buy: 1000, sell: 1375, unit: 'per kg' },
+      benin: { buy: 1000, sell: 1375, unit: 'per kg' },
+      togo: { buy: 1000, sell: 1375, unit: 'per kg' },
+      guinea: { buy: 8000, sell: 11000, unit: 'per kg' },
+      'sierra-leone': { buy: 16, sell: 22, unit: 'per kg' },
+      'guinea-bissau': { buy: 1000, sell: 1375, unit: 'per kg' },
+      niger: { buy: 1000, sell: 1375, unit: 'per kg' },
+      'cape-verde': { buy: 95, sell: 130, unit: 'per kg' },
+      gambia: { buy: 50, sell: 65, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'sorghum',
+    name: 'Sorghum',
+    icon: '🌾',
+    category: 'Cereal',
+    prices: {
+      liberia: { buy: 0.50, sell: 0.70, unit: 'per kg' },
+      nigeria: { buy: 250, sell: 350, unit: 'per kg' },
+      ghana: { buy: 3.3, sell: 4.7, unit: 'per kg' },
+      senegal: { buy: 625, sell: 875, unit: 'per kg' },
+      'ivory-coast': { buy: 625, sell: 875, unit: 'per kg' },
+      mali: { buy: 625, sell: 875, unit: 'per kg' },
+      'burkina-faso': { buy: 625, sell: 875, unit: 'per kg' },
+      benin: { buy: 625, sell: 875, unit: 'per kg' },
+      togo: { buy: 625, sell: 875, unit: 'per kg' },
+      guinea: { buy: 5000, sell: 7000, unit: 'per kg' },
+      'sierra-leone': { buy: 10, sell: 14, unit: 'per kg' },
+      'guinea-bissau': { buy: 625, sell: 875, unit: 'per kg' },
+      niger: { buy: 625, sell: 875, unit: 'per kg' },
+      'cape-verde': { buy: 60, sell: 80, unit: 'per kg' },
+      gambia: { buy: 30, sell: 40, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'millet',
+    name: 'Millet',
+    icon: '🌾',
+    category: 'Cereal',
+    prices: {
+      liberia: { buy: 0.40, sell: 0.55, unit: 'per kg' },
+      nigeria: { buy: 200, sell: 275, unit: 'per kg' },
+      ghana: { buy: 2.7, sell: 3.7, unit: 'per kg' },
+      senegal: { buy: 500, sell: 687, unit: 'per kg' },
+      'ivory-coast': { buy: 500, sell: 687, unit: 'per kg' },
+      mali: { buy: 500, sell: 687, unit: 'per kg' },
+      'burkina-faso': { buy: 500, sell: 687, unit: 'per kg' },
+      benin: { buy: 500, sell: 687, unit: 'per kg' },
+      togo: { buy: 500, sell: 687, unit: 'per kg' },
+      guinea: { buy: 4000, sell: 5500, unit: 'per kg' },
+      'sierra-leone': { buy: 8, sell: 11, unit: 'per kg' },
+      'guinea-bissau': { buy: 500, sell: 687, unit: 'per kg' },
+      niger: { buy: 500, sell: 687, unit: 'per kg' },
+      'cape-verde': { buy: 48, sell: 65, unit: 'per kg' },
+      gambia: { buy: 24, sell: 32, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'cowpea',
+    name: 'Cowpea',
+    icon: '🫘',
+    category: 'Legume',
+    prices: {
+      liberia: { buy: 0.70, sell: 0.90, unit: 'per kg' },
+      nigeria: { buy: 350, sell: 450, unit: 'per kg' },
+      ghana: { buy: 4.7, sell: 6.0, unit: 'per kg' },
+      senegal: { buy: 875, sell: 1125, unit: 'per kg' },
+      'ivory-coast': { buy: 875, sell: 1125, unit: 'per kg' },
+      mali: { buy: 875, sell: 1125, unit: 'per kg' },
+      'burkina-faso': { buy: 875, sell: 1125, unit: 'per kg' },
+      benin: { buy: 875, sell: 1125, unit: 'per kg' },
+      togo: { buy: 875, sell: 1125, unit: 'per kg' },
+      guinea: { buy: 7000, sell: 9000, unit: 'per kg' },
+      'sierra-leone': { buy: 14, sell: 18, unit: 'per kg' },
+      'guinea-bissau': { buy: 875, sell: 1125, unit: 'per kg' },
+      niger: { buy: 875, sell: 1125, unit: 'per kg' },
+      'cape-verde': { buy: 85, sell: 110, unit: 'per kg' },
+      gambia: { buy: 42, sell: 55, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'tomato',
+    name: 'Tomato',
+    icon: '🍅',
+    category: 'Vegetable',
+    prices: {
+      liberia: { buy: 0.60, sell: 0.85, unit: 'per kg' },
+      nigeria: { buy: 300, sell: 425, unit: 'per kg' },
+      ghana: { buy: 4.0, sell: 5.7, unit: 'per kg' },
+      senegal: { buy: 750, sell: 1062, unit: 'per kg' },
+      'ivory-coast': { buy: 750, sell: 1062, unit: 'per kg' },
+      mali: { buy: 750, sell: 1062, unit: 'per kg' },
+      'burkina-faso': { buy: 750, sell: 1062, unit: 'per kg' },
+      benin: { buy: 750, sell: 1062, unit: 'per kg' },
+      togo: { buy: 750, sell: 1062, unit: 'per kg' },
+      guinea: { buy: 6000, sell: 8500, unit: 'per kg' },
+      'sierra-leone': { buy: 12, sell: 17, unit: 'per kg' },
+      'guinea-bissau': { buy: 750, sell: 1062, unit: 'per kg' },
+      niger: { buy: 750, sell: 1062, unit: 'per kg' },
+      'cape-verde': { buy: 72, sell: 100, unit: 'per kg' },
+      gambia: { buy: 36, sell: 50, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'onion',
+    name: 'Onion',
+    icon: '🧅',
+    category: 'Vegetable',
+    prices: {
+      liberia: { buy: 0.45, sell: 0.65, unit: 'per kg' },
+      nigeria: { buy: 225, sell: 325, unit: 'per kg' },
+      ghana: { buy: 3.0, sell: 4.3, unit: 'per kg' },
+      senegal: { buy: 562, sell: 812, unit: 'per kg' },
+      'ivory-coast': { buy: 562, sell: 812, unit: 'per kg' },
+      mali: { buy: 562, sell: 812, unit: 'per kg' },
+      'burkina-faso': { buy: 562, sell: 812, unit: 'per kg' },
+      benin: { buy: 562, sell: 812, unit: 'per kg' },
+      togo: { buy: 562, sell: 812, unit: 'per kg' },
+      guinea: { buy: 4500, sell: 6500, unit: 'per kg' },
+      'sierra-leone': { buy: 9, sell: 13, unit: 'per kg' },
+      'guinea-bissau': { buy: 562, sell: 812, unit: 'per kg' },
+      niger: { buy: 562, sell: 812, unit: 'per kg' },
+      'cape-verde': { buy: 54, sell: 75, unit: 'per kg' },
+      gambia: { buy: 27, sell: 38, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'pepper',
+    name: 'Pepper',
+    icon: '🌶️',
+    category: 'Spice',
+    prices: {
+      liberia: { buy: 1.20, sell: 1.60, unit: 'per kg' },
+      nigeria: { buy: 600, sell: 800, unit: 'per kg' },
+      ghana: { buy: 8.0, sell: 10.7, unit: 'per kg' },
+      senegal: { buy: 1500, sell: 2000, unit: 'per kg' },
+      'ivory-coast': { buy: 1500, sell: 2000, unit: 'per kg' },
+      mali: { buy: 1500, sell: 2000, unit: 'per kg' },
+      'burkina-faso': { buy: 1500, sell: 2000, unit: 'per kg' },
+      benin: { buy: 1500, sell: 2000, unit: 'per kg' },
+      togo: { buy: 1500, sell: 2000, unit: 'per kg' },
+      guinea: { buy: 12000, sell: 16000, unit: 'per kg' },
+      'sierra-leone': { buy: 24, sell: 32, unit: 'per kg' },
+      'guinea-bissau': { buy: 1500, sell: 2000, unit: 'per kg' },
+      niger: { buy: 1500, sell: 2000, unit: 'per kg' },
+      'cape-verde': { buy: 140, sell: 190, unit: 'per kg' },
+      gambia: { buy: 70, sell: 90, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'okra',
+    name: 'Okra',
+    icon: '🥬',
+    category: 'Vegetable',
+    prices: {
+      liberia: { buy: 0.55, sell: 0.75, unit: 'per kg' },
+      nigeria: { buy: 275, sell: 375, unit: 'per kg' },
+      ghana: { buy: 3.7, sell: 5.0, unit: 'per kg' },
+      senegal: { buy: 687, sell: 937, unit: 'per kg' },
+      'ivory-coast': { buy: 687, sell: 937, unit: 'per kg' },
+      mali: { buy: 687, sell: 937, unit: 'per kg' },
+      'burkina-faso': { buy: 687, sell: 937, unit: 'per kg' },
+      benin: { buy: 687, sell: 937, unit: 'per kg' },
+      togo: { buy: 687, sell: 937, unit: 'per kg' },
+      guinea: { buy: 5500, sell: 7500, unit: 'per kg' },
+      'sierra-leone': { buy: 11, sell: 15, unit: 'per kg' },
+      'guinea-bissau': { buy: 687, sell: 937, unit: 'per kg' },
+      niger: { buy: 687, sell: 937, unit: 'per kg' },
+      'cape-verde': { buy: 65, sell: 85, unit: 'per kg' },
+      gambia: { buy: 32, sell: 42, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'eggplant',
+    name: 'Eggplant',
+    icon: '🍆',
+    category: 'Vegetable',
+    prices: {
+      liberia: { buy: 0.65, sell: 0.90, unit: 'per kg' },
+      nigeria: { buy: 325, sell: 450, unit: 'per kg' },
+      ghana: { buy: 4.3, sell: 6.0, unit: 'per kg' },
+      senegal: { buy: 812, sell: 1125, unit: 'per kg' },
+      'ivory-coast': { buy: 812, sell: 1125, unit: 'per kg' },
+      mali: { buy: 812, sell: 1125, unit: 'per kg' },
+      'burkina-faso': { buy: 812, sell: 1125, unit: 'per kg' },
+      benin: { buy: 812, sell: 1125, unit: 'per kg' },
+      togo: { buy: 812, sell: 1125, unit: 'per kg' },
+      guinea: { buy: 6500, sell: 9000, unit: 'per kg' },
+      'sierra-leone': { buy: 13, sell: 18, unit: 'per kg' },
+      'guinea-bissau': { buy: 812, sell: 1125, unit: 'per kg' },
+      niger: { buy: 812, sell: 1125, unit: 'per kg' },
+      'cape-verde': { buy: 77, sell: 105, unit: 'per kg' },
+      gambia: { buy: 38, sell: 52, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'sweet-potato',
+    name: 'Sweet Potato',
+    icon: '🍠',
+    category: 'Staple',
+    prices: {
+      liberia: { buy: 0.30, sell: 0.45, unit: 'per kg' },
+      nigeria: { buy: 150, sell: 225, unit: 'per kg' },
+      ghana: { buy: 2.0, sell: 3.0, unit: 'per kg' },
+      senegal: { buy: 375, sell: 562, unit: 'per kg' },
+      'ivory-coast': { buy: 375, sell: 562, unit: 'per kg' },
+      mali: { buy: 375, sell: 562, unit: 'per kg' },
+      'burkina-faso': { buy: 375, sell: 562, unit: 'per kg' },
+      benin: { buy: 375, sell: 562, unit: 'per kg' },
+      togo: { buy: 375, sell: 562, unit: 'per kg' },
+      guinea: { buy: 3000, sell: 4500, unit: 'per kg' },
+      'sierra-leone': { buy: 6, sell: 9, unit: 'per kg' },
+      'guinea-bissau': { buy: 375, sell: 562, unit: 'per kg' },
+      niger: { buy: 375, sell: 562, unit: 'per kg' },
+      'cape-verde': { buy: 36, sell: 52, unit: 'per kg' },
+      gambia: { buy: 18, sell: 26, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'ginger',
+    name: 'Ginger',
+    icon: '🫚',
+    category: 'Spice',
+    prices: {
+      liberia: { buy: 2.00, sell: 2.80, unit: 'per kg' },
+      nigeria: { buy: 1000, sell: 1400, unit: 'per kg' },
+      ghana: { buy: 13.3, sell: 18.7, unit: 'per kg' },
+      senegal: { buy: 2500, sell: 3500, unit: 'per kg' },
+      'ivory-coast': { buy: 2500, sell: 3500, unit: 'per kg' },
+      mali: { buy: 2500, sell: 3500, unit: 'per kg' },
+      'burkina-faso': { buy: 2500, sell: 3500, unit: 'per kg' },
+      benin: { buy: 2500, sell: 3500, unit: 'per kg' },
+      togo: { buy: 2500, sell: 3500, unit: 'per kg' },
+      guinea: { buy: 20000, sell: 28000, unit: 'per kg' },
+      'sierra-leone': { buy: 40, sell: 56, unit: 'per kg' },
+      'guinea-bissau': { buy: 2500, sell: 3500, unit: 'per kg' },
+      niger: { buy: 2500, sell: 3500, unit: 'per kg' },
+      'cape-verde': { buy: 240, sell: 330, unit: 'per kg' },
+      gambia: { buy: 120, sell: 165, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'turmeric',
+    name: 'Turmeric',
+    icon: '🫚',
+    category: 'Spice',
+    prices: {
+      liberia: { buy: 1.80, sell: 2.40, unit: 'per kg' },
+      nigeria: { buy: 900, sell: 1200, unit: 'per kg' },
+      ghana: { buy: 12.0, sell: 16.0, unit: 'per kg' },
+      senegal: { buy: 2250, sell: 3000, unit: 'per kg' },
+      'ivory-coast': { buy: 2250, sell: 3000, unit: 'per kg' },
+      mali: { buy: 2250, sell: 3000, unit: 'per kg' },
+      'burkina-faso': { buy: 2250, sell: 3000, unit: 'per kg' },
+      benin: { buy: 2250, sell: 3000, unit: 'per kg' },
+      togo: { buy: 2250, sell: 3000, unit: 'per kg' },
+      guinea: { buy: 18000, sell: 24000, unit: 'per kg' },
+      'sierra-leone': { buy: 36, sell: 48, unit: 'per kg' },
+      'guinea-bissau': { buy: 2250, sell: 3000, unit: 'per kg' },
+      niger: { buy: 2250, sell: 3000, unit: 'per kg' },
+      'cape-verde': { buy: 215, sell: 285, unit: 'per kg' },
+      gambia: { buy: 108, sell: 142, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'cabbage',
+    name: 'Cabbage',
+    icon: '🥬',
+    category: 'Vegetable',
+    prices: {
+      liberia: { buy: 0.40, sell: 0.60, unit: 'per kg' },
+      nigeria: { buy: 200, sell: 300, unit: 'per kg' },
+      ghana: { buy: 2.7, sell: 4.0, unit: 'per kg' },
+      senegal: { buy: 500, sell: 750, unit: 'per kg' },
+      'ivory-coast': { buy: 500, sell: 750, unit: 'per kg' },
+      mali: { buy: 500, sell: 750, unit: 'per kg' },
+      'burkina-faso': { buy: 500, sell: 750, unit: 'per kg' },
+      benin: { buy: 500, sell: 750, unit: 'per kg' },
+      togo: { buy: 500, sell: 750, unit: 'per kg' },
+      guinea: { buy: 4000, sell: 6000, unit: 'per kg' },
+      'sierra-leone': { buy: 8, sell: 12, unit: 'per kg' },
+      'guinea-bissau': { buy: 500, sell: 750, unit: 'per kg' },
+      niger: { buy: 500, sell: 750, unit: 'per kg' },
+      'cape-verde': { buy: 48, sell: 70, unit: 'per kg' },
+      gambia: { buy: 24, sell: 35, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'carrot',
+    name: 'Carrot',
+    icon: '🥕',
+    category: 'Vegetable',
+    prices: {
+      liberia: { buy: 0.70, sell: 1.00, unit: 'per kg' },
+      nigeria: { buy: 350, sell: 500, unit: 'per kg' },
+      ghana: { buy: 4.7, sell: 6.7, unit: 'per kg' },
+      senegal: { buy: 875, sell: 1250, unit: 'per kg' },
+      'ivory-coast': { buy: 875, sell: 1250, unit: 'per kg' },
+      mali: { buy: 875, sell: 1250, unit: 'per kg' },
+      'burkina-faso': { buy: 875, sell: 1250, unit: 'per kg' },
+      benin: { buy: 875, sell: 1250, unit: 'per kg' },
+      togo: { buy: 875, sell: 1250, unit: 'per kg' },
+      guinea: { buy: 7000, sell: 10000, unit: 'per kg' },
+      'sierra-leone': { buy: 14, sell: 20, unit: 'per kg' },
+      'guinea-bissau': { buy: 875, sell: 1250, unit: 'per kg' },
+      niger: { buy: 875, sell: 1250, unit: 'per kg' },
+      'cape-verde': { buy: 85, sell: 120, unit: 'per kg' },
+      gambia: { buy: 42, sell: 60, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'lettuce',
+    name: 'Lettuce',
+    icon: '🥬',
+    category: 'Vegetable',
+    prices: {
+      liberia: { buy: 0.50, sell: 0.75, unit: 'per kg' },
+      nigeria: { buy: 250, sell: 375, unit: 'per kg' },
+      ghana: { buy: 3.3, sell: 5.0, unit: 'per kg' },
+      senegal: { buy: 625, sell: 937, unit: 'per kg' },
+      'ivory-coast': { buy: 625, sell: 937, unit: 'per kg' },
+      mali: { buy: 625, sell: 937, unit: 'per kg' },
+      'burkina-faso': { buy: 625, sell: 937, unit: 'per kg' },
+      benin: { buy: 625, sell: 937, unit: 'per kg' },
+      togo: { buy: 625, sell: 937, unit: 'per kg' },
+      guinea: { buy: 5000, sell: 7500, unit: 'per kg' },
+      'sierra-leone': { buy: 10, sell: 15, unit: 'per kg' },
+      'guinea-bissau': { buy: 625, sell: 937, unit: 'per kg' },
+      niger: { buy: 625, sell: 937, unit: 'per kg' },
+      'cape-verde': { buy: 60, sell: 90, unit: 'per kg' },
+      gambia: { buy: 30, sell: 45, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'spinach',
+    name: 'Spinach',
+    icon: '🥬',
+    category: 'Vegetable',
+    prices: {
+      liberia: { buy: 0.35, sell: 0.50, unit: 'per kg' },
+      nigeria: { buy: 175, sell: 250, unit: 'per kg' },
+      ghana: { buy: 2.3, sell: 3.3, unit: 'per kg' },
+      senegal: { buy: 437, sell: 625, unit: 'per kg' },
+      'ivory-coast': { buy: 437, sell: 625, unit: 'per kg' },
+      mali: { buy: 437, sell: 625, unit: 'per kg' },
+      'burkina-faso': { buy: 437, sell: 625, unit: 'per kg' },
+      benin: { buy: 437, sell: 625, unit: 'per kg' },
+      togo: { buy: 437, sell: 625, unit: 'per kg' },
+      guinea: { buy: 3500, sell: 5000, unit: 'per kg' },
+      'sierra-leone': { buy: 7, sell: 10, unit: 'per kg' },
+      'guinea-bissau': { buy: 437, sell: 625, unit: 'per kg' },
+      niger: { buy: 437, sell: 625, unit: 'per kg' },
+      'cape-verde': { buy: 42, sell: 60, unit: 'per kg' },
+      gambia: { buy: 21, sell: 30, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'banana',
+    name: 'Banana',
+    icon: '🍌',
+    category: 'Fruit',
+    prices: {
+      liberia: { buy: 0.25, sell: 0.40, unit: 'per kg' },
+      nigeria: { buy: 125, sell: 200, unit: 'per kg' },
+      ghana: { buy: 1.7, sell: 2.7, unit: 'per kg' },
+      senegal: { buy: 312, sell: 500, unit: 'per kg' },
+      'ivory-coast': { buy: 312, sell: 500, unit: 'per kg' },
+      mali: { buy: 312, sell: 500, unit: 'per kg' },
+      'burkina-faso': { buy: 312, sell: 500, unit: 'per kg' },
+      benin: { buy: 312, sell: 500, unit: 'per kg' },
+      togo: { buy: 312, sell: 500, unit: 'per kg' },
+      guinea: { buy: 2500, sell: 4000, unit: 'per kg' },
+      'sierra-leone': { buy: 5, sell: 8, unit: 'per kg' },
+      'guinea-bissau': { buy: 312, sell: 500, unit: 'per kg' },
+      niger: { buy: 312, sell: 500, unit: 'per kg' },
+      'cape-verde': { buy: 30, sell: 48, unit: 'per kg' },
+      gambia: { buy: 15, sell: 24, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'mango',
+    name: 'Mango',
+    icon: '🥭',
+    category: 'Fruit',
+    prices: {
+      liberia: { buy: 0.60, sell: 0.90, unit: 'per kg' },
+      nigeria: { buy: 300, sell: 450, unit: 'per kg' },
+      ghana: { buy: 4.0, sell: 6.0, unit: 'per kg' },
+      senegal: { buy: 750, sell: 1125, unit: 'per kg' },
+      'ivory-coast': { buy: 750, sell: 1125, unit: 'per kg' },
+      mali: { buy: 750, sell: 1125, unit: 'per kg' },
+      'burkina-faso': { buy: 750, sell: 1125, unit: 'per kg' },
+      benin: { buy: 750, sell: 1125, unit: 'per kg' },
+      togo: { buy: 750, sell: 1125, unit: 'per kg' },
+      guinea: { buy: 6000, sell: 9000, unit: 'per kg' },
+      'sierra-leone': { buy: 12, sell: 18, unit: 'per kg' },
+      'guinea-bissau': { buy: 750, sell: 1125, unit: 'per kg' },
+      niger: { buy: 750, sell: 1125, unit: 'per kg' },
+      'cape-verde': { buy: 72, sell: 108, unit: 'per kg' },
+      gambia: { buy: 36, sell: 54, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'orange',
+    name: 'Orange',
+    icon: '🍊',
+    category: 'Fruit',
+    prices: {
+      liberia: { buy: 0.45, sell: 0.70, unit: 'per kg' },
+      nigeria: { buy: 225, sell: 350, unit: 'per kg' },
+      ghana: { buy: 3.0, sell: 4.7, unit: 'per kg' },
+      senegal: { buy: 562, sell: 875, unit: 'per kg' },
+      'ivory-coast': { buy: 562, sell: 875, unit: 'per kg' },
+      mali: { buy: 562, sell: 875, unit: 'per kg' },
+      'burkina-faso': { buy: 562, sell: 875, unit: 'per kg' },
+      benin: { buy: 562, sell: 875, unit: 'per kg' },
+      togo: { buy: 562, sell: 875, unit: 'per kg' },
+      guinea: { buy: 4500, sell: 7000, unit: 'per kg' },
+      'sierra-leone': { buy: 9, sell: 14, unit: 'per kg' },
+      'guinea-bissau': { buy: 562, sell: 875, unit: 'per kg' },
+      niger: { buy: 562, sell: 875, unit: 'per kg' },
+      'cape-verde': { buy: 54, sell: 84, unit: 'per kg' },
+      gambia: { buy: 27, sell: 42, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'pineapple',
+    name: 'Pineapple',
+    icon: '🍍',
+    category: 'Fruit',
+    prices: {
+      liberia: { buy: 0.80, sell: 1.20, unit: 'per kg' },
+      nigeria: { buy: 400, sell: 600, unit: 'per kg' },
+      ghana: { buy: 5.3, sell: 8.0, unit: 'per kg' },
+      senegal: { buy: 1000, sell: 1500, unit: 'per kg' },
+      'ivory-coast': { buy: 1000, sell: 1500, unit: 'per kg' },
+      mali: { buy: 1000, sell: 1500, unit: 'per kg' },
+      'burkina-faso': { buy: 1000, sell: 1500, unit: 'per kg' },
+      benin: { buy: 1000, sell: 1500, unit: 'per kg' },
+      togo: { buy: 1000, sell: 1500, unit: 'per kg' },
+      guinea: { buy: 8000, sell: 12000, unit: 'per kg' },
+      'sierra-leone': { buy: 16, sell: 24, unit: 'per kg' },
+      'guinea-bissau': { buy: 1000, sell: 1500, unit: 'per kg' },
+      niger: { buy: 1000, sell: 1500, unit: 'per kg' },
+      'cape-verde': { buy: 95, sell: 140, unit: 'per kg' },
+      gambia: { buy: 48, sell: 72, unit: 'per kg' }
+    }
+  },
+  {
+    id: 'papaya',
+    name: 'Papaya',
+    icon: '🥭',
+    category: 'Fruit',
+    prices: {
+      liberia: { buy: 0.35, sell: 0.55, unit: 'per kg' },
+      nigeria: { buy: 175, sell: 275, unit: 'per kg' },
+      ghana: { buy: 2.3, sell: 3.7, unit: 'per kg' },
+      senegal: { buy: 437, sell: 687, unit: 'per kg' },
+      'ivory-coast': { buy: 437, sell: 687, unit: 'per kg' },
+      mali: { buy: 437, sell: 687, unit: 'per kg' },
+      'burkina-faso': { buy: 437, sell: 687, unit: 'per kg' },
+      benin: { buy: 437, sell: 687, unit: 'per kg' },
+      togo: { buy: 437, sell: 687, unit: 'per kg' },
+      guinea: { buy: 3500, sell: 5500, unit: 'per kg' },
+      'sierra-leone': { buy: 7, sell: 11, unit: 'per kg' },
+      'guinea-bissau': { buy: 437, sell: 687, unit: 'per kg' },
+      niger: { buy: 437, sell: 687, unit: 'per kg' },
+      'cape-verde': { buy: 42, sell: 65, unit: 'per kg' },
+      gambia: { buy: 21, sell: 32, unit: 'per kg' }
     }
   }
 ]

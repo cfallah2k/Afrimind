@@ -155,7 +155,7 @@ export function NavigationDropdown() {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="absolute top-full left-0 mt-2 w-96 bg-white rounded-xl shadow-lg border border-gray-200 z-50 max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
+                className="absolute top-full left-0 mt-2 w-96 bg-white rounded-xl shadow-lg border border-gray-200 z-[60] max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
               >
                 <div className="p-4">
                   {allNavigation.map((section, sectionIndex) => (
@@ -265,7 +265,7 @@ export function NavigationDropdown() {
 
         <AnimatePresence>
           {isMobileMenuOpen && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[60]">
               <div className="absolute inset-0 bg-black/30" onClick={() => setIsMobileMenuOpen(false)} />
               <motion.div
                 id="mobile-nav-panel"
@@ -273,9 +273,10 @@ export function NavigationDropdown() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -10, opacity: 0 }}
                 transition={{ duration: 0.15 }}
-                className="absolute top-0 left-0 right-0 mt-16 bg-white border-t border-gray-200 shadow-lg max-h-[calc(100vh-4rem)] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
+                className="absolute top-0 left-0 right-0 mt-16 bg-white border-t border-gray-200 shadow-lg h-[calc(100vh-4rem)] flex flex-col"
               >
-                <div className="p-5 space-y-6">
+                {/* Scrollable content */}
+                <div className="p-5 space-y-6 flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
                   {/* Mobile Navigation Items */}
                   {allNavigation.map((section) => (
                     <div key={section.title}>
@@ -308,52 +309,51 @@ export function NavigationDropdown() {
                       </div>
                     </div>
                   ))}
-
-                  {/* Mobile User Section */}
-                  <div className="pt-5 border-t border-gray-200">
-                    <LanguageSelector />
-                    {session?.user ? (
-                      <div className="mt-4 space-y-3">
-                        <div className="flex items-center space-x-3 p-3.5 bg-gray-50 rounded-xl">
-                          <div className="w-9 h-9 bg-green-100 rounded-full flex items-center justify-center">
-                            <span className="text-sm font-medium text-green-700 leading-none">
-                              {session.user.name?.charAt(0).toUpperCase()}
-                            </span>
-                          </div>
-                          <div>
-                            <div className="font-medium text-gray-900 leading-tight">{session.user.name}</div>
-                            <div className="text-xs text-gray-500">{session.user.country}</div>
-                          </div>
+                </div>
+                {/* Sticky footer actions */}
+                <div className="px-5 pb-5 pt-4 border-t border-gray-200 bg-white">
+                  <LanguageSelector />
+                  {session?.user ? (
+                    <div className="mt-4 space-y-3">
+                      <div className="flex items-center space-x-3 p-3.5 bg-gray-50 rounded-xl">
+                        <div className="w-9 h-9 bg-green-100 rounded-full flex items-center justify-center">
+                          <span className="text-sm font-medium text-green-700 leading-none">
+                            {session.user.name?.charAt(0).toUpperCase()}
+                          </span>
                         </div>
-                        <button
-                          onClick={() => {
-                            signOut()
-                            setIsMobileMenuOpen(false)
-                          }}
-                          className="w-full text-left px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-xl transition-colors text-[15px]"
-                        >
-                          Sign Out
-                        </button>
+                        <div>
+                          <div className="font-medium text-gray-900 leading-tight">{session.user.name}</div>
+                          <div className="text-xs text-gray-500">{session.user.country}</div>
+                        </div>
                       </div>
-                    ) : (
-                      <div className="mt-4 space-y-2">
-                        <Link
-                          href="/auth/signin"
-                          className="block w-full text-center px-4 py-3 text-gray-800 hover:bg-gray-100 rounded-xl transition-colors text-[15px]"
-                          onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                          Sign In
-                        </Link>
-                        <Link
-                          href="/auth/signup"
-                          className="block w-full text-center px-4 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-colors text-[15px]"
-                          onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                          Sign Up
-                        </Link>
-                      </div>
-                    )}
-                  </div>
+                      <button
+                        onClick={() => {
+                          signOut()
+                          setIsMobileMenuOpen(false)
+                        }}
+                        className="w-full text-left px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-xl transition-colors text-[15px]"
+                      >
+                        Sign Out
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="mt-4 space-y-2">
+                      <Link
+                        href="/auth/signin"
+                        className="block w-full text-center px-4 py-3 text-gray-800 hover:bg-gray-100 rounded-xl transition-colors text-[15px]"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        Sign In
+                      </Link>
+                      <Link
+                        href="/auth/signup"
+                        className="block w-full text-center px-4 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-colors text-[15px]"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        Sign Up
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             </motion.div>

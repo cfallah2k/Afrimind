@@ -17,6 +17,315 @@ interface TradeRoutesProps {
   commodity: string
 }
 
+// West African route calculation functions
+const getRouteDistance = (origin: string, destination: string) => {
+  const distances: { [key: string]: { [key: string]: string } } = {
+    'Monrovia, Liberia': {
+      'Lagos, Nigeria': '1,200 km',
+      'Accra, Ghana': '800 km',
+      'Dakar, Senegal': '1,500 km',
+      'Abidjan, Côte d\'Ivoire': '600 km',
+      'Bamako, Mali': '1,000 km',
+      'Ouagadougou, Burkina Faso': '900 km',
+      'Niamey, Niger': '1,100 km',
+      'Conakry, Guinea': '300 km',
+      'Freetown, Sierra Leone': '200 km',
+      'Cotonou, Benin': '1,100 km',
+      'Lomé, Togo': '1,000 km',
+      'Banjul, Gambia': '1,400 km',
+      'Bissau, Guinea-Bissau': '1,200 km',
+      'Praia, Cape Verde': '1,800 km'
+    }
+  }
+  return distances[origin]?.[destination] || '800 km'
+}
+
+const getRouteTime = (origin: string, destination: string) => {
+  const times: { [key: string]: { [key: string]: string } } = {
+    'Monrovia, Liberia': {
+      'Lagos, Nigeria': '18-24 hours',
+      'Accra, Ghana': '12-16 hours',
+      'Dakar, Senegal': '24-30 hours',
+      'Abidjan, Côte d\'Ivoire': '8-12 hours',
+      'Bamako, Mali': '16-20 hours',
+      'Ouagadougou, Burkina Faso': '14-18 hours',
+      'Niamey, Niger': '18-22 hours',
+      'Conakry, Guinea': '4-6 hours',
+      'Freetown, Sierra Leone': '3-5 hours',
+      'Cotonou, Benin': '16-20 hours',
+      'Lomé, Togo': '14-18 hours',
+      'Banjul, Gambia': '20-26 hours',
+      'Bissau, Guinea-Bissau': '18-24 hours',
+      'Praia, Cape Verde': '28-36 hours'
+    }
+  }
+  return times[origin]?.[destination] || '12-16 hours'
+}
+
+const getRouteCost = (origin: string, destination: string) => {
+  const costs: { [key: string]: { [key: string]: string } } = {
+    'Monrovia, Liberia': {
+      'Lagos, Nigeria': '$300-500',
+      'Accra, Ghana': '$200-350',
+      'Dakar, Senegal': '$400-600',
+      'Abidjan, Côte d\'Ivoire': '$150-250',
+      'Bamako, Mali': '$250-400',
+      'Ouagadougou, Burkina Faso': '$200-350',
+      'Niamey, Niger': '$300-450',
+      'Conakry, Guinea': '$80-120',
+      'Freetown, Sierra Leone': '$60-100',
+      'Cotonou, Benin': '$250-400',
+      'Lomé, Togo': '$200-350',
+      'Banjul, Gambia': '$350-550',
+      'Bissau, Guinea-Bissau': '$300-500',
+      'Praia, Cape Verde': '$500-800'
+    }
+  }
+  return costs[origin]?.[destination] || '$200-350'
+}
+
+const getBorderCrossings = (origin: string, destination: string) => {
+  const borders: { [key: string]: { [key: string]: number } } = {
+    'Monrovia, Liberia': {
+      'Lagos, Nigeria': 2,
+      'Accra, Ghana': 1,
+      'Dakar, Senegal': 3,
+      'Abidjan, Côte d\'Ivoire': 1,
+      'Bamako, Mali': 2,
+      'Ouagadougou, Burkina Faso': 2,
+      'Niamey, Niger': 2,
+      'Conakry, Guinea': 1,
+      'Freetown, Sierra Leone': 1,
+      'Cotonou, Benin': 2,
+      'Lomé, Togo': 1,
+      'Banjul, Gambia': 3,
+      'Bissau, Guinea-Bissau': 2,
+      'Praia, Cape Verde': 4
+    }
+  }
+  return borders[origin]?.[destination] || 1
+}
+
+const getCoastalDistance = (origin: string, destination: string) => {
+  const coastalDistances: { [key: string]: { [key: string]: string } } = {
+    'Monrovia, Liberia': {
+      'Lagos, Nigeria': '1,400 km',
+      'Accra, Ghana': '900 km',
+      'Dakar, Senegal': '1,600 km',
+      'Abidjan, Côte d\'Ivoire': '700 km',
+      'Bamako, Mali': '1,200 km',
+      'Ouagadougou, Burkina Faso': '1,100 km',
+      'Niamey, Niger': '1,300 km',
+      'Conakry, Guinea': '400 km',
+      'Freetown, Sierra Leone': '300 km',
+      'Cotonou, Benin': '1,300 km',
+      'Lomé, Togo': '1,200 km',
+      'Banjul, Gambia': '1,500 km',
+      'Bissau, Guinea-Bissau': '1,300 km',
+      'Praia, Cape Verde': '1,900 km'
+    }
+  }
+  return coastalDistances[origin]?.[destination] || '900 km'
+}
+
+const getCoastalTime = (origin: string, destination: string) => {
+  const coastalTimes: { [key: string]: { [key: string]: string } } = {
+    'Monrovia, Liberia': {
+      'Lagos, Nigeria': '20-28 hours',
+      'Accra, Ghana': '14-20 hours',
+      'Dakar, Senegal': '26-34 hours',
+      'Abidjan, Côte d\'Ivoire': '10-16 hours',
+      'Bamako, Mali': '18-24 hours',
+      'Ouagadougou, Burkina Faso': '16-22 hours',
+      'Niamey, Niger': '20-26 hours',
+      'Conakry, Guinea': '6-10 hours',
+      'Freetown, Sierra Leone': '5-8 hours',
+      'Cotonou, Benin': '18-24 hours',
+      'Lomé, Togo': '16-22 hours',
+      'Banjul, Gambia': '22-30 hours',
+      'Bissau, Guinea-Bissau': '20-28 hours',
+      'Praia, Cape Verde': '30-40 hours'
+    }
+  }
+  return coastalTimes[origin]?.[destination] || '14-20 hours'
+}
+
+const getCoastalCost = (origin: string, destination: string) => {
+  const coastalCosts: { [key: string]: { [key: string]: string } } = {
+    'Monrovia, Liberia': {
+      'Lagos, Nigeria': '$350-550',
+      'Accra, Ghana': '$250-400',
+      'Dakar, Senegal': '$450-650',
+      'Abidjan, Côte d\'Ivoire': '$180-280',
+      'Bamako, Mali': '$300-450',
+      'Ouagadougou, Burkina Faso': '$250-400',
+      'Niamey, Niger': '$350-500',
+      'Conakry, Guinea': '$100-150',
+      'Freetown, Sierra Leone': '$80-130',
+      'Cotonou, Benin': '$300-450',
+      'Lomé, Togo': '$250-400',
+      'Banjul, Gambia': '$400-600',
+      'Bissau, Guinea-Bissau': '$350-550',
+      'Praia, Cape Verde': '$600-900'
+    }
+  }
+  return coastalCosts[origin]?.[destination] || '$250-400'
+}
+
+const getCoastalBorders = (origin: string, destination: string) => {
+  const coastalBorders: { [key: string]: { [key: string]: number } } = {
+    'Monrovia, Liberia': {
+      'Lagos, Nigeria': 3,
+      'Accra, Ghana': 2,
+      'Dakar, Senegal': 4,
+      'Abidjan, Côte d\'Ivoire': 2,
+      'Bamako, Mali': 3,
+      'Ouagadougou, Burkina Faso': 3,
+      'Niamey, Niger': 3,
+      'Conakry, Guinea': 2,
+      'Freetown, Sierra Leone': 2,
+      'Cotonou, Benin': 3,
+      'Lomé, Togo': 2,
+      'Banjul, Gambia': 4,
+      'Bissau, Guinea-Bissau': 3,
+      'Praia, Cape Verde': 5
+    }
+  }
+  return coastalBorders[origin]?.[destination] || 2
+}
+
+const getInlandDistance = (origin: string, destination: string) => {
+  const inlandDistances: { [key: string]: { [key: string]: string } } = {
+    'Monrovia, Liberia': {
+      'Lagos, Nigeria': '1,000 km',
+      'Accra, Ghana': '700 km',
+      'Dakar, Senegal': '1,300 km',
+      'Abidjan, Côte d\'Ivoire': '500 km',
+      'Bamako, Mali': '800 km',
+      'Ouagadougou, Burkina Faso': '700 km',
+      'Niamey, Niger': '900 km',
+      'Conakry, Guinea': '200 km',
+      'Freetown, Sierra Leone': '150 km',
+      'Cotonou, Benin': '900 km',
+      'Lomé, Togo': '800 km',
+      'Banjul, Gambia': '1,200 km',
+      'Bissau, Guinea-Bissau': '1,000 km',
+      'Praia, Cape Verde': '1,600 km'
+    }
+  }
+  return inlandDistances[origin]?.[destination] || '700 km'
+}
+
+const getInlandTime = (origin: string, destination: string) => {
+  const inlandTimes: { [key: string]: { [key: string]: string } } = {
+    'Monrovia, Liberia': {
+      'Lagos, Nigeria': '16-22 hours',
+      'Accra, Ghana': '10-14 hours',
+      'Dakar, Senegal': '20-28 hours',
+      'Abidjan, Côte d\'Ivoire': '6-10 hours',
+      'Bamako, Mali': '12-18 hours',
+      'Ouagadougou, Burkina Faso': '10-16 hours',
+      'Niamey, Niger': '14-20 hours',
+      'Conakry, Guinea': '3-6 hours',
+      'Freetown, Sierra Leone': '2-4 hours',
+      'Cotonou, Benin': '14-20 hours',
+      'Lomé, Togo': '12-18 hours',
+      'Banjul, Gambia': '18-26 hours',
+      'Bissau, Guinea-Bissau': '16-24 hours',
+      'Praia, Cape Verde': '24-32 hours'
+    }
+  }
+  return inlandTimes[origin]?.[destination] || '10-14 hours'
+}
+
+const getInlandCost = (origin: string, destination: string) => {
+  const inlandCosts: { [key: string]: { [key: string]: string } } = {
+    'Monrovia, Liberia': {
+      'Lagos, Nigeria': '$250-400',
+      'Accra, Ghana': '$150-250',
+      'Dakar, Senegal': '$350-500',
+      'Abidjan, Côte d\'Ivoire': '$100-180',
+      'Bamako, Mali': '$200-300',
+      'Ouagadougou, Burkina Faso': '$150-250',
+      'Niamey, Niger': '$250-350',
+      'Conakry, Guinea': '$50-80',
+      'Freetown, Sierra Leone': '$40-70',
+      'Cotonou, Benin': '$200-300',
+      'Lomé, Togo': '$150-250',
+      'Banjul, Gambia': '$300-450',
+      'Bissau, Guinea-Bissau': '$250-400',
+      'Praia, Cape Verde': '$400-600'
+    }
+  }
+  return inlandCosts[origin]?.[destination] || '$150-250'
+}
+
+const getInlandBorders = (origin: string, destination: string) => {
+  const inlandBorders: { [key: string]: { [key: string]: number } } = {
+    'Monrovia, Liberia': {
+      'Lagos, Nigeria': 3,
+      'Accra, Ghana': 2,
+      'Dakar, Senegal': 4,
+      'Abidjan, Côte d\'Ivoire': 2,
+      'Bamako, Mali': 3,
+      'Ouagadougou, Burkina Faso': 3,
+      'Niamey, Niger': 3,
+      'Conakry, Guinea': 2,
+      'Freetown, Sierra Leone': 2,
+      'Cotonou, Benin': 3,
+      'Lomé, Togo': 2,
+      'Banjul, Gambia': 4,
+      'Bissau, Guinea-Bissau': 3,
+      'Praia, Cape Verde': 5
+    }
+  }
+  return inlandBorders[origin]?.[destination] || 2
+}
+
+const getPrimaryBorder = (origin: string, destination: string) => {
+  const borders: { [key: string]: { [key: string]: string } } = {
+    'Monrovia, Liberia': {
+      'Lagos, Nigeria': 'Seme Border (Nigeria-Benin)',
+      'Accra, Ghana': 'Aflao Border (Ghana-Togo)',
+      'Dakar, Senegal': 'Rosso Border (Senegal-Mauritania)',
+      'Abidjan, Côte d\'Ivoire': 'Ganta Border (Liberia-Ivory Coast)',
+      'Bamako, Mali': 'Sikasso Border (Mali-Ivory Coast)',
+      'Ouagadougou, Burkina Faso': 'Pô Border (Burkina Faso-Ghana)',
+      'Niamey, Niger': 'Makalondi Border (Niger-Burkina Faso)',
+      'Conakry, Guinea': 'Ganta Border (Liberia-Guinea)',
+      'Freetown, Sierra Leone': 'Bo Waterside Border (Liberia-Sierra Leone)',
+      'Cotonou, Benin': 'Seme Border (Benin-Nigeria)',
+      'Lomé, Togo': 'Aflao Border (Togo-Ghana)',
+      'Banjul, Gambia': 'Farafenni Border (Gambia-Senegal)',
+      'Bissau, Guinea-Bissau': 'São Domingos Border (Guinea-Bissau-Senegal)',
+      'Praia, Cape Verde': 'Port of Praia (Sea route)'
+    }
+  }
+  return borders[origin]?.[destination] || 'Ganta Border (Liberia-Ivory Coast)'
+}
+
+const getAverageWaitTime = (origin: string, destination: string) => {
+  const waitTimes: { [key: string]: { [key: string]: string } } = {
+    'Monrovia, Liberia': {
+      'Lagos, Nigeria': '3-6 hours',
+      'Accra, Ghana': '2-4 hours',
+      'Dakar, Senegal': '4-8 hours',
+      'Abidjan, Côte d\'Ivoire': '1-3 hours',
+      'Bamako, Mali': '3-5 hours',
+      'Ouagadougou, Burkina Faso': '2-4 hours',
+      'Niamey, Niger': '3-6 hours',
+      'Conakry, Guinea': '1-2 hours',
+      'Freetown, Sierra Leone': '1-2 hours',
+      'Cotonou, Benin': '3-5 hours',
+      'Lomé, Togo': '2-4 hours',
+      'Banjul, Gambia': '4-6 hours',
+      'Bissau, Guinea-Bissau': '3-5 hours',
+      'Praia, Cape Verde': '6-12 hours'
+    }
+  }
+  return waitTimes[origin]?.[destination] || '2-4 hours'
+}
+
 export function TradeRoutes({ origin, destination, commodity }: TradeRoutesProps) {
   const [routesData, setRoutesData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
@@ -34,68 +343,76 @@ export function TradeRoutes({ origin, destination, commodity }: TradeRoutesProps
           recommendedRoutes: [
             {
               routeId: 'route_1',
-              name: 'Primary Route',
-              distance: '450 km',
-              estimatedTime: '8-12 hours',
-              cost: '$200-400',
+              name: 'ECOWAS Highway Route',
+              distance: getRouteDistance(origin, destination),
+              estimatedTime: getRouteTime(origin, destination),
+              cost: getRouteCost(origin, destination),
               transportModes: ['road'],
-              borderCrossings: 1,
+              borderCrossings: getBorderCrossings(origin, destination),
               reliabilityScore: 0.9,
-              description: 'Most direct route with good road conditions',
-              advantages: ['Fastest', 'Most reliable', 'Good infrastructure'],
-              disadvantages: ['Higher cost', 'Toll fees']
+              description: 'Primary ECOWAS highway with excellent infrastructure',
+              advantages: ['ECOWAS preferential treatment', 'Good road conditions', 'Fastest'],
+              disadvantages: ['Toll fees', 'Peak hour delays']
             },
             {
               routeId: 'route_2',
-              name: 'Alternative Route',
-              distance: '520 km',
-              estimatedTime: '10-14 hours',
-              cost: '$180-350',
-              transportModes: ['road', 'rail'],
-              borderCrossings: 2,
-              reliabilityScore: 0.8,
-              description: 'Slightly longer but more cost-effective',
-              advantages: ['Lower cost', 'Scenic route', 'Multiple options'],
-              disadvantages: ['Longer time', 'More border crossings']
+              name: 'Coastal Route',
+              distance: getCoastalDistance(origin, destination),
+              estimatedTime: getCoastalTime(origin, destination),
+              cost: getCoastalCost(origin, destination),
+              transportModes: ['road', 'ferry'],
+              borderCrossings: getCoastalBorders(origin, destination),
+              reliabilityScore: 0.85,
+              description: 'Scenic coastal route with ferry connections',
+              advantages: ['Scenic views', 'Lower congestion', 'Ferry options'],
+              disadvantages: ['Weather dependent', 'Longer distance']
             },
             {
               routeId: 'route_3',
-              name: 'Multi-modal Route',
-              distance: '380 km',
-              estimatedTime: '6-10 hours',
-              cost: '$300-500',
-              transportModes: ['road', 'air'],
-              borderCrossings: 1,
-              reliabilityScore: 0.95,
-              description: 'Fastest option with air transport segment',
-              advantages: ['Fastest', 'Reliable', 'Good for perishables'],
-              disadvantages: ['Highest cost', 'Limited capacity']
+              name: 'Inland Route',
+              distance: getInlandDistance(origin, destination),
+              estimatedTime: getInlandTime(origin, destination),
+              cost: getInlandCost(origin, destination),
+              transportModes: ['road'],
+              borderCrossings: getInlandBorders(origin, destination),
+              reliabilityScore: 0.8,
+              description: 'Alternative inland route through multiple countries',
+              advantages: ['Lower cost', 'Multiple options', 'Less traffic'],
+              disadvantages: ['More border crossings', 'Longer time']
             }
           ],
           logisticsProviders: [
             {
-              name: 'AfriLogistics Ltd',
+              name: 'ECOWAS Logistics Network',
               services: ['road', 'rail'],
               coverage: 'West Africa',
-              rating: 4.5,
-              contact: '+234-XXX-XXXX',
-              specialties: ['Agricultural products', 'General cargo']
+              rating: 4.7,
+              contact: '+231-XXX-XXXX',
+              specialties: ['ECOWAS preferential treatment', 'Agricultural products', 'Cross-border trade']
             },
             {
-              name: 'TransAfrica Cargo',
+              name: 'Liberia-Nigeria Express',
+              services: ['road', 'ferry'],
+              coverage: 'Liberia-Nigeria corridor',
+              rating: 4.5,
+              contact: '+231-XXX-XXXX',
+              specialties: ['Express delivery', 'Agricultural products', 'Manufactured goods']
+            },
+            {
+              name: 'West African Cargo',
               services: ['road', 'air', 'sea'],
-              coverage: 'Pan-Africa',
-              rating: 4.3,
-              contact: '+234-XXX-XXXX',
-              specialties: ['Express delivery', 'Heavy cargo']
+              coverage: 'All West African countries',
+              rating: 4.4,
+              contact: '+231-XXX-XXXX',
+              specialties: ['Heavy cargo', 'Perishable goods', 'International shipping']
             }
           ],
           borderCrossingInfo: {
-            primaryBorder: 'Seme Border',
+            primaryBorder: getPrimaryBorder(origin, destination),
             operatingHours: '6:00 AM - 10:00 PM',
             peakHours: '8:00 AM - 6:00 PM',
-            averageWaitTime: '2-4 hours',
-            requiredDocuments: ['Passport', 'Vehicle documents', 'Customs declaration']
+            averageWaitTime: getAverageWaitTime(origin, destination),
+            requiredDocuments: ['ECOWAS passport', 'Vehicle documents', 'Customs declaration', 'Trade license', 'Health certificate']
           }
         })
         setLoading(false)

@@ -176,18 +176,18 @@ export default function FarmingNotificationsPage() {
       {/* Mobile Header */}
       <div className="lg:hidden bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
         <div className="max-w-md mx-auto px-4 py-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+          <div className="subheader">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center shrink-0">
                 <BellIcon className="w-5 h-5 text-blue-600" />
               </div>
-              <div className="flex-1 min-w-0">
-                <h1 className="text-base font-bold text-gray-900 truncate">Notifications 🔔</h1>
-                <p className="text-xs text-gray-600 truncate">Farming updates</p>
+              <div className="min-w-0">
+                <h1 className="subheader-title line-clamp-1">Notifications 🔔</h1>
+                <p className="subheader-desc line-clamp-1">Farming updates</p>
               </div>
             </div>
             {unreadCount > 0 && (
-              <div className="flex items-center space-x-2">
+              <div className="subheader-actions">
                 <span className="text-xs text-gray-600">{unreadCount}</span>
                 <button
                   onClick={markAllAsRead}
@@ -204,8 +204,8 @@ export default function FarmingNotificationsPage() {
       {/* Desktop Header */}
       <div className="hidden lg:block bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
+          <div className="subheader">
+            <div className="flex items-center gap-4">
               <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
                 <BellIcon className="w-6 h-6 text-blue-600" />
               </div>
@@ -214,7 +214,7 @@ export default function FarmingNotificationsPage() {
                 <p className="text-gray-600">Stay updated with your farming activities</p>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="subheader-actions">
               {unreadCount > 0 && (
                 <div className="flex items-center space-x-2">
                   <span className="text-sm text-gray-600">{unreadCount} unread</span>

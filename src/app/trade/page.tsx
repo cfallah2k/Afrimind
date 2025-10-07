@@ -76,8 +76,8 @@ import { useLanguage } from '@/components/providers/language-provider'
 
 export default function TradePage() {
   const { currentLanguage, setLanguage, currentCountry, setCountry, availableLanguages, availableCountries } = useLanguage()
-  const [selectedOrigin, setSelectedOrigin] = useState('Lagos, Nigeria')
-  const [selectedDestination, setSelectedDestination] = useState('Accra, Ghana')
+  const [selectedOrigin, setSelectedOrigin] = useState('Monrovia, Liberia')
+  const [selectedDestination, setSelectedDestination] = useState('Lagos, Nigeria')
   const [selectedCommodity, setSelectedCommodity] = useState('Agricultural Products')
   const [showOriginSelector, setShowOriginSelector] = useState(false)
   const [showDestinationSelector, setShowDestinationSelector] = useState(false)
@@ -102,12 +102,27 @@ export default function TradePage() {
     routes: [
       {
         id: 1,
-        name: 'Lagos-Accra Route',
-        origin: 'Lagos, Nigeria',
+        name: 'Monrovia-Lagos Route',
+        origin: 'Monrovia, Liberia',
+        destination: 'Lagos, Nigeria',
+        distance: 1200,
+        duration: '18-24 hours',
+        cost: 350,
+        currency: 'USD',
+        status: 'active',
+        efficiency: 90,
+        popularity: 88,
+        risk: 'low',
+        lastUpdated: new Date(Date.now() - 1 * 60 * 60 * 1000)
+      },
+      {
+        id: 2,
+        name: 'Monrovia-Accra Route',
+        origin: 'Monrovia, Liberia',
         destination: 'Accra, Ghana',
-        distance: 450,
-        duration: '8-12 hours',
-        cost: 200,
+        distance: 800,
+        duration: '12-16 hours',
+        cost: 250,
         currency: 'USD',
         status: 'active',
         efficiency: 92,
@@ -116,43 +131,93 @@ export default function TradePage() {
         lastUpdated: new Date(Date.now() - 2 * 60 * 60 * 1000)
       },
       {
-        id: 2,
+        id: 3,
         name: 'Monrovia-Abidjan Route',
         origin: 'Monrovia, Liberia',
         destination: 'Abidjan, Côte d\'Ivoire',
-        distance: 320,
-        duration: '6-8 hours',
-        cost: 150,
+        distance: 600,
+        duration: '8-12 hours',
+        cost: 180,
         currency: 'USD',
         status: 'active',
         efficiency: 88,
-        popularity: 72,
-        risk: 'medium',
-        lastUpdated: new Date(Date.now() - 4 * 60 * 60 * 1000)
+        popularity: 82,
+        risk: 'low',
+        lastUpdated: new Date(Date.now() - 3 * 60 * 60 * 1000)
       },
       {
-        id: 3,
-        name: 'Dakar-Bamako Route',
-        origin: 'Dakar, Senegal',
-        destination: 'Bamako, Mali',
-        distance: 680,
-        duration: '12-16 hours',
-        cost: 300,
+        id: 4,
+        name: 'Monrovia-Conakry Route',
+        origin: 'Monrovia, Liberia',
+        destination: 'Conakry, Guinea',
+        distance: 300,
+        duration: '4-6 hours',
+        cost: 100,
         currency: 'USD',
         status: 'active',
-        efficiency: 78,
-        popularity: 65,
+        efficiency: 95,
+        popularity: 75,
+        risk: 'low',
+        lastUpdated: new Date(Date.now() - 30 * 60 * 1000)
+      },
+      {
+        id: 5,
+        name: 'Monrovia-Freetown Route',
+        origin: 'Monrovia, Liberia',
+        destination: 'Freetown, Sierra Leone',
+        distance: 200,
+        duration: '3-5 hours',
+        cost: 80,
+        currency: 'USD',
+        status: 'active',
+        efficiency: 96,
+        popularity: 78,
+        risk: 'low',
+        lastUpdated: new Date(Date.now() - 45 * 60 * 1000)
+      },
+      {
+        id: 6,
+        name: 'Monrovia-Dakar Route',
+        origin: 'Monrovia, Liberia',
+        destination: 'Dakar, Senegal',
+        distance: 1500,
+        duration: '24-30 hours',
+        cost: 450,
+        currency: 'USD',
+        status: 'active',
+        efficiency: 82,
+        popularity: 68,
         risk: 'medium',
-        lastUpdated: new Date(Date.now() - 1 * 60 * 60 * 1000)
+        lastUpdated: new Date(Date.now() - 4 * 60 * 60 * 1000)
       }
     ],
     marketTrends: [
-      { commodity: 'Rice', price: 450, change: 5.2, trend: 'up', volume: 1200 },
-      { commodity: 'Maize', price: 380, change: -2.1, trend: 'down', volume: 800 },
-      { commodity: 'Cassava', price: 120, change: 8.5, trend: 'up', volume: 1500 },
-      { commodity: 'Tomato', price: 320, change: 12.3, trend: 'up', volume: 600 }
+      { commodity: 'Rice', price: 450, change: 5.2, trend: 'up', volume: 1200, country: 'Liberia' },
+      { commodity: 'Maize', price: 380, change: -2.1, trend: 'down', volume: 800, country: 'Liberia' },
+      { commodity: 'Cassava', price: 120, change: 8.5, trend: 'up', volume: 1500, country: 'Liberia' },
+      { commodity: 'Tomato', price: 320, change: 12.3, trend: 'up', volume: 600, country: 'Liberia' },
+      { commodity: 'Cocoa', price: 2800, change: 3.8, trend: 'up', volume: 400, country: 'Liberia' },
+      { commodity: 'Coffee', price: 1800, change: -1.5, trend: 'down', volume: 300, country: 'Liberia' },
+      { commodity: 'Palm Oil', price: 650, change: 7.2, trend: 'up', volume: 800, country: 'Liberia' },
+      { commodity: 'Groundnut', price: 280, change: 4.1, trend: 'up', volume: 500, country: 'Liberia' }
     ],
     borderConditions: [
+      {
+        border: 'Ganta Border',
+        countries: 'Liberia-Ivory Coast',
+        status: 'normal',
+        waitTime: '1-3 hours',
+        efficiency: 88,
+        lastUpdate: new Date(Date.now() - 15 * 60 * 1000)
+      },
+      {
+        border: 'Bo Waterside Border',
+        countries: 'Liberia-Sierra Leone',
+        status: 'normal',
+        waitTime: '1-2 hours',
+        efficiency: 92,
+        lastUpdate: new Date(Date.now() - 20 * 60 * 1000)
+      },
       {
         border: 'Seme Border',
         countries: 'Nigeria-Benin',
@@ -168,6 +233,14 @@ export default function TradePage() {
         waitTime: '4-6 hours',
         efficiency: 72,
         lastUpdate: new Date(Date.now() - 45 * 60 * 1000)
+      },
+      {
+        border: 'Rosso Border',
+        countries: 'Senegal-Mauritania',
+        status: 'normal',
+        waitTime: '3-5 hours',
+        efficiency: 78,
+        lastUpdate: new Date(Date.now() - 25 * 60 * 1000)
       }
     ]
   })
@@ -230,21 +303,51 @@ export default function TradePage() {
 
   return (
     <div className="min-h-screen bg-gray-50 pb-24 lg:pb-0">
-      {/* Enhanced Header */}
-      <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      {/* Mobile Header */}
+      <div className="lg:hidden bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
+        <div className="max-w-md mx-auto px-4 py-3 subheader">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-600 rounded-xl flex items-center justify-center">
+            <div className="flex items-center space-x-3 min-w-0">
+              <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <TruckIcon className="w-5 h-5 text-white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h1 className="subheader-title">Trade Intelligence</h1>
+                <p className="subheader-desc">Cross-border commerce</p>
+              </div>
+            </div>
+            <div className="subheader-actions">
+              <button
+                onClick={() => setRealTimeData(!realTimeData)}
+                className={`flex items-center space-x-1 px-2 py-1 rounded-lg text-xs font-medium transition-colors ${
+                  realTimeData 
+                    ? 'bg-green-100 text-green-700' 
+                    : 'bg-gray-100 text-gray-600'
+                }`}
+              >
+                <div className={`w-1.5 h-1.5 rounded-full ${realTimeData ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
+                <span>Live</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop Header */}
+      <div className="hidden lg:block bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 subheader">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4 min-w-0">
+              <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
                 <TruckIcon className="w-7 h-7 text-white" />
               </div>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900">Trade Intelligence</h1>
-                <p className="text-gray-600">Advanced cross-border commerce platform</p>
+              <div className="flex-1 min-w-0">
+                <h1 className="subheader-title">Trade Intelligence</h1>
+                <p className="subheader-desc">Advanced cross-border commerce platform</p>
               </div>
             </div>
             
-            <div className="flex items-center space-x-3">
+            <div className="subheader-actions">
               {/* Real-time Toggle */}
               <button
                 onClick={() => setRealTimeData(!realTimeData)}
@@ -422,16 +525,21 @@ export default function TradePage() {
               {showOriginSelector && (
                 <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
                   {[
+                    { name: 'Monrovia, Liberia', flag: '🇱🇷' },
                     { name: 'Lagos, Nigeria', flag: '🇳🇬' },
                     { name: 'Accra, Ghana', flag: '🇬🇭' },
-                    { name: 'Monrovia, Liberia', flag: '🇱🇷' },
                     { name: 'Dakar, Senegal', flag: '🇸🇳' },
                     { name: 'Abidjan, Côte d\'Ivoire', flag: '🇨🇮' },
                     { name: 'Bamako, Mali', flag: '🇲🇱' },
                     { name: 'Ouagadougou, Burkina Faso', flag: '🇧🇫' },
                     { name: 'Niamey, Niger', flag: '🇳🇪' },
                     { name: 'Conakry, Guinea', flag: '🇬🇳' },
-                    { name: 'Freetown, Sierra Leone', flag: '🇸🇱' }
+                    { name: 'Freetown, Sierra Leone', flag: '🇸🇱' },
+                    { name: 'Cotonou, Benin', flag: '🇧🇯' },
+                    { name: 'Lomé, Togo', flag: '🇹🇬' },
+                    { name: 'Banjul, Gambia', flag: '🇬🇲' },
+                    { name: 'Bissau, Guinea-Bissau', flag: '🇬🇼' },
+                    { name: 'Praia, Cape Verde', flag: '🇨🇻' }
                   ].map((location) => (
                     <button
                       key={location.name}
@@ -466,16 +574,21 @@ export default function TradePage() {
               {showDestinationSelector && (
                 <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
                   {[
+                    { name: 'Monrovia, Liberia', flag: '🇱🇷' },
                     { name: 'Lagos, Nigeria', flag: '🇳🇬' },
                     { name: 'Accra, Ghana', flag: '🇬🇭' },
-                    { name: 'Monrovia, Liberia', flag: '🇱🇷' },
                     { name: 'Dakar, Senegal', flag: '🇸🇳' },
                     { name: 'Abidjan, Côte d\'Ivoire', flag: '🇨🇮' },
                     { name: 'Bamako, Mali', flag: '🇲🇱' },
                     { name: 'Ouagadougou, Burkina Faso', flag: '🇧🇫' },
                     { name: 'Niamey, Niger', flag: '🇳🇪' },
                     { name: 'Conakry, Guinea', flag: '🇬🇳' },
-                    { name: 'Freetown, Sierra Leone', flag: '🇸🇱' }
+                    { name: 'Freetown, Sierra Leone', flag: '🇸🇱' },
+                    { name: 'Cotonou, Benin', flag: '🇧🇯' },
+                    { name: 'Lomé, Togo', flag: '🇹🇬' },
+                    { name: 'Banjul, Gambia', flag: '🇬🇲' },
+                    { name: 'Bissau, Guinea-Bissau', flag: '🇬🇼' },
+                    { name: 'Praia, Cape Verde', flag: '🇨🇻' }
                   ].map((location) => (
                     <button
                       key={location.name}
@@ -660,10 +773,17 @@ export default function TradePage() {
           >
             {/* Market Trends */}
             <div className="bg-white rounded-xl shadow-lg p-6">
-              <h3 className="text-xl font-semibold text-gray-900 mb-6">Market Trends</h3>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-semibold text-gray-900">West African Market Trends</h3>
+                <div className="flex items-center space-x-2 text-sm text-gray-600">
+                  <span>🇱🇷 Liberia Focus</span>
+                  <span>•</span>
+                  <span>Updated: {new Date().toLocaleTimeString()}</span>
+                </div>
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {tradeData.marketTrends.map((trend, index) => (
-                  <div key={index} className="border border-gray-200 rounded-lg p-4">
+                  <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
                     <div className="flex items-center justify-between mb-2">
                       <h4 className="font-semibold text-gray-900">{trend.commodity}</h4>
                       <div className={`flex items-center space-x-1 ${
@@ -682,8 +802,13 @@ export default function TradePage() {
                     <div className="text-2xl font-bold text-gray-900 mb-1">
                       ${trend.price}/ton
                     </div>
-                    <div className="text-sm text-gray-600">
+                    <div className="text-sm text-gray-600 mb-2">
                       Volume: {trend.volume} tons
+                    </div>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-gray-500">{trend.country}</span>
+                      <span className="text-gray-400">•</span>
+                      <span className="text-gray-500">West Africa</span>
                     </div>
                   </div>
                 ))}
@@ -692,34 +817,61 @@ export default function TradePage() {
 
             {/* Border Conditions */}
             <div className="bg-white rounded-xl shadow-lg p-6">
-              <h3 className="text-xl font-semibold text-gray-900 mb-6">Border Conditions</h3>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-semibold text-gray-900">West African Border Conditions</h3>
+                <div className="flex items-center space-x-2 text-sm text-gray-600">
+                  <span>🛂 ECOWAS Borders</span>
+                  <span>•</span>
+                  <span>Real-time Updates</span>
+                </div>
+              </div>
               <div className="space-y-4">
                 {tradeData.borderConditions.map((border, index) => (
-                  <div key={index} className="border border-gray-200 rounded-lg p-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="font-semibold text-gray-900">{border.border}</h4>
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        border.status === 'normal' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
-                      }`}>
-                        {border.status}
-                      </span>
+                  <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center space-x-3">
+                        <h4 className="font-semibold text-gray-900">{border.border}</h4>
+                        <span className="text-sm text-gray-500">{border.countries}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                          border.status === 'normal' ? 'bg-green-100 text-green-800' : 
+                          border.status === 'busy' ? 'bg-yellow-100 text-yellow-800' : 
+                          'bg-red-100 text-red-800'
+                        }`}>
+                          {border.status}
+                        </span>
+                        <span className="text-sm text-gray-500">{border.efficiency}% efficiency</span>
+                      </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-4 text-sm">
-                      <div>
-                        <span className="text-gray-600">Countries:</span>
-                        <span className="font-medium ml-2">{border.countries}</span>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                      <div className="flex items-center space-x-2">
+                        <ClockIcon className="w-4 h-4 text-gray-400" />
+                        <div>
+                          <span className="text-gray-600">Wait Time:</span>
+                          <span className="font-medium ml-1">{border.waitTime}</span>
+                        </div>
                       </div>
-                      <div>
-                        <span className="text-gray-600">Wait Time:</span>
-                        <span className="font-medium ml-2">{border.waitTime}</span>
+                      <div className="flex items-center space-x-2">
+                        <CheckCircleIcon className="w-4 h-4 text-gray-400" />
+                        <div>
+                          <span className="text-gray-600">Efficiency:</span>
+                          <span className="font-medium ml-1">{border.efficiency}%</span>
+                        </div>
                       </div>
-                      <div>
-                        <span className="text-gray-600">Efficiency:</span>
-                        <span className="font-medium ml-2">{border.efficiency}%</span>
+                      <div className="flex items-center space-x-2">
+                        <CalendarIcon className="w-4 h-4 text-gray-400" />
+                        <div>
+                          <span className="text-gray-600">Last Update:</span>
+                          <span className="font-medium ml-1">{border.lastUpdate.toLocaleTimeString()}</span>
+                        </div>
                       </div>
-                      <div>
-                        <span className="text-gray-600">Last Update:</span>
-                        <span className="font-medium ml-2">{border.lastUpdate.toLocaleTimeString()}</span>
+                      <div className="flex items-center space-x-2">
+                        <MapPinIcon className="w-4 h-4 text-gray-400" />
+                        <div>
+                          <span className="text-gray-600">ECOWAS:</span>
+                          <span className="font-medium ml-1 text-green-600">Active</span>
+                        </div>
                       </div>
                     </div>
                   </div>

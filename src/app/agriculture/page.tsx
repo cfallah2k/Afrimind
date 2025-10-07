@@ -218,18 +218,18 @@ export default function AgriculturePage() {
       {/* Enhanced Header */}
       <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-600 rounded-xl flex items-center justify-center">
+          <div className="subheader">
+            <div className="flex items-center gap-4 min-w-0">
+              <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-600 rounded-xl flex items-center justify-center shrink-0">
                 <SunIcon className="w-7 h-7 text-white" />
               </div>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900">Agriculture Intelligence</h1>
-                <p className="text-gray-600">Smart farming solutions for Liberia</p>
+              <div className="min-w-0">
+                <h1 className="subheader-title line-clamp-1 text-xl lg:text-2xl">Agriculture Intelligence</h1>
+                <p className="subheader-desc line-clamp-1">Smart farming solutions for Liberia</p>
               </div>
             </div>
             
-            <div className="flex items-center space-x-3">
+            <div className="subheader-actions">
               {/* Real-time Toggle */}
               <button
                 onClick={() => setRealTimeData(!realTimeData)}

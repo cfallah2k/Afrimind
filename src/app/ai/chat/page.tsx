@@ -469,33 +469,73 @@ export default function AIChatPage() {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input */}
+        {/* Enhanced Input Area */}
         <div className="bg-white border-t border-gray-200 p-4">
+          {/* Service Selection */}
+          <div className="mb-4">
+            <div className="flex items-center space-x-2 mb-2">
+              <span className="text-sm font-medium text-gray-700">AI Service:</span>
+              <div className="flex space-x-1">
+                {aiServices.map((service) => {
+                  const Icon = service.icon
+                  return (
+                    <button
+                      key={service.id}
+                      onClick={() => setSelectedService(service.id)}
+                      className={`flex items-center space-x-1 px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                        selectedService === service.id
+                          ? `bg-${service.color}-100 text-${service.color}-700 border border-${service.color}-200`
+                          : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                      }`}
+                    >
+                      <Icon className="w-3 h-3" />
+                      <span>{service.name}</span>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+
           {/* Attachment Options */}
           {showAttachments && (
-            <div className="mb-4 p-4 bg-gray-50 rounded-lg">
-              <div className="flex items-center space-x-4">
+            <motion.div 
+              className="mb-4 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+            >
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-sm font-semibold text-gray-800">Add Attachments</h3>
+                <button
+                  onClick={() => setShowAttachments(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <XMarkIcon className="w-4 h-4" />
+                </button>
+              </div>
+              <div className="grid grid-cols-3 gap-3">
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="flex items-center space-x-2 px-3 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="flex flex-col items-center space-y-2 p-3 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                 >
-                  <PhotoIcon className="w-4 h-4 text-gray-600" />
-                  <span className="text-sm text-gray-700">Image</span>
+                  <PhotoIcon className="w-6 h-6 text-blue-600" />
+                  <span className="text-xs text-gray-700">Image</span>
                 </button>
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="flex items-center space-x-2 px-3 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="flex flex-col items-center space-y-2 p-3 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                 >
-                  <DocumentTextIcon className="w-4 h-4 text-gray-600" />
-                  <span className="text-sm text-gray-700">Document</span>
+                  <DocumentTextIcon className="w-6 h-6 text-green-600" />
+                  <span className="text-xs text-gray-700">Document</span>
                 </button>
                 <button
                   onClick={startRecording}
                   disabled={isRecording}
-                  className="flex items-center space-x-2 px-3 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50"
+                  className="flex flex-col items-center space-y-2 p-3 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50"
                 >
-                  <MicrophoneIcon className="w-4 h-4 text-gray-600" />
-                  <span className="text-sm text-gray-700">Voice</span>
+                  <MicrophoneIcon className="w-6 h-6 text-purple-600" />
+                  <span className="text-xs text-gray-700">Voice</span>
                 </button>
               </div>
               <input
@@ -505,60 +545,108 @@ export default function AIChatPage() {
                 onChange={handleFileUpload}
                 className="hidden"
               />
-            </div>
+            </motion.div>
           )}
           
-          <div className="flex space-x-2">
-            <button
-              onClick={() => setShowAttachments(!showAttachments)}
-              className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
-              title="Attachments"
-            >
-              <PlusIcon className="w-5 h-5" />
-            </button>
-            
-            <div className="flex-1 relative">
-              <input
-                type="text"
-                value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                placeholder="Ask me anything about African digital sovereignty..."
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-              />
+          {/* Main Input Area */}
+          <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
+            <div className="flex items-end space-x-3">
+              <button
+                onClick={() => setShowAttachments(!showAttachments)}
+                className="p-2 text-gray-500 hover:text-gray-700 hover:bg-white rounded-lg transition-colors"
+                title="Add Attachments"
+              >
+                <PlusIcon className="w-5 h-5" />
+              </button>
+              
+              <div className="flex-1 relative">
+                <textarea
+                  value={inputMessage}
+                  onChange={(e) => setInputMessage(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && handleSendMessage()}
+                  placeholder={`Ask me anything about ${selectedService === 'general' ? 'African digital sovereignty' : aiServices.find(s => s.id === selectedService)?.name}...`}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none min-h-[44px] max-h-32"
+                  rows={1}
+                  style={{ 
+                    height: 'auto',
+                    minHeight: '44px',
+                    maxHeight: '128px'
+                  }}
+                  onInput={(e) => {
+                    const target = e.target as HTMLTextAreaElement
+                    target.style.height = 'auto'
+                    target.style.height = Math.min(target.scrollHeight, 128) + 'px'
+                  }}
+                />
+                <div className="absolute bottom-2 right-2 text-xs text-gray-400">
+                  {inputMessage.length}/1000
+                </div>
+              </div>
+              
+              <div className="flex flex-col space-y-2">
+                <button
+                  onClick={isRecording ? stopRecording : startRecording}
+                  className={`p-2 rounded-lg transition-colors ${
+                    isRecording 
+                      ? 'bg-red-500 text-white hover:bg-red-600' 
+                      : 'text-gray-500 hover:text-gray-700 hover:bg-white'
+                  }`}
+                  title={isRecording ? 'Stop Recording' : 'Voice Message'}
+                >
+                  {isRecording ? (
+                    <StopIcon className="w-5 h-5" />
+                  ) : (
+                    <MicrophoneIcon className="w-5 h-5" />
+                  )}
+                </button>
+                
+                <button
+                  onClick={handleSendMessage}
+                  disabled={!inputMessage.trim()}
+                  className="bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  title="Send Message"
+                >
+                  <PaperAirplaneIcon className="w-5 h-5" />
+                </button>
+              </div>
             </div>
             
-            <button
-              onClick={isRecording ? stopRecording : startRecording}
-              className={`p-2 rounded-lg transition-colors ${
-                isRecording 
-                  ? 'bg-red-500 text-white hover:bg-red-600' 
-                  : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'
-              }`}
-              title={isRecording ? 'Stop Recording' : 'Voice Message'}
-            >
-              {isRecording ? (
-                <StopIcon className="w-5 h-5" />
-              ) : (
-                <MicrophoneIcon className="w-5 h-5" />
-              )}
-            </button>
-            
-            <button
-              onClick={handleSendMessage}
-              disabled={!inputMessage.trim()}
-              className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              <PaperAirplaneIcon className="w-5 h-5" />
-            </button>
+            {/* Quick Actions */}
+            <div className="mt-3 flex items-center justify-between">
+              <div className="flex items-center space-x-4 text-xs text-gray-500">
+                <span>Press Enter to send, Shift+Enter for new line</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-xs text-gray-500">
+                  {selectedService === 'general' ? 'General AI' : aiServices.find(s => s.id === selectedService)?.name}
+                </span>
+                <div className={`w-2 h-2 rounded-full ${
+                  selectedService === 'general' ? 'bg-gray-400' : 
+                  selectedService === 'agricultural' ? 'bg-green-500' :
+                  selectedService === 'trade' ? 'bg-blue-500' :
+                  selectedService === 'cultural' ? 'bg-purple-500' :
+                  'bg-yellow-500'
+                }`}></div>
+              </div>
+            </div>
           </div>
           
           {/* Recording Indicator */}
           {isRecording && (
-            <div className="mt-2 flex items-center space-x-2 text-red-600">
-              <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-              <span className="text-sm">Recording... {formatDuration(recordingDuration)}</span>
-            </div>
+            <motion.div 
+              className="mt-3 flex items-center justify-center space-x-2 text-red-600 bg-red-50 rounded-lg p-3"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+              <span className="text-sm font-medium">Recording... {formatDuration(recordingDuration)}</span>
+              <button
+                onClick={stopRecording}
+                className="ml-2 px-3 py-1 bg-red-500 text-white text-xs rounded-full hover:bg-red-600 transition-colors"
+              >
+                Stop
+              </button>
+            </motion.div>
           )}
         </div>
       </div>

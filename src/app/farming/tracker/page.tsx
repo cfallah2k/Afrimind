@@ -127,6 +127,18 @@ export default function FarmingTrackerPage() {
     { id: 'post-harvest', name: 'Post-Harvest', icon: CheckCircleIcon, color: 'gray', duration: 7 }
   ]
 
+  // Safe Tailwind color class map to avoid dynamic className template strings
+  const colorClassMap: Record<string, { bg100: string; text600: string; bg50: string; border500: string; bg500: string; }> = {
+    blue:   { bg100: 'bg-blue-100',   text600: 'text-blue-600',   bg50: 'bg-blue-50',   border500: 'border-blue-500',   bg500: 'bg-blue-500' },
+    red:    { bg100: 'bg-red-100',    text600: 'text-red-600',    bg50: 'bg-red-50',    border500: 'border-red-500',    bg500: 'bg-red-500' },
+    green:  { bg100: 'bg-green-100',  text600: 'text-green-600',  bg50: 'bg-green-50',  border500: 'border-green-500',  bg500: 'bg-green-500' },
+    yellow: { bg100: 'bg-yellow-100', text600: 'text-yellow-600', bg50: 'bg-yellow-50', border500: 'border-yellow-500', bg500: 'bg-yellow-500' },
+    orange: { bg100: 'bg-orange-100', text600: 'text-orange-600', bg50: 'bg-orange-50', border500: 'border-orange-500', bg500: 'bg-orange-500' },
+    purple: { bg100: 'bg-purple-100', text600: 'text-purple-600', bg50: 'bg-purple-50', border500: 'border-purple-500', bg500: 'bg-purple-500' },
+    gray:   { bg100: 'bg-gray-100',   text600: 'text-gray-600',   bg50: 'bg-gray-50',   border500: 'border-gray-500',   bg500: 'bg-gray-500' },
+    pink:   { bg100: 'bg-pink-100',   text600: 'text-pink-600',   bg50: 'bg-pink-50',   border500: 'border-pink-500',   bg500: 'bg-pink-500' },
+  }
+
   // Smart AI predictions based on Liberia's climate and farming conditions
   const getSmartPredictions = () => {
     const currentMonth = new Date().getMonth() + 1
@@ -439,11 +451,12 @@ export default function FarmingTrackerPage() {
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
             {predictions.map((prediction, index) => {
               const Icon = prediction.icon
+              const colors = colorClassMap[prediction.color] || colorClassMap.gray
               return (
                 <div key={prediction.type} className="bg-white rounded-xl shadow-sm p-4 lg:p-6">
                   <div className="flex items-center space-x-3 mb-3 lg:mb-4">
-                    <div className={`w-8 h-8 lg:w-10 lg:h-10 bg-${prediction.color}-100 rounded-lg flex items-center justify-center`}>
-                      <Icon className={`w-4 h-4 lg:w-5 lg:h-5 text-${prediction.color}-600`} />
+                    <div className={`w-8 h-8 lg:w-10 lg:h-10 ${colors.bg100} rounded-lg flex items-center justify-center`}>
+                      <Icon className={`w-4 h-4 lg:w-5 lg:h-5 ${colors.text600}`} />
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900 text-sm lg:text-base">{prediction.title}</h3>
@@ -461,10 +474,7 @@ export default function FarmingTrackerPage() {
                     </div>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-1">
-                    <div 
-                      className={`bg-${prediction.color}-500 h-1 rounded-full`}
-                      style={{ width: `${prediction.confidence}%` }}
-                    ></div>
+                    <div className={`${colors.bg500} h-1 rounded-full`} style={{ width: `${prediction.confidence}%` }}></div>
                   </div>
                 </div>
               )
@@ -546,7 +556,7 @@ export default function FarmingTrackerPage() {
                   key={phase.id}
                   className={`p-3 lg:p-4 rounded-lg border-2 transition-colors ${
                     isActive
-                      ? `border-${phase.color}-500 bg-${phase.color}-50`
+                      ? `${(colorClassMap[phase.color] || colorClassMap.gray).border500} ${(colorClassMap[phase.color] || colorClassMap.gray).bg50}`
                       : isCompleted
                       ? 'border-green-200 bg-green-50'
                       : 'border-gray-200 bg-gray-50'
@@ -555,14 +565,14 @@ export default function FarmingTrackerPage() {
                   <div className="flex items-center space-x-2 lg:space-x-3 mb-2">
                     <div className={`w-6 h-6 lg:w-8 lg:h-8 rounded-lg flex items-center justify-center ${
                       isActive 
-                        ? `bg-${phase.color}-100` 
+                        ? (colorClassMap[phase.color] || colorClassMap.gray).bg100 
                         : isCompleted
                         ? 'bg-green-100'
                         : 'bg-gray-100'
                     }`}>
                       <Icon className={`w-3 h-3 lg:w-4 lg:h-4 ${
                         isActive 
-                          ? `text-${phase.color}-600` 
+                          ? (colorClassMap[phase.color] || colorClassMap.gray).text600 
                           : isCompleted
                           ? 'text-green-600'
                           : 'text-gray-400'
@@ -582,10 +592,7 @@ export default function FarmingTrackerPage() {
                   {isActive && (
                     <div className="mt-2">
                       <div className="w-full bg-gray-200 rounded-full h-1">
-                        <div 
-                          className={`bg-${phase.color}-500 h-1 rounded-full`}
-                          style={{ width: '60%' }}
-                        ></div>
+                        <div className={`${(colorClassMap[phase.color] || colorClassMap.gray).bg500} h-1 rounded-full`} style={{ width: '60%' }}></div>
                       </div>
                     </div>
                   )}
