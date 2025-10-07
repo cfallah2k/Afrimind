@@ -345,11 +345,11 @@ export default function FarmerNetworkPage() {
   const [newFarmer, setNewFarmer] = useState({
     name: '',
     location: '',
-    crops: [],
+    crops: [] as string[],
     experience: '',
     phone: '',
-    specialties: [],
-    languages: [],
+    specialties: [] as string[],
+    languages: [] as string[],
     bio: ''
   })
 
